@@ -1,21 +1,21 @@
 package com.google.code.springcryptoutils.core.spring;
 
-import com.google.code.springcryptoutils.core.keystore.KeyStoreFactoryBean;
+import com.google.code.springcryptoutils.core.key.PrivateKeyFactoryBean;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.AbstractSingleBeanDefinitionParser;
 import org.w3c.dom.Element;
 
-public class KeyStoreBeanDefinitionParser extends AbstractSingleBeanDefinitionParser {
+public class PrivateKeyBeanDefinitionParser extends AbstractSingleBeanDefinitionParser {
 
     @Override
     protected Class getBeanClass(Element element) {
-        return KeyStoreFactoryBean.class;
+        return PrivateKeyFactoryBean.class;
     }
 
     protected void doParse(Element element, BeanDefinitionBuilder bean) {
-        bean.addPropertyValue("location", element.getAttribute("location"));
+        bean.addPropertyReference("keystore", element.getAttribute("keystore-ref"));
+        bean.addPropertyValue("alias", element.getAttribute("alias"));
         bean.addPropertyValue("password", element.getAttribute("password"));
-        bean.addPropertyValue("type", element.getAttribute("type"));
     }
 
 }

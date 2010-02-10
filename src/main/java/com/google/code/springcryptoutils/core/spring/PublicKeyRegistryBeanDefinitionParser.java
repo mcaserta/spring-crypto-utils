@@ -1,19 +1,19 @@
 package com.google.code.springcryptoutils.core.spring;
 
-import com.google.code.springcryptoutils.core.keystore.KeyStoreRegistryImpl;
+import com.google.code.springcryptoutils.core.key.PublicKeyRegistryImpl;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.AbstractSingleBeanDefinitionParser;
 import org.w3c.dom.Element;
 
-public class KeyStoreRegistryBeanDefinitionParser extends AbstractSingleBeanDefinitionParser {
+public class PublicKeyRegistryBeanDefinitionParser extends AbstractSingleBeanDefinitionParser {
 
     @Override
     protected Class getBeanClass(Element element) {
-        return KeyStoreRegistryImpl.class;
+        return PublicKeyRegistryImpl.class;
     }
 
     protected void doParse(Element element, BeanDefinitionBuilder bean) {
-        bean.addPropertyReference("entries", element.getAttribute("entries-ref"));
+        bean.addPropertyReference("keyStoreRegistry", element.getAttribute("keystoreRegistry-ref"));
     }
 
 }

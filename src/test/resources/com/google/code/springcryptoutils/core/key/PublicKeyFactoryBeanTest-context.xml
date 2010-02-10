@@ -4,11 +4,8 @@
        xmlns:crypt="http://code.google.com/p/spring-crypto-utils/schema/crypt"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://code.google.com/p/spring-crypto-utils/schema/crypt http://code.google.com/p/spring-crypto-utils/schema/crypt.xsd">
 
-    <bean id="publicKey" class="com.google.code.springcryptoutils.core.key.PublicKeyFactoryBean">
-        <property name="keystore" ref="keystore"/>
-        <property name="alias" value="test"/>
-    </bean>
-
     <crypt:keystore id="keystore" location="classpath:keystore.jks" password="password"/>
+
+    <crypt:publicKey id="publicKey" keystore-ref="keystore" alias="test"/>
 
 </beans>

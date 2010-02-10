@@ -14,22 +14,10 @@
         <entry key="keystoreTwo" value-ref="keystore2"/>
     </util:map>
 
-    <bean id="publicKeyRegistry" class="com.google.code.springcryptoutils.core.key.PublicKeyRegistryImpl">
-        <property name="keyStoreRegistry" ref="keystoreRegistry"/>
-    </bean>
+    <crypt:privateKeyRegistry id="privateKeyRegistry" keystoreRegistry-ref="keystoreRegistry"/>
+    <crypt:publicKeyRegistry id="publicKeyRegistry" keystoreRegistry-ref="keystoreRegistry"/>
 
-    <bean id="privateKeyRegistry" class="com.google.code.springcryptoutils.core.key.PrivateKeyRegistryImpl">
-        <property name="keyStoreRegistry" ref="keystoreRegistry"/>
-    </bean>
-
-    <bean id="signer" class="com.google.code.springcryptoutils.core.signature.SignerWithChoosersImpl">
-        <property name="privateKeyRegistry" ref="privateKeyRegistry"/>
-        <property name="algorithm" value="SHA1withRSA"/>
-    </bean>
-
-    <bean id="verifier" class="com.google.code.springcryptoutils.core.signature.VerifierWithChoosersImpl">
-        <property name="publicKeyRegistry" ref="publicKeyRegistry"/>
-        <property name="algorithm" value="SHA1withRSA"/>
-    </bean>
+    <crypt:signerWithChoosers id="signer" privateKeyRegistry-ref="privateKeyRegistry" algorithm="SHA1withRSA"/>
+    <crypt:verifierWithChoosers id="verifier" publicKeyRegistry-ref="publicKeyRegistry" algorithm="SHA1withRSA"/>
 
 </beans>

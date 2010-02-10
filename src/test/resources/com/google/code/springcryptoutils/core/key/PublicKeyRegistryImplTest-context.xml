@@ -14,8 +14,6 @@
         <entry key="keystoreTwo" value-ref="keystore2"/>
     </util:map>
 
-    <bean id="publicKeyRegistry" class="com.google.code.springcryptoutils.core.key.PublicKeyRegistryImpl">
-        <property name="keyStoreRegistry" ref="keystoreRegistry"/>
-    </bean>
+    <crypt:publicKeyRegistry id="publicKeyRegistry" keystoreRegistry-ref="keystoreRegistry"/>
 
 </beans>
