@@ -1,19 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+       xmlns:crypt="http://code.google.com/p/spring-crypto-utils/schema/crypt"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd http://code.google.com/p/spring-crypto-utils/schema/crypt http://code.google.com/p/spring-crypto-utils/schema/crypt.xsd">
 
-    <bean id="keystore1" class="com.google.code.springcryptoutils.core.keystore.KeyStoreFactoryBean">
-        <property name="keystore" value="classpath:keystore.jks"/>
-        <property name="password" value="password"/>
-        <property name="type" value="JKS"/>
-    </bean>
-
-    <bean id="keystore2" class="com.google.code.springcryptoutils.core.keystore.KeyStoreFactoryBean">
-        <property name="keystore" value="classpath:keystore.jks"/>
-        <property name="password" value="password"/>
-        <property name="type" value="JKS"/>
-    </bean>
+    <crypt:keystore id="keystore1" location="classpath:keystore.jks" password="password"/>
+    <crypt:keystore id="keystore2" location="classpath:keystore.jks" password="password"/>
 
     <bean id="keystoreRegistry" class="com.google.code.springcryptoutils.core.keystore.KeyStoreRegistryImpl">
         <property name="entries">

@@ -8,14 +8,14 @@ import java.security.KeyStore;
 
 public class KeyStoreFactoryBean implements FactoryBean, InitializingBean {
 
-    private Resource keyStoreResource;
+    private Resource location;
     private String password;
     private String type = "JKS";
 
     private KeyStore keystore;
 
-    public void setKeystore(Resource aKeyStore) {
-        this.keyStoreResource = aKeyStore;
+    public void setLocation(Resource location) {
+        this.location = location;
     }
 
     /**
@@ -50,7 +50,7 @@ public class KeyStoreFactoryBean implements FactoryBean, InitializingBean {
 
     public void afterPropertiesSet() throws Exception {
         keystore = KeyStore.getInstance(type);
-        keystore.load(keyStoreResource.getInputStream(), password.toCharArray());
+        keystore.load(location.getInputStream(), password.toCharArray());
     }
 
 }

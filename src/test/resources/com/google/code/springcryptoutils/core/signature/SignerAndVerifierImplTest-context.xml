@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:crypt="http://code.google.com/p/spring-crypto-utils/schema/crypt"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://code.google.com/p/spring-crypto-utils/schema/crypt http://code.google.com/p/spring-crypto-utils/schema/crypt.xsd">
 
     <bean id="publicKey" class="com.google.code.springcryptoutils.core.key.PublicKeyFactoryBean">
         <property name="keystore" ref="keystore"/>
@@ -14,11 +15,7 @@
         <property name="password" value="password"/>
     </bean>
 
-    <bean id="keystore" class="com.google.code.springcryptoutils.core.keystore.KeyStoreFactoryBean">
-        <property name="keystore" value="classpath:keystore.jks"/>
-        <property name="password" value="password"/>
-        <property name="type" value="JKS"/>
-    </bean>
+    <crypt:keystore id="keystore" location="classpath:keystore.jks" password="password"/>
 
     <bean id="signer" class="com.google.code.springcryptoutils.core.signature.SignerImpl">
         <property name="privateKey" ref="privateKey"/>
