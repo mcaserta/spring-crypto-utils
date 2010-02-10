@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="publicKey" class="com.google.code.springcryptoutils.core.key.PublicKeyFactoryBean">
+        <property name="keystore" ref="keystore"/>
+        <property name="alias" value="test"/>
+    </bean>
+
+    <bean id="privateKey" class="com.google.code.springcryptoutils.core.key.PrivateKeyFactoryBean">
+        <property name="keystore" ref="keystore"/>
+        <property name="alias" value="test"/>
+        <property name="password" value="password"/>
+    </bean>
+
+    <bean id="keystore" class="com.google.code.springcryptoutils.core.keystore.KeyStoreFactoryBean">
+        <property name="keystore" value="classpath:keystore.jks"/>
+        <property name="password" value="password"/>
+        <property name="type" value="JKS"/>
+    </bean>
+
+    <bean id="signer" class="com.google.code.springcryptoutils.core.signature.Base64EncodedSignerImpl">
+        <property name="privateKey" ref="privateKey"/>
+        <property name="algorithm" value="SHA1withRSA"/>
+    </bean>
+
+    <bean id="verifier" class="com.google.code.springcryptoutils.core.signature.Base64EncodedVerifierImpl">
+        <property name="publicKey" ref="publicKey"/>
+        <property name="algorithm" value="SHA1withRSA"/>
+    </bean>
+
+</beans>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <bean id="keystore1" class="com.google.code.springcryptoutils.core.keystore.KeyStoreFactoryBean">
+        <property name="keystore" value="classpath:keystore.jks"/>
+        <property name="password" value="password"/>
+        <property name="type" value="JKS"/>
+    </bean>
+
+    <bean id="keystore2" class="com.google.code.springcryptoutils.core.keystore.KeyStoreFactoryBean">
+        <property name="keystore" value="classpath:keystore.jks"/>
+        <property name="password" value="password"/>
+        <property name="type" value="JKS"/>
+    </bean>
+
+    <bean id="keystoreRegistry" class="com.google.code.springcryptoutils.core.keystore.KeyStoreRegistryImpl">
+        <property name="entries">
+            <util:map>
+                <entry key="keystoreOne" value-ref="keystore1"/>
+                <entry key="keystoreTwo" value-ref="keystore2"/>
+            </util:map>
+        </property>
+    </bean>
+
+    <bean id="publicKeyRegistry" class="com.google.code.springcryptoutils.core.key.PublicKeyRegistryImpl">
+        <property name="keyStoreRegistry" ref="keystoreRegistry"/>
+    </bean>
+
+    <bean id="privateKeyRegistry" class="com.google.code.springcryptoutils.core.key.PrivateKeyRegistryImpl">
+        <property name="keyStoreRegistry" ref="keystoreRegistry"/>
+    </bean>
+
+    <bean id="signer" class="com.google.code.springcryptoutils.core.signature.Base64EncodedSignerWithChoosersImpl">
+        <property name="privateKeyRegistry" ref="privateKeyRegistry"/>
+        <property name="algorithm" value="SHA1withRSA"/>
+    </bean>
+
+    <bean id="verifier" class="com.google.code.springcryptoutils.core.signature.Base64EncodedVerifierWithChoosersImpl">
+        <property name="publicKeyRegistry" ref="publicKeyRegistry"/>
+        <property name="algorithm" value="SHA1withRSA"/>
+    </bean>
+
+</beans>
