@@ -20,6 +20,20 @@
         </xsd:complexType>
     </xsd:element>
 
+    <xsd:element name="base64EncodedKeystore">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="beans:identifiedType">
+                    <xsd:sequence>
+                        <xsd:element name="file" type="xsd:string"/>
+                    </xsd:sequence>
+                    <xsd:attribute name="password" type="xsd:string" use="required"/>
+                    <xsd:attribute name="type" type="xsd:string" default="JKS"/>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
     <xsd:element name="keystoreRegistry">
         <xsd:complexType>
             <xsd:complexContent>
