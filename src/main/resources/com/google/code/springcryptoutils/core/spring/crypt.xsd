@@ -20,4 +20,14 @@
         </xsd:complexType>
     </xsd:element>
 
+    <xsd:element name="keystoreRegistry">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="beans:identifiedType">
+                    <xsd:attribute name="entries" type="xsd:string" use="required"/>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
 </xsd:schema>

@@ -7,14 +7,12 @@
     <crypt:keystore id="keystore1" location="classpath:keystore.jks" password="password"/>
     <crypt:keystore id="keystore2" location="classpath:keystore.jks" password="password"/>
 
-    <bean id="keystoreRegistry" class="com.google.code.springcryptoutils.core.keystore.KeyStoreRegistryImpl">
-        <property name="entries">
-            <util:map>
-                <entry key="keystoreOne" value-ref="keystore1"/>
-                <entry key="keystoreTwo" value-ref="keystore2"/>
-            </util:map>
-        </property>
-    </bean>
+    <crypt:keystoreRegistry id="keystoreRegistry" entries="entries"/>
+
+    <util:map id="entries">
+        <entry key="keystoreOne" value-ref="keystore1"/>
+        <entry key="keystoreTwo" value-ref="keystore2"/>
+    </util:map>
 
     <bean id="privateKeyRegistry" class="com.google.code.springcryptoutils.core.key.PrivateKeyRegistryImpl">
         <property name="keyStoreRegistry" ref="keystoreRegistry"/>

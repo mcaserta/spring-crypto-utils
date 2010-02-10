@@ -6,6 +6,7 @@ public class SpringCryptoUtilsNamespaceHandler extends NamespaceHandlerSupport {
 
     public void init() {
         registerBeanDefinitionParser("keystore", new KeyStoreBeanDefinitionParser());
+        registerBeanDefinitionParser("keystoreRegistry", new KeyStoreRegistryBeanDefinitionParser());
     }
 
 }
