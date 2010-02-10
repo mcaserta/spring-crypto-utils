@@ -12,7 +12,7 @@ public class KeyStoreRegistryBeanDefinitionParser extends AbstractSingleBeanDefi
     }
 
     protected void doParse(Element element, BeanDefinitionBuilder bean) {
-        bean.addPropertyReference("entries", element.getAttribute("entries"));
+        bean.addPropertyReference("entries", element.getAttribute("entries-ref"));
     }
 
 }

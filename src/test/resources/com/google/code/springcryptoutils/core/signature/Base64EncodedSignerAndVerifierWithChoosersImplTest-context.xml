@@ -7,7 +7,7 @@
     <crypt:keystore id="keystore1" location="classpath:keystore.jks" password="password"/>
     <crypt:keystore id="keystore2" location="classpath:keystore.jks" password="password"/>
 
-    <crypt:keystoreRegistry id="keystoreRegistry" entries="entries"/>
+    <crypt:keystoreRegistry id="keystoreRegistry" entries-ref="entries"/>
 
     <util:map id="entries">
         <entry key="keystoreOne" value-ref="keystore1"/>
