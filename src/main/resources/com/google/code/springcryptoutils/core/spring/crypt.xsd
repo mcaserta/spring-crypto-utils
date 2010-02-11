@@ -225,4 +225,14 @@
         </xsd:complexType>
     </xsd:element>
 
+    <xsd:element name="symmetricKeyGenerator">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="beans:identifiedType">
+                    <xsd:attribute name="algorithm" type="xsd:string" use="required"/>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
 </xsd:schema>
