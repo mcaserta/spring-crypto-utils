@@ -44,7 +44,7 @@
         </xsd:complexType>
     </xsd:element>
 
-    <xsd:element name="publicKeyRegistry">
+    <xsd:element name="publicKeyRegistryByAlias">
         <xsd:complexType>
             <xsd:complexContent>
                 <xsd:extension base="beans:identifiedType">
@@ -54,7 +54,7 @@
         </xsd:complexType>
     </xsd:element>
 
-    <xsd:element name="privateKeyRegistry">
+    <xsd:element name="privateKeyRegistryByAlias">
         <xsd:complexType>
             <xsd:complexContent>
                 <xsd:extension base="beans:identifiedType">
@@ -131,44 +131,44 @@
         </xsd:complexType>
     </xsd:element>
 
-    <xsd:element name="signerWithChoosers">
+    <xsd:element name="signerWithChoosersByAlias">
         <xsd:complexType>
             <xsd:complexContent>
                 <xsd:extension base="beans:identifiedType">
-                    <xsd:attribute name="privateKeyRegistry-ref" type="xsd:string" use="required"/>
+                    <xsd:attribute name="privateKeyRegistryByAlias-ref" type="xsd:string" use="required"/>
                     <xsd:attribute name="algorithm" type="xsd:string" use="required"/>
                 </xsd:extension>
             </xsd:complexContent>
         </xsd:complexType>
     </xsd:element>
 
-    <xsd:element name="verifierWithChoosers">
+    <xsd:element name="verifierWithChoosersByAlias">
         <xsd:complexType>
             <xsd:complexContent>
                 <xsd:extension base="beans:identifiedType">
-                    <xsd:attribute name="publicKeyRegistry-ref" type="xsd:string" use="required"/>
+                    <xsd:attribute name="publicKeyRegistryByAlias-ref" type="xsd:string" use="required"/>
                     <xsd:attribute name="algorithm" type="xsd:string" use="required"/>
                 </xsd:extension>
             </xsd:complexContent>
         </xsd:complexType>
     </xsd:element>
 
-    <xsd:element name="base64EncodedSignerWithChoosers">
+    <xsd:element name="base64EncodedSignerWithChoosersByAlias">
         <xsd:complexType>
             <xsd:complexContent>
                 <xsd:extension base="beans:identifiedType">
-                    <xsd:attribute name="privateKeyRegistry-ref" type="xsd:string" use="required"/>
+                    <xsd:attribute name="privateKeyRegistryByAlias-ref" type="xsd:string" use="required"/>
                     <xsd:attribute name="algorithm" type="xsd:string" use="required"/>
                 </xsd:extension>
             </xsd:complexContent>
         </xsd:complexType>
     </xsd:element>
 
-    <xsd:element name="base64EncodedVerifierWithChoosers">
+    <xsd:element name="base64EncodedVerifierWithChoosersByAlias">
         <xsd:complexType>
             <xsd:complexContent>
                 <xsd:extension base="beans:identifiedType">
-                    <xsd:attribute name="publicKeyRegistry-ref" type="xsd:string" use="required"/>
+                    <xsd:attribute name="publicKeyRegistryByAlias-ref" type="xsd:string" use="required"/>
                     <xsd:attribute name="algorithm" type="xsd:string" use="required"/>
                 </xsd:extension>
             </xsd:complexContent>

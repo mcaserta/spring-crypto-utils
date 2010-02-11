@@ -1,7 +1,7 @@
 package com.google.code.springcryptoutils.core.signature;
 
-import com.google.code.springcryptoutils.core.key.PrivateKeyChooser;
-import com.google.code.springcryptoutils.core.key.PublicKeyChooser;
+import com.google.code.springcryptoutils.core.key.PrivateKeyChooserByAlias;
+import com.google.code.springcryptoutils.core.key.PublicKeyChooserByAlias;
 import com.google.code.springcryptoutils.core.keystore.KeyStoreChooser;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,13 +14,13 @@ import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration
-public class SignerAndVerifierWithChoosersImplTest {
+public class SignerAndVerifierWithChoosersByAliasImplTest {
 
     @Autowired
-    private SignerWithChoosers signer;
+    private SignerWithChoosersByAlias signer;
 
     @Autowired
-    private VerifierWithChoosers verifier;
+    private VerifierWithChoosersByAlias verifier;
 
     @Test
     public void testSignAndVerify() {
@@ -31,12 +31,12 @@ public class SignerAndVerifierWithChoosersImplTest {
                 return "keystoreOne";
             }
         };
-        PublicKeyChooser publicKeyChooser = new PublicKeyChooser() {
+        PublicKeyChooserByAlias publicKeyChooserByAlias = new PublicKeyChooserByAlias() {
             public String getAlias() {
                 return "test";
             }
         };
-        PrivateKeyChooser privateKeyChooser = new PrivateKeyChooser() {
+        PrivateKeyChooserByAlias privateKeyChooserByAlias = new PrivateKeyChooserByAlias() {
             public String getAlias() {
                 return "test";
             }
@@ -47,9 +47,9 @@ public class SignerAndVerifierWithChoosersImplTest {
         };
 
         assertNotNull(signer);
-        byte[] signature = signer.sign(keyStoreChooser, privateKeyChooser, message);
+        byte[] signature = signer.sign(keyStoreChooser, privateKeyChooserByAlias, message);
         assertNotNull(signature);
-        assertTrue(verifier.verify(keyStoreChooser, publicKeyChooser, message, signature));
+        assertTrue(verifier.verify(keyStoreChooser, publicKeyChooserByAlias, message, signature));
     }
 
 }

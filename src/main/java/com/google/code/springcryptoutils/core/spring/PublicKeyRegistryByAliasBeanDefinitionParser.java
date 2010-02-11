@@ -1,15 +1,15 @@
 package com.google.code.springcryptoutils.core.spring;
 
-import com.google.code.springcryptoutils.core.key.PrivateKeyRegistryImpl;
+import com.google.code.springcryptoutils.core.key.PublicKeyRegistryByAliasImpl;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.AbstractSingleBeanDefinitionParser;
 import org.w3c.dom.Element;
 
-public class PrivateKeyRegistryBeanDefinitionParser extends AbstractSingleBeanDefinitionParser {
+public class PublicKeyRegistryByAliasBeanDefinitionParser extends AbstractSingleBeanDefinitionParser {
 
     @Override
     protected Class getBeanClass(Element element) {
-        return PrivateKeyRegistryImpl.class;
+        return PublicKeyRegistryByAliasImpl.class;
     }
 
     protected void doParse(Element element, BeanDefinitionBuilder bean) {

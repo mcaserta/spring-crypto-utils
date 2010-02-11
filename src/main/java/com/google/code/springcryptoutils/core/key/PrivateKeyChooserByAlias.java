@@ -1,6 +1,6 @@
 package com.google.code.springcryptoutils.core.key;
 
-public interface PrivateKeyChooser {
+public interface PrivateKeyChooserByAlias {
 
     String getAlias();
 

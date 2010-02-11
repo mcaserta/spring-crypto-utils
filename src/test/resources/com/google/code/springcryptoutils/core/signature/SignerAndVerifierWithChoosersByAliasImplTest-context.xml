@@ -14,10 +14,12 @@
         <entry key="keystoreTwo" value-ref="keystore2"/>
     </util:map>
 
-    <crypt:privateKeyRegistry id="privateKeyRegistry" keystoreRegistry-ref="keystoreRegistry"/>
-    <crypt:publicKeyRegistry id="publicKeyRegistry" keystoreRegistry-ref="keystoreRegistry"/>
+    <crypt:privateKeyRegistryByAlias id="privateKeyRegistry" keystoreRegistry-ref="keystoreRegistry"/>
+    <crypt:publicKeyRegistryByAlias id="publicKeyRegistry" keystoreRegistry-ref="keystoreRegistry"/>
 
-    <crypt:signerWithChoosers id="signer" privateKeyRegistry-ref="privateKeyRegistry" algorithm="SHA1withRSA"/>
-    <crypt:verifierWithChoosers id="verifier" publicKeyRegistry-ref="publicKeyRegistry" algorithm="SHA1withRSA"/>
+    <crypt:signerWithChoosersByAlias id="signer" privateKeyRegistryByAlias-ref="privateKeyRegistry"
+                                     algorithm="SHA1withRSA"/>
+    <crypt:verifierWithChoosersByAlias id="verifier" publicKeyRegistryByAlias-ref="publicKeyRegistry"
+                                       algorithm="SHA1withRSA"/>
 
 </beans>

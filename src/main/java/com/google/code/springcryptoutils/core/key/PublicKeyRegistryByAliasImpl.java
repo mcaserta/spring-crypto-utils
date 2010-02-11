@@ -8,7 +8,7 @@ import java.security.PublicKey;
 import java.util.HashMap;
 import java.util.Map;
 
-public class PublicKeyRegistryImpl implements PublicKeyRegistry {
+public class PublicKeyRegistryByAliasImpl implements PublicKeyRegistryByAlias {
 
     private KeyStoreRegistry keyStoreRegistry;
 
@@ -18,8 +18,8 @@ public class PublicKeyRegistryImpl implements PublicKeyRegistry {
         this.keyStoreRegistry = keyStoreRegistry;
     }
 
-    public PublicKey get(KeyStoreChooser keyStoreChooser, PublicKeyChooser publicKeyChooser) {
-        CacheKey cacheKey = new CacheKey(keyStoreChooser.getKeyStoreName(), publicKeyChooser.getAlias());
+    public PublicKey get(KeyStoreChooser keyStoreChooser, PublicKeyChooserByAlias publicKeyChooserByAlias) {
+        CacheKey cacheKey = new CacheKey(keyStoreChooser.getKeyStoreName(), publicKeyChooserByAlias.getAlias());
         PublicKey retrievedPublicKey = cache.get(cacheKey);
 
         if (retrievedPublicKey != null) {
@@ -31,7 +31,7 @@ public class PublicKeyRegistryImpl implements PublicKeyRegistry {
         if (keyStore != null) {
             PublicKeyFactoryBean factory = new PublicKeyFactoryBean();
             factory.setKeystore(keyStore);
-            factory.setAlias(publicKeyChooser.getAlias());
+            factory.setAlias(publicKeyChooserByAlias.getAlias());
             try {
                 factory.afterPropertiesSet();
                 PublicKey publicKey = (PublicKey) factory.getObject();

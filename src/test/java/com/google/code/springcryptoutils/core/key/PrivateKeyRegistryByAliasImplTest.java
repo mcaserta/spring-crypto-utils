@@ -7,49 +7,57 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.security.PublicKey;
+import java.security.PrivateKey;
 
 import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration
-public class PublicKeyRegistryImplTest {
+public class PrivateKeyRegistryByAliasImplTest {
 
     @Autowired
-    private PublicKeyRegistry registry;
+    private PrivateKeyRegistryByAlias registryByAlias;
 
     @Test
     public void testPublicKeyRegistryIsProperlyLoaded() {
-        assertNotNull(registry);
-        PublicKey publicKey1 = registry.get(
+        assertNotNull(registryByAlias);
+        PrivateKey privateKey1 = registryByAlias.get(
                 new KeyStoreChooser() {
                     public String getKeyStoreName() {
                         return "keystoreOne";
                     }
                 },
-                new PublicKeyChooser() {
+                new PrivateKeyChooserByAlias() {
                     public String getAlias() {
                         return "test";
                     }
+
+                    public String getPassword() {
+                        return "password";
+                    }
                 }
         );
-        PublicKey publicKey2 = registry.get(
+        PrivateKey privateKey2 = registryByAlias.get(
                 new KeyStoreChooser() {
                     public String getKeyStoreName() {
                         return "keystoreTwo";
                     }
                 },
-                new PublicKeyChooser() {
+                new PrivateKeyChooserByAlias() {
                     public String getAlias() {
                         return "test";
                     }
+
+                    public String getPassword() {
+                        return "password";
+                    }
                 }
         );
-        assertNotNull(publicKey1);
-        assertNotNull(publicKey2);
-        assertEquals("algorithm", "RSA", publicKey1.getAlgorithm());
-        assertEquals("algorithm", "RSA", publicKey2.getAlgorithm());
-        assertSame(publicKey1, publicKey2);
+        assertNotNull(privateKey1);
+        assertNotNull(privateKey2);
+        assertEquals("algorithm", "RSA", privateKey1.getAlgorithm());
+        assertEquals("algorithm", "RSA", privateKey2.getAlgorithm());
+        assertNotSame(privateKey1, privateKey2);
     }
 
 }

@@ -4,8 +4,8 @@ import com.google.code.springcryptoutils.core.keystore.KeyStoreChooser;
 
 import java.security.PublicKey;
 
-public interface PublicKeyRegistry {
+public interface PublicKeyRegistryByAlias {
 
-    PublicKey get(KeyStoreChooser keyStoreChooser, PublicKeyChooser publicKeyChooser);
+    PublicKey get(KeyStoreChooser keyStoreChooser, PublicKeyChooserByAlias publicKeyChooserByAlias);
 
 }

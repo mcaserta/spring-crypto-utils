@@ -14,6 +14,6 @@
         <entry key="keystoreTwo" value-ref="keystore2"/>
     </util:map>
 
-    <crypt:privateKeyRegistry id="privateKeyRegistry" keystoreRegistry-ref="keystoreRegistry"/>
+    <crypt:privateKeyRegistryByAlias id="privateKeyRegistry" keystoreRegistry-ref="keystoreRegistry"/>
 
 </beans>

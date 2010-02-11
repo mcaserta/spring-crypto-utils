@@ -14,14 +14,6 @@
         <entry key="keystoreTwo" value-ref="keystore2"/>
     </util:map>
 
-    <crypt:privateKeyRegistry id="privateKeyRegistry" keystoreRegistry-ref="keystoreRegistry"/>
-
-    <crypt:publicKeyRegistry id="publicKeyRegistry" keystoreRegistry-ref="keystoreRegistry"/>
-
-    <crypt:base64EncodedSignerWithChoosers id="signer" privateKeyRegistry-ref="privateKeyRegistry"
-                                           algorithm="SHA1withRSA"/>
-
-    <crypt:base64EncodedVerifierWithChoosers id="verifier" publicKeyRegistry-ref="publicKeyRegistry"
-                                             algorithm="SHA1withRSA"/>
+    <crypt:publicKeyRegistryByAlias id="publicKeyRegistry" keystoreRegistry-ref="keystoreRegistry"/>
 
 </beans>

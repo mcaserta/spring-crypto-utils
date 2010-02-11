@@ -9,17 +9,17 @@ public class SpringCryptoUtilsNamespaceHandler extends NamespaceHandlerSupport {
         registerBeanDefinitionParser("publicKey", new PublicKeyBeanDefinitionParser());
         registerBeanDefinitionParser("privateKey", new PrivateKeyBeanDefinitionParser());
         registerBeanDefinitionParser("keystoreRegistry", new KeyStoreRegistryBeanDefinitionParser());
-        registerBeanDefinitionParser("publicKeyRegistry", new PublicKeyRegistryBeanDefinitionParser());
-        registerBeanDefinitionParser("privateKeyRegistry", new PrivateKeyRegistryBeanDefinitionParser());
+        registerBeanDefinitionParser("publicKeyRegistryByAlias", new PublicKeyRegistryByAliasBeanDefinitionParser());
+        registerBeanDefinitionParser("privateKeyRegistryByAlias", new PrivateKeyRegistryByAliasBeanDefinitionParser());
         registerBeanDefinitionParser("signer", new SignerBeanDefinitionParser());
         registerBeanDefinitionParser("verifier", new VerifierBeanDefinitionParser());
-        registerBeanDefinitionParser("signerWithChoosers", new SignerWithChoosersBeanDefinitionParser());
-        registerBeanDefinitionParser("verifierWithChoosers", new VerifierWithChoosersBeanDefinitionParser());
+        registerBeanDefinitionParser("signerWithChoosersByAlias", new SignerWithChoosersByAliasBeanDefinitionParser());
+        registerBeanDefinitionParser("verifierWithChoosersByAlias", new VerifierWithChoosersByAliasBeanDefinitionParser());
         registerBeanDefinitionParser("base64EncodedKeystore", new Base64EncodedKeyStoreBeanDefinitionParser());
         registerBeanDefinitionParser("base64EncodedSigner", new Base64EncodedSignerBeanDefinitionParser());
         registerBeanDefinitionParser("base64EncodedVerifier", new Base64EncodedVerifierBeanDefinitionParser());
-        registerBeanDefinitionParser("base64EncodedSignerWithChoosers", new Base64EncodedSignerWithChoosersBeanDefinitionParser());
-        registerBeanDefinitionParser("base64EncodedVerifierWithChoosers", new Base64EncodedVerifierWithChoosersBeanDefinitionParser());
+        registerBeanDefinitionParser("base64EncodedSignerWithChoosersByAlias", new Base64EncodedSignerWithChoosersByAliasBeanDefinitionParser());
+        registerBeanDefinitionParser("base64EncodedVerifierWithChoosersByAlias", new Base64EncodedVerifierWithChoosersByAliasBeanDefinitionParser());
     }
 
 }
