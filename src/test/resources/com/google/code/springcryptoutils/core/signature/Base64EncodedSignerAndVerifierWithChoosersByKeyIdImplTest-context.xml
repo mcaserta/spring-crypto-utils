@@ -19,8 +19,10 @@
         </entry>
     </util:map>
 
-    <crypt:signerWithChooserByPrivateKeyId id="signer" privateKeyMap-ref="privateKeyMap" algorithm="SHA1withRSA"/>
+    <crypt:base64EncodedSignerWithChooserByPrivateKeyId id="signer" privateKeyMap-ref="privateKeyMap"
+                                                  algorithm="SHA1withRSA"/>
 
-    <crypt:verifierWithChooserByPublicKeyId id="verifier" publicKeyMap-ref="publicKeyMap" algorithm="SHA1withRSA"/>
+    <crypt:base64EncodedVerifierWithChooserByPublicKeyId id="verifier" publicKeyMap-ref="publicKeyMap"
+                                                    algorithm="SHA1withRSA"/>
 
 </beans>

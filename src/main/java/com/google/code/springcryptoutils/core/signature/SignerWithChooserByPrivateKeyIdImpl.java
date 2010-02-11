@@ -1,9 +1,12 @@
 package com.google.code.springcryptoutils.core.signature;
 
 import java.security.PrivateKey;
+import java.util.HashMap;
 import java.util.Map;
 
 public class SignerWithChooserByPrivateKeyIdImpl implements SignerWithChooserByPrivateKeyId {
+
+    private Map<String, Signer> cache = new HashMap<String, Signer>();
 
     private String algorithm;
 
@@ -18,11 +21,17 @@ public class SignerWithChooserByPrivateKeyIdImpl implements SignerWithChooserByP
     }
 
     public byte[] sign(String privateKeyId, byte[] message) {
-        // TODO: these signers must be kept in a cache
-        SignerImpl signer = new SignerImpl();
-        signer.setPrivateKey(privateKeyMap.get(privateKeyId));
-        signer.setAlgorithm(algorithm);
-        return signer.sign(message);
+        Signer signer = cache.get(privateKeyId);
+
+        if (signer != null) {
+            return signer.sign(message);
+        }
+
+        SignerImpl signerImpl = new SignerImpl();
+        signerImpl.setPrivateKey(privateKeyMap.get(privateKeyId));
+        signerImpl.setAlgorithm(algorithm);
+        cache.put(privateKeyId, signerImpl);
+        return signerImpl.sign(message);
     }
     
 }

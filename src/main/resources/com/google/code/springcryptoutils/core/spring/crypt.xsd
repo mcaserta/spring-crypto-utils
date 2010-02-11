@@ -109,28 +109,6 @@
         </xsd:complexType>
     </xsd:element>
 
-    <xsd:element name="base64EncodedSigner">
-        <xsd:complexType>
-            <xsd:complexContent>
-                <xsd:extension base="beans:identifiedType">
-                    <xsd:attribute name="privateKey-ref" type="xsd:string" use="required"/>
-                    <xsd:attribute name="algorithm" type="xsd:string" use="required"/>
-                </xsd:extension>
-            </xsd:complexContent>
-        </xsd:complexType>
-    </xsd:element>
-
-    <xsd:element name="base64EncodedVerifier">
-        <xsd:complexType>
-            <xsd:complexContent>
-                <xsd:extension base="beans:identifiedType">
-                    <xsd:attribute name="publicKey-ref" type="xsd:string" use="required"/>
-                    <xsd:attribute name="algorithm" type="xsd:string" use="required"/>
-                </xsd:extension>
-            </xsd:complexContent>
-        </xsd:complexType>
-    </xsd:element>
-
     <xsd:element name="signerWithChoosersByAlias">
         <xsd:complexType>
             <xsd:complexContent>
@@ -153,12 +131,59 @@
         </xsd:complexType>
     </xsd:element>
 
+    <xsd:element name="signerWithChooserByPrivateKeyId">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="beans:identifiedType">
+                    <xsd:attribute name="privateKeyMap-ref" type="xsd:string" use="required"/>
+                    <xsd:attribute name="algorithm" type="xsd:string" use="required"/>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="verifierWithChooserByPublicKeyId">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="beans:identifiedType">
+                    <xsd:attribute name="publicKeyMap-ref" type="xsd:string" use="required"/>
+                    <xsd:attribute name="algorithm" type="xsd:string" use="required"/>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="base64EncodedSigner">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="beans:identifiedType">
+                    <xsd:attribute name="privateKey-ref" type="xsd:string" use="required"/>
+                    <xsd:attribute name="algorithm" type="xsd:string" use="required"/>
+                    <xsd:attribute name="charsetName" type="xsd:string" default="UTF-8"/>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="base64EncodedVerifier">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="beans:identifiedType">
+                    <xsd:attribute name="publicKey-ref" type="xsd:string" use="required"/>
+                    <xsd:attribute name="algorithm" type="xsd:string" use="required"/>
+                    <xsd:attribute name="charsetName" type="xsd:string" default="UTF-8"/>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
     <xsd:element name="base64EncodedSignerWithChoosersByAlias">
         <xsd:complexType>
             <xsd:complexContent>
                 <xsd:extension base="beans:identifiedType">
                     <xsd:attribute name="privateKeyRegistryByAlias-ref" type="xsd:string" use="required"/>
                     <xsd:attribute name="algorithm" type="xsd:string" use="required"/>
+                    <xsd:attribute name="charsetName" type="xsd:string" default="UTF-8"/>
                 </xsd:extension>
             </xsd:complexContent>
         </xsd:complexType>
@@ -170,6 +195,31 @@
                 <xsd:extension base="beans:identifiedType">
                     <xsd:attribute name="publicKeyRegistryByAlias-ref" type="xsd:string" use="required"/>
                     <xsd:attribute name="algorithm" type="xsd:string" use="required"/>
+                    <xsd:attribute name="charsetName" type="xsd:string" default="UTF-8"/>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="base64EncodedSignerWithChooserByPrivateKeyId">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="beans:identifiedType">
+                    <xsd:attribute name="privateKeyMap-ref" type="xsd:string" use="required"/>
+                    <xsd:attribute name="algorithm" type="xsd:string" use="required"/>
+                    <xsd:attribute name="charsetName" type="xsd:string" default="UTF-8"/>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="base64EncodedVerifierWithChooserByPublicKeyId">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="beans:identifiedType">
+                    <xsd:attribute name="publicKeyMap-ref" type="xsd:string" use="required"/>
+                    <xsd:attribute name="algorithm" type="xsd:string" use="required"/>
+                    <xsd:attribute name="charsetName" type="xsd:string" default="UTF-8"/>
                 </xsd:extension>
             </xsd:complexContent>
         </xsd:complexType>

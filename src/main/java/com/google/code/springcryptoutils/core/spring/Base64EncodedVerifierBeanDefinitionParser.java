@@ -15,6 +15,7 @@ public class Base64EncodedVerifierBeanDefinitionParser extends AbstractSingleBea
     protected void doParse(Element element, BeanDefinitionBuilder bean) {
         bean.addPropertyReference("publicKey", element.getAttribute("publicKey-ref"));
         bean.addPropertyValue("algorithm", element.getAttribute("algorithm"));
+        bean.addPropertyValue("charsetName", element.getAttribute("charsetName"));
     }
 
 }

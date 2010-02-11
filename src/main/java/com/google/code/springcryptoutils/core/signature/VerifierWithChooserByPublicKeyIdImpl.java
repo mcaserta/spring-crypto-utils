@@ -1,9 +1,12 @@
 package com.google.code.springcryptoutils.core.signature;
 
 import java.security.PublicKey;
+import java.util.HashMap;
 import java.util.Map;
 
 public class VerifierWithChooserByPublicKeyIdImpl implements VerifierWithChooserByPublicKeyId {
+
+    private Map<String, Verifier> cache = new HashMap<String, Verifier>();
 
     private String algorithm;
 
@@ -18,11 +21,17 @@ public class VerifierWithChooserByPublicKeyIdImpl implements VerifierWithChooser
     }
 
     public boolean verify(String publicKeyId, byte[] message, byte[] signature) {
-        // TODO: these must be kept in a cache
-        VerifierImpl verifier = new VerifierImpl();
-        verifier.setAlgorithm(algorithm);
-        verifier.setPublicKey(publicKeyMap.get(publicKeyId));
-        return verifier.verify(message, signature);
+        Verifier verifier = cache.get(publicKeyId);
+
+        if (verifier != null) {
+            return verifier.verify(message, signature);
+        }
+
+        VerifierImpl verifierImpl = new VerifierImpl();
+        verifierImpl.setAlgorithm(algorithm);
+        verifierImpl.setPublicKey(publicKeyMap.get(publicKeyId));
+        cache.put(publicKeyId, verifierImpl);
+        return verifierImpl.verify(message, signature);
     }
 
 }
