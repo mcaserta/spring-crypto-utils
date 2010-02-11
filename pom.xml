@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.google.code.spring-crypto-utils</groupId>
     <artifactId>spring-crypto-utils</artifactId>
-    <version>0.9.0</version>
+    <version>0.9.1-SNAPSHOT</version>
     <name>Spring Cryptographic Utilities</name>
 
     <properties>
@@ -12,9 +12,9 @@
     </properties>
 
     <scm>
-        <developerConnection>scm:svn:https://spring-crypto-utils.googlecode.com/svn/tags/spring-crypto-utils-0.9.0</developerConnection>
-        <connection>scm:svn:http://spring-crypto-utils.googlecode.com/svn/tags/spring-crypto-utils-0.9.0</connection>
-        <url>scm:svn:https://spring-crypto-utils.googlecode.com/svn/tags/spring-crypto-utils-0.9.0</url>
+        <developerConnection>scm:svn:https://spring-crypto-utils.googlecode.com/svn/trunk</developerConnection>
+        <connection>scm:svn:http://spring-crypto-utils.googlecode.com/svn/trunk</connection>
+        <url>http://code.google.com/p/spring-crypto-utils/source/browse/</url>
     </scm>
 
     <issueManagement>
