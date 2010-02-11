@@ -235,4 +235,15 @@
         </xsd:complexType>
     </xsd:element>
 
+    <xsd:element name="base64EncodedSymmetricKeyGenerator">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="beans:identifiedType">
+                    <xsd:attribute name="algorithm" type="xsd:string" use="required"/>
+                    <xsd:attribute name="chunkOutput" type="xsd:boolean" default="false"/>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
 </xsd:schema>

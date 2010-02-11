@@ -25,6 +25,7 @@ public class SpringCryptoUtilsNamespaceHandler extends NamespaceHandlerSupport {
         registerBeanDefinitionParser("base64EncodedSignerWithChooserByPrivateKeyId", new Base64EncodedSignerWithChooserByPrivateKeyIdBeanDefinitionParser());
         registerBeanDefinitionParser("base64EncodedVerifierWithChooserByPublicKeyId", new Base64EncodedVerifierWithChooserByPublicKeyIdBeanDefinitionParser());
         registerBeanDefinitionParser("symmetricKeyGenerator", new SymmetricKeyGeneratorBeanDefinitionParser());
+        registerBeanDefinitionParser("base64EncodedSymmetricKeyGenerator", new Base64EncodedSymmetricKeyGeneratorBeanDefinitionParser());
     }
 
 }
