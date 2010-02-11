@@ -1,4 +1,4 @@
-package com.google.code.springcryptoutils.core.spring;
+package com.google.code.springcryptoutils.core.spring.signature;
 
 import com.google.code.springcryptoutils.core.signature.SignerWithChooserByPrivateKeyIdImpl;
 import com.google.code.springcryptoutils.core.signature.SignerWithChoosersByAliasImpl;

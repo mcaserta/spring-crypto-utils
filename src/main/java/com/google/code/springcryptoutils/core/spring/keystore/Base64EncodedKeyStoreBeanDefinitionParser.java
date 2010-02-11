@@ -1,4 +1,4 @@
-package com.google.code.springcryptoutils.core.spring;
+package com.google.code.springcryptoutils.core.spring.keystore;
 
 import com.google.code.springcryptoutils.core.keystore.Base64EncodedKeyStoreFactoryBean;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;

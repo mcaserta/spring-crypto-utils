@@ -1,20 +1,21 @@
-package com.google.code.springcryptoutils.core.spring;
+package com.google.code.springcryptoutils.core.spring.signature;
 
-import com.google.code.springcryptoutils.core.signature.SignerImpl;
+import com.google.code.springcryptoutils.core.signature.Base64EncodedSignerImpl;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.AbstractSingleBeanDefinitionParser;
 import org.w3c.dom.Element;
 
-public class SignerBeanDefinitionParser extends AbstractSingleBeanDefinitionParser {
+public class Base64EncodedSignerBeanDefinitionParser extends AbstractSingleBeanDefinitionParser {
 
     @Override
     protected Class getBeanClass(Element element) {
-        return SignerImpl.class;
+        return Base64EncodedSignerImpl.class;
     }
 
     protected void doParse(Element element, BeanDefinitionBuilder bean) {
         bean.addPropertyReference("privateKey", element.getAttribute("privateKey-ref"));
         bean.addPropertyValue("algorithm", element.getAttribute("algorithm"));
+        bean.addPropertyValue("charsetName", element.getAttribute("charsetName"));
     }
 
 }
