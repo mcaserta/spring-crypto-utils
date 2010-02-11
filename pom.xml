@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.google.code.spring-crypto-utils</groupId>
     <artifactId>spring-crypto-utils</artifactId>
-    <version>0.9.0-SNAPSHOT</version>
+    <version>0.9.0</version>
     <name>Spring Cryptographic Utilities</name>
 
     <properties>
@@ -13,9 +12,9 @@
     </properties>
 
     <scm>
-        <developerConnection>scm:svn:https://spring-crypto-utils.googlecode.com/svn/trunk</developerConnection>
-        <connection>scm:svn:http://spring-crypto-utils.googlecode.com/svn/trunk</connection>
-        <url>http://code.google.com/p/spring-crypto-utils/source/browse/</url>
+        <developerConnection>scm:svn:https://spring-crypto-utils.googlecode.com/svn/tags/spring-crypto-utils-0.9.0</developerConnection>
+        <connection>scm:svn:http://spring-crypto-utils.googlecode.com/svn/tags/spring-crypto-utils-0.9.0</connection>
+        <url>scm:svn:https://spring-crypto-utils.googlecode.com/svn/tags/spring-crypto-utils-0.9.0</url>
     </scm>
 
     <issueManagement>
