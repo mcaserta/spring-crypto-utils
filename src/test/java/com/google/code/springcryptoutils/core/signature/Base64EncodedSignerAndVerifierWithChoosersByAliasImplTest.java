@@ -47,6 +47,8 @@ public class Base64EncodedSignerAndVerifierWithChoosersByAliasImplTest {
         };
 
         assertNotNull(signer);
+        assertNotNull(verifier);
+        
         String signature = signer.sign(keyStoreChooser, privateKeyChooserByAlias, message);
         assertNotNull(signature);
         assertTrue(verifier.verify(keyStoreChooser, publicKeyChooserByAlias, message, signature));

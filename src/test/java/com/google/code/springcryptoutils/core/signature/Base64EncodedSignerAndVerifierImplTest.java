@@ -24,6 +24,8 @@ public class Base64EncodedSignerAndVerifierImplTest {
         final String message = "this is a top-secret message";
 
         assertNotNull(signer);
+        assertNotNull(verifier);
+        
         String signature = signer.sign(message);
         assertNotNull(signature);
         assertTrue(verifier.verify(message, signature));

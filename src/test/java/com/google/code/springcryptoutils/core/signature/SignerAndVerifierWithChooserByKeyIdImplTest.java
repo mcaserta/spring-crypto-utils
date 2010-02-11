@@ -1,5 +1,8 @@
 package com.google.code.springcryptoutils.core.signature;
 
+import com.google.code.springcryptoutils.core.key.PrivateKeyChooserByAlias;
+import com.google.code.springcryptoutils.core.key.PublicKeyChooserByAlias;
+import com.google.code.springcryptoutils.core.keystore.KeyStoreChooser;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,13 +14,13 @@ import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration
-public class SignerAndVerifierImplTest {
+public class SignerAndVerifierWithChooserByKeyIdImplTest {
 
     @Autowired
-    private Signer signer;
+    private SignerWithChooserByPrivateKeyId signer;
 
     @Autowired
-    private Verifier verifier;
+    private VerifierWithChooserByPublicKeyId verifier;
 
     @Test
     public void testSignAndVerify() {
@@ -26,9 +29,9 @@ public class SignerAndVerifierImplTest {
         assertNotNull(signer);
         assertNotNull(verifier);
         
-        byte[] signature = signer.sign(message);
+        byte[] signature = signer.sign("privateKeyId", message);
         assertNotNull(signature);
-        assertTrue(verifier.verify(message, signature));
+        assertTrue(verifier.verify("publicKeyId", message, signature));
     }
 
 }
