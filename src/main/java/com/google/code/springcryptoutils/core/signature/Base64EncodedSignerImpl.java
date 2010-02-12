@@ -28,7 +28,7 @@ public class Base64EncodedSignerImpl implements Base64EncodedSigner {
             final byte[] signature = signer.sign(message.getBytes(charsetName));
             return new String(Base64.encodeBase64(signature, false));
         } catch (UnsupportedEncodingException e) {
-            throw new SignerException("unsupported encoding: charsetName=" + charsetName, e);
+            throw new SignatureException("unsupported encoding: charsetName=" + charsetName, e);
         }
     }
 
