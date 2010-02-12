@@ -1,7 +1,6 @@
 package com.google.code.springcryptoutils.core.cipher.symmetric;
 
-import sun.misc.BASE64Decoder;
-import sun.misc.BASE64Encoder;
+import org.apache.commons.codec.binary.Base64;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
@@ -13,9 +12,7 @@ public class Base64EncodedCiphererImpl implements Base64EncodedCipherer {
     private String cipherAlgorithm;
     private String charsetName = "UTF-8";
     private Mode mode;
-
-    private final BASE64Encoder b64encoder = new BASE64Encoder();
-    private final BASE64Decoder b64decoder = new BASE64Decoder();
+    private boolean chunkOutput;
 
     public void setKeyAlgorithm(String keyAlgorithm) {
         this.keyAlgorithm = keyAlgorithm;
@@ -33,22 +30,26 @@ public class Base64EncodedCiphererImpl implements Base64EncodedCipherer {
         this.mode = mode;
     }
 
+    public void setChunkOutput(boolean chunkOutput) {
+        this.chunkOutput = chunkOutput;
+    }
+
     public String encrypt(String key, String initializationVector, String message) {
         try {
-            IvParameterSpec initializationVectorSpec = new IvParameterSpec(b64decoder.decodeBuffer(initializationVector));
-            final SecretKeySpec skey = new SecretKeySpec(b64decoder.decodeBuffer(key), keyAlgorithm);
+            IvParameterSpec initializationVectorSpec = new IvParameterSpec(Base64.decodeBase64(initializationVector));
+            final SecretKeySpec keySpec = new SecretKeySpec(Base64.decodeBase64(key), keyAlgorithm);
             final Cipher cipher = Cipher.getInstance(cipherAlgorithm);
             byte[] messageAsByteArray;
 
             switch (mode) {
                 case ENCRYPT:
-                    cipher.init(Cipher.ENCRYPT_MODE, skey, initializationVectorSpec);
+                    cipher.init(Cipher.ENCRYPT_MODE, keySpec, initializationVectorSpec);
                     messageAsByteArray = message.getBytes(charsetName);
                     final byte[] encryptedMessage = cipher.doFinal(messageAsByteArray);
-                    return b64encoder.encode(encryptedMessage);
+                    return new String(Base64.encodeBase64(encryptedMessage, chunkOutput));
                 case DECRYPT:
-                    cipher.init(Cipher.DECRYPT_MODE, skey, initializationVectorSpec);
-                    messageAsByteArray = b64decoder.decodeBuffer(message);
+                    cipher.init(Cipher.DECRYPT_MODE, keySpec, initializationVectorSpec);
+                    messageAsByteArray = Base64.decodeBase64(message);
                     final byte[] decryptedMessage = cipher.doFinal(messageAsByteArray);
                     return new String(decryptedMessage, charsetName);
                 default:

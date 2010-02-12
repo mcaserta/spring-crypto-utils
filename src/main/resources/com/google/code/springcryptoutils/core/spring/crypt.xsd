@@ -279,6 +279,7 @@
                     <xsd:attribute name="keyAlgorithm" type="xsd:string" use="required"/>
                     <xsd:attribute name="cipherAlgorithm" type="xsd:string" use="required"/>
                     <xsd:attribute name="mode" type="cipherModeType" use="required"/>
+                    <xsd:attribute name="chunkOutput" type="xsd:boolean" default="false"/>
                 </xsd:extension>
             </xsd:complexContent>
         </xsd:complexType>

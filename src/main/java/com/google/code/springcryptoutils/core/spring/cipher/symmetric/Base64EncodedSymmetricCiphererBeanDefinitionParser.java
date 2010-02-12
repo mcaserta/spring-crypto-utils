@@ -17,6 +17,7 @@ public class Base64EncodedSymmetricCiphererBeanDefinitionParser extends Abstract
         bean.addPropertyValue("keyAlgorithm", element.getAttribute("keyAlgorithm"));
         bean.addPropertyValue("cipherAlgorithm", element.getAttribute("cipherAlgorithm"));
         bean.addPropertyValue("mode", element.getAttribute("mode"));
+        bean.addPropertyValue("chunkOutput", element.getAttribute("chunkOutput"));
     }
 
 }
