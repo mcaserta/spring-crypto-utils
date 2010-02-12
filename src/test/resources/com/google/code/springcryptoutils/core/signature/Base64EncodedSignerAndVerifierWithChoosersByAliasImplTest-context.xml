@@ -18,10 +18,10 @@
 
     <crypt:publicKeyRegistryByAlias id="publicKeyRegistry" keystoreRegistry-ref="keystoreRegistry"/>
 
-    <crypt:base64EncodedSignerWithChoosersByAlias id="signer" privateKeyRegistryByAlias-ref="privateKeyRegistry"
-                                                  algorithm="SHA1withRSA"/>
+    <crypt:b64SignerWithChoosersByAlias id="signer" privateKeyRegistryByAlias-ref="privateKeyRegistry"
+                                        algorithm="SHA1withRSA"/>
 
-    <crypt:base64EncodedVerifierWithChoosersByAlias id="verifier" publicKeyRegistryByAlias-ref="publicKeyRegistry"
-                                                    algorithm="SHA1withRSA"/>
+    <crypt:b64VerifierWithChoosersByAlias id="verifier" publicKeyRegistryByAlias-ref="publicKeyRegistry"
+                                          algorithm="SHA1withRSA"/>
 
 </beans>

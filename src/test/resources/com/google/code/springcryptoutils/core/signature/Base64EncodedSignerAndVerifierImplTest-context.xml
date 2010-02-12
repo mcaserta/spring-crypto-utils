@@ -10,8 +10,8 @@
 
     <crypt:privateKey id="privateKey" keystore-ref="keystore" alias="test" password="password"/>
 
-    <crypt:base64EncodedSigner id="signer" privateKey-ref="privateKey" algorithm="SHA1withRSA"/>
+    <crypt:b64Signer id="signer" privateKey-ref="privateKey" algorithm="SHA1withRSA"/>
 
-    <crypt:base64EncodedVerifier id="verifier" publicKey-ref="publicKey" algorithm="SHA1withRSA"/>
+    <crypt:b64Verifier id="verifier" publicKey-ref="publicKey" algorithm="SHA1withRSA"/>
 
 </beans>

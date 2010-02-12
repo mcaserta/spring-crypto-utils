@@ -20,7 +20,7 @@
         </xsd:complexType>
     </xsd:element>
 
-    <xsd:element name="base64EncodedKeystore">
+    <xsd:element name="b64Keystore">
         <xsd:complexType>
             <xsd:complexContent>
                 <xsd:extension base="beans:identifiedType">
@@ -153,7 +153,7 @@
         </xsd:complexType>
     </xsd:element>
 
-    <xsd:element name="base64EncodedSigner">
+    <xsd:element name="b64Signer">
         <xsd:complexType>
             <xsd:complexContent>
                 <xsd:extension base="beans:identifiedType">
@@ -165,7 +165,7 @@
         </xsd:complexType>
     </xsd:element>
 
-    <xsd:element name="base64EncodedVerifier">
+    <xsd:element name="b64Verifier">
         <xsd:complexType>
             <xsd:complexContent>
                 <xsd:extension base="beans:identifiedType">
@@ -177,7 +177,7 @@
         </xsd:complexType>
     </xsd:element>
 
-    <xsd:element name="base64EncodedSignerWithChoosersByAlias">
+    <xsd:element name="b64SignerWithChoosersByAlias">
         <xsd:complexType>
             <xsd:complexContent>
                 <xsd:extension base="beans:identifiedType">
@@ -189,7 +189,7 @@
         </xsd:complexType>
     </xsd:element>
 
-    <xsd:element name="base64EncodedVerifierWithChoosersByAlias">
+    <xsd:element name="b64VerifierWithChoosersByAlias">
         <xsd:complexType>
             <xsd:complexContent>
                 <xsd:extension base="beans:identifiedType">
@@ -201,7 +201,7 @@
         </xsd:complexType>
     </xsd:element>
 
-    <xsd:element name="base64EncodedSignerWithChooserByPrivateKeyId">
+    <xsd:element name="b64SignerWithChooserByPrivateKeyId">
         <xsd:complexType>
             <xsd:complexContent>
                 <xsd:extension base="beans:identifiedType">
@@ -213,7 +213,7 @@
         </xsd:complexType>
     </xsd:element>
 
-    <xsd:element name="base64EncodedVerifierWithChooserByPublicKeyId">
+    <xsd:element name="b64VerifierWithChooserByPublicKeyId">
         <xsd:complexType>
             <xsd:complexContent>
                 <xsd:extension base="beans:identifiedType">
@@ -235,7 +235,7 @@
         </xsd:complexType>
     </xsd:element>
 
-    <xsd:element name="base64EncodedSymmetricKeyGenerator">
+    <xsd:element name="b64SymmetricKeyGenerator">
         <xsd:complexType>
             <xsd:complexContent>
                 <xsd:extension base="beans:identifiedType">
@@ -272,7 +272,7 @@
         </xsd:complexType>
     </xsd:element>
 
-    <xsd:element name="base64EncodedSymmetricCipherer">
+    <xsd:element name="b64SymmetricCipherer">
         <xsd:complexType>
             <xsd:complexContent>
                 <xsd:extension base="beans:identifiedType">
