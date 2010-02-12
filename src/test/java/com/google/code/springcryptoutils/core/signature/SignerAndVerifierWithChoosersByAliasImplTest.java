@@ -48,7 +48,7 @@ public class SignerAndVerifierWithChoosersByAliasImplTest {
 
         assertNotNull(signer);
         assertNotNull(verifier);
-        
+
         byte[] signature = signer.sign(keyStoreChooser, privateKeyChooserByAlias, message);
         assertNotNull(signature);
         assertTrue(verifier.verify(keyStoreChooser, publicKeyChooserByAlias, message, signature));

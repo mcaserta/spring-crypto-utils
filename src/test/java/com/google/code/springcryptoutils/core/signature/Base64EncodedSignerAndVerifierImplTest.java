@@ -25,7 +25,7 @@ public class Base64EncodedSignerAndVerifierImplTest {
 
         assertNotNull(signer);
         assertNotNull(verifier);
-        
+
         String signature = signer.sign(message);
         assertNotNull(signature);
         assertTrue(verifier.verify(message, signature));

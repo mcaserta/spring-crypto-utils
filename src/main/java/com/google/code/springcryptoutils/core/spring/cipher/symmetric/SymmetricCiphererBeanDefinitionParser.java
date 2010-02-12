@@ -1,7 +1,6 @@
 package com.google.code.springcryptoutils.core.spring.cipher.symmetric;
 
 import com.google.code.springcryptoutils.core.cipher.symmetric.CiphererImpl;
-import com.google.code.springcryptoutils.core.cipher.symmetric.KeyGeneratorImpl;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.AbstractSingleBeanDefinitionParser;
 import org.w3c.dom.Element;

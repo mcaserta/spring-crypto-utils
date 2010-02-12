@@ -25,7 +25,7 @@ public class SignerAndVerifierImplTest {
 
         assertNotNull(signer);
         assertNotNull(verifier);
-        
+
         byte[] signature = signer.sign(message);
         assertNotNull(signature);
         assertTrue(verifier.verify(message, signature));

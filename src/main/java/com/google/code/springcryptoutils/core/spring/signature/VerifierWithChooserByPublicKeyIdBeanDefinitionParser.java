@@ -1,7 +1,6 @@
 package com.google.code.springcryptoutils.core.spring.signature;
 
 import com.google.code.springcryptoutils.core.signature.VerifierWithChooserByPublicKeyIdImpl;
-import com.google.code.springcryptoutils.core.signature.VerifierWithChoosersByAliasImpl;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.AbstractSingleBeanDefinitionParser;
 import org.w3c.dom.Element;

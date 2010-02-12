@@ -33,5 +33,5 @@ public class SignerWithChooserByPrivateKeyIdImpl implements SignerWithChooserByP
         cache.put(privateKeyId, signerImpl);
         return signerImpl.sign(message);
     }
-    
+
 }

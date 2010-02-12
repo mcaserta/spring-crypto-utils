@@ -1,8 +1,5 @@
 package com.google.code.springcryptoutils.core.signature;
 
-import com.google.code.springcryptoutils.core.key.PrivateKeyChooserByAlias;
-import com.google.code.springcryptoutils.core.key.PublicKeyChooserByAlias;
-import com.google.code.springcryptoutils.core.keystore.KeyStoreChooser;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +25,7 @@ public class SignerAndVerifierWithChooserByKeyIdImplTest {
 
         assertNotNull(signer);
         assertNotNull(verifier);
-        
+
         byte[] signature = signer.sign("privateKeyId", message);
         assertNotNull(signature);
         assertTrue(verifier.verify("publicKeyId", message, signature));
