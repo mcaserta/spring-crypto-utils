@@ -58,8 +58,13 @@ public class VerifierWithChooserByPublicKeyIdImpl implements VerifierWithChooser
 
         VerifierImpl verifierImpl = new VerifierImpl();
         verifierImpl.setAlgorithm(algorithm);
-        // TODO: fail if key is not found
-        verifierImpl.setPublicKey(publicKeyMap.get(publicKeyId));
+        PublicKey publicKey = publicKeyMap.get(publicKeyId);
+
+        if (publicKey == null) {
+            throw new SignatureException("public key not found: publicKeyId=" + publicKeyId);
+        }
+
+        verifierImpl.setPublicKey(publicKey);
         cache.put(publicKeyId, verifierImpl);
         return verifierImpl.verify(message, signature);
     }

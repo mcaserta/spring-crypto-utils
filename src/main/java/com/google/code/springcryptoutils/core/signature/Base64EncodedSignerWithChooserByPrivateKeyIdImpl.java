@@ -70,8 +70,13 @@ public class Base64EncodedSignerWithChooserByPrivateKeyIdImpl implements Base64E
         Base64EncodedSignerImpl signerImpl = new Base64EncodedSignerImpl();
         signerImpl.setAlgorithm(algorithm);
         signerImpl.setCharsetName(charsetName);
-        // TODO: fail if key is not found
-        signerImpl.setPrivateKey(privateKeyMap.get(privateKeyId));
+        PrivateKey privateKey = privateKeyMap.get(privateKeyId);
+
+        if (privateKey == null) {
+            throw new SignatureException("private key not found: privateKeyId=" + privateKeyId);
+        }
+
+        signerImpl.setPrivateKey(privateKey);
         cache.put(privateKeyId, signerImpl);
         return signerImpl.sign(message);
     }

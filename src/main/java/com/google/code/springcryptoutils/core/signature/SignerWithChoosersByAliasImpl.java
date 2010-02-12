@@ -5,6 +5,8 @@ import com.google.code.springcryptoutils.core.key.PrivateKeyRegistryByAlias;
 import com.google.code.springcryptoutils.core.keystore.KeyStoreChooser;
 
 import java.security.PrivateKey;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * The default implementation for providing digital signatures when the private key
@@ -13,6 +15,8 @@ import java.security.PrivateKey;
  * @author Mirko Caserta (mirko.caserta@gmail.com)
  */
 public class SignerWithChoosersByAliasImpl implements SignerWithChoosersByAlias {
+
+    private Map<String, Signer> cache = new HashMap<String, Signer>();
 
     private PrivateKeyRegistryByAlias privateKeyRegistryByAlias;
 
@@ -45,17 +49,31 @@ public class SignerWithChoosersByAliasImpl implements SignerWithChoosersByAlias 
      * @return the signature
      */
     public byte[] sign(KeyStoreChooser keyStoreChooser, PrivateKeyChooserByAlias privateKeyChooserByAlias, byte[] message) {
-        // TODO: the signer instance should be in a cache where the key is an aggregate of keyStoreName and alias
-        SignerImpl signer = new SignerImpl();
-        signer.setAlgorithm(algorithm);
+        Signer signer = cache.get(cacheKey(keyStoreChooser, privateKeyChooserByAlias));
+
+        if (signer != null) {
+            return signer.sign(message);
+        }
+
+        SignerImpl signerImpl = new SignerImpl();
+        signerImpl.setAlgorithm(algorithm);
         PrivateKey privateKey = privateKeyRegistryByAlias.get(keyStoreChooser, privateKeyChooserByAlias);
 
         if (privateKey == null) {
             throw new SignatureException("private key not found in registry: keyStoreName=" + keyStoreChooser.getKeyStoreName() + ", alias=" + privateKeyChooserByAlias.getAlias());
         }
 
-        signer.setPrivateKey(privateKey);
-        return signer.sign(message);
+        signerImpl.setPrivateKey(privateKey);
+        cache.put(cacheKey(keyStoreChooser, privateKeyChooserByAlias), signerImpl);
+        return signerImpl.sign(message);
+    }
+
+    private static String cacheKey(KeyStoreChooser keyStoreChooser, PrivateKeyChooserByAlias privateKeyChooserByAlias) {
+        return new StringBuffer()
+                .append(keyStoreChooser.getKeyStoreName())
+                .append('-')
+                .append(privateKeyChooserByAlias.getAlias())
+                .toString();
     }
 
 }

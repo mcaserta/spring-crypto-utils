@@ -5,6 +5,8 @@ import com.google.code.springcryptoutils.core.key.PublicKeyRegistryByAlias;
 import com.google.code.springcryptoutils.core.keystore.KeyStoreChooser;
 
 import java.security.PublicKey;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * The default implementation for verifying the authenticity of messages using
@@ -14,6 +16,8 @@ import java.security.PublicKey;
  * @author Mirko Caserta (mirko.caserta@gmail.com)
  */
 public class VerifierWithChoosersByAliasImpl implements VerifierWithChoosersByAlias {
+
+    private Map<String, Verifier> cache = new HashMap<String, Verifier>();
 
     private PublicKeyRegistryByAlias publicKeyRegistryByAlias;
 
@@ -47,17 +51,31 @@ public class VerifierWithChoosersByAliasImpl implements VerifierWithChoosersByAl
      * @return true if the authenticity of the message is verified by the digital signature
      */
     public boolean verify(KeyStoreChooser keyStoreChooser, PublicKeyChooserByAlias publicKeyChooserByAlias, byte[] message, byte[] signature) {
-        // TODO: the verifier instance should be kept in a cache where the key is an aggregate of keyStoreName and alias
-        VerifierImpl verifier = new VerifierImpl();
-        verifier.setAlgorithm(algorithm);
+        Verifier verifier = cache.get(cacheKey(keyStoreChooser, publicKeyChooserByAlias));
+
+        if (verifier != null) {
+            return verifier.verify(message, signature);
+        }
+
+        VerifierImpl verifierImpl = new VerifierImpl();
+        verifierImpl.setAlgorithm(algorithm);
         PublicKey publicKey = publicKeyRegistryByAlias.get(keyStoreChooser, publicKeyChooserByAlias);
 
         if (publicKey == null) {
             throw new SignatureException("public key not found in registry: keyStoreName=" + keyStoreChooser.getKeyStoreName() + ", alias=" + publicKeyChooserByAlias.getAlias());
         }
 
-        verifier.setPublicKey(publicKey);
-        return verifier.verify(message, signature);
+        verifierImpl.setPublicKey(publicKey);
+        cache.put(cacheKey(keyStoreChooser, publicKeyChooserByAlias), verifierImpl);
+        return verifierImpl.verify(message, signature);
+    }
+
+    private static String cacheKey(KeyStoreChooser keyStoreChooser, PublicKeyChooserByAlias publicKeyChooserByAlias) {
+        return new StringBuffer()
+                .append(keyStoreChooser.getKeyStoreName())
+                .append('-')
+                .append(publicKeyChooserByAlias.getAlias())
+                .toString();
     }
 
 }

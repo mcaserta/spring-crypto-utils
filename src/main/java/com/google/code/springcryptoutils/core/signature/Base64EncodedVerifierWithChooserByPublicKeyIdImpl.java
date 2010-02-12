@@ -72,8 +72,13 @@ public class Base64EncodedVerifierWithChooserByPublicKeyIdImpl implements Base64
         Base64EncodedVerifierImpl verifierImpl = new Base64EncodedVerifierImpl();
         verifierImpl.setAlgorithm(algorithm);
         verifierImpl.setCharsetName(charsetName);
-        // TODO: fail if key is not found
-        verifierImpl.setPublicKey(publicKeyMap.get(publicKeyId));
+        PublicKey publicKey = publicKeyMap.get(publicKeyId);
+
+        if (publicKey == null) {
+            throw new SignatureException("public key not found: publicKeyId=" + publicKeyId);
+        }
+
+        verifierImpl.setPublicKey(publicKey);
         cache.put(publicKeyId, verifierImpl);
         return verifierImpl.verify(message, signature);
     }

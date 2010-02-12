@@ -23,16 +23,31 @@ public class CiphererWithStaticKeyImplTest {
     private CiphererWithStaticKey decrypter;
 
     @Test
-    public void testGenerator() throws UnsupportedEncodingException {
+    public void testCipher() throws UnsupportedEncodingException {
         assertNotNull(encrypter);
         assertNotNull(decrypter);
 
-        final byte[] message = UUID.randomUUID().toString().getBytes("UTF-8");
+        final byte[] message = "this is a top-secret message".getBytes("UTF-8");
         byte[] encryptedMessage = encrypter.encrypt(message);
         assertNotNull(encryptedMessage);
         byte[] decryptedMessage = decrypter.encrypt(encryptedMessage);
         assertNotNull(decryptedMessage);
         assertArrayEquals(message, decryptedMessage);
+    }
+
+    @Test
+    public void testCipherInALoop() throws UnsupportedEncodingException {
+        assertNotNull(encrypter);
+        assertNotNull(decrypter);
+
+        for (int i = 0; i < 100; i++) {
+            final byte[] message = UUID.randomUUID().toString().getBytes("UTF-8");
+            byte[] encryptedMessage = encrypter.encrypt(message);
+            assertNotNull(encryptedMessage);
+            byte[] decryptedMessage = decrypter.encrypt(encryptedMessage);
+            assertNotNull(decryptedMessage);
+            assertArrayEquals(message, decryptedMessage);
+        }
     }
 
 }

@@ -7,6 +7,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.io.UnsupportedEncodingException;
+import java.util.UUID;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -22,7 +23,7 @@ public class Base64EncodedCiphererWithStaticKeyImplTest {
     private Base64EncodedCiphererWithStaticKey decrypter;
 
     @Test
-    public void testGenerator() throws UnsupportedEncodingException {
+    public void testCipher() throws UnsupportedEncodingException {
         assertNotNull(encrypter);
         assertNotNull(decrypter);
 
@@ -32,6 +33,21 @@ public class Base64EncodedCiphererWithStaticKeyImplTest {
         String decryptedMessage = decrypter.encrypt(encryptedMessage);
         assertNotNull(decryptedMessage);
         assertEquals(message, decryptedMessage);
+    }
+
+    @Test
+    public void testCipherInALoop() throws UnsupportedEncodingException {
+        assertNotNull(encrypter);
+        assertNotNull(decrypter);
+
+        for (int i = 0; i < 100; i++) {
+            final String message = UUID.randomUUID().toString();
+            String encryptedMessage = encrypter.encrypt(message);
+            assertNotNull(encryptedMessage);
+            String decryptedMessage = decrypter.encrypt(encryptedMessage);
+            assertNotNull(decryptedMessage);
+            assertEquals(message, decryptedMessage);
+        }
     }
 
 }
