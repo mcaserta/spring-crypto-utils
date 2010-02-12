@@ -258,6 +258,20 @@
         </xsd:complexType>
     </xsd:element>
 
+    <xsd:element name="symmetricCiphererWithStaticKey">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="beans:identifiedType">
+                    <xsd:attribute name="keyAlgorithm" type="xsd:string" use="required"/>
+                    <xsd:attribute name="cipherAlgorithm" type="xsd:string" use="required"/>
+                    <xsd:attribute name="key" type="xsd:string" use="required"/>
+                    <xsd:attribute name="initializationVector" type="xsd:string" use="required"/>
+                    <xsd:attribute name="mode" type="cipherModeType" use="required"/>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
     <xsd:simpleType name="cipherModeType">
         <xsd:restriction base="xsd:string">
             <xsd:enumeration value="ENCRYPT"/>

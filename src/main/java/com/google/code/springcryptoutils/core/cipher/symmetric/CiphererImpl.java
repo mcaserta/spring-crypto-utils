@@ -37,7 +37,8 @@ public class CiphererImpl implements Cipherer {
             }
             return cipher.doFinal(message);
         } catch (Exception e) {
-            throw new SymmetricEncryptionException("error encrypting message", e);
+            throw new SymmetricEncryptionException("error encrypting/decrypting message; mode=" + mode, e);
         }
     }
+
 }
