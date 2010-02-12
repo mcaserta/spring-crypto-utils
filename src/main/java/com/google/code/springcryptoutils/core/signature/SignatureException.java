@@ -6,4 +6,7 @@ public class SignatureException extends RuntimeException {
         super(message, e);
     }
 
+    public SignatureException(String message) {
+        super(message);
+    }
 }
