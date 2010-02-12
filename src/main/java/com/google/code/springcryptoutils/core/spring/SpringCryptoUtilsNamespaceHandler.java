@@ -1,7 +1,6 @@
 package com.google.code.springcryptoutils.core.spring;
 
-import com.google.code.springcryptoutils.core.spring.cipher.symmetric.Base64EncodedSymmetricKeyGeneratorBeanDefinitionParser;
-import com.google.code.springcryptoutils.core.spring.cipher.symmetric.SymmetricKeyGeneratorBeanDefinitionParser;
+import com.google.code.springcryptoutils.core.spring.cipher.symmetric.*;
 import com.google.code.springcryptoutils.core.spring.key.PrivateKeyBeanDefinitionParser;
 import com.google.code.springcryptoutils.core.spring.key.PrivateKeyRegistryByAliasBeanDefinitionParser;
 import com.google.code.springcryptoutils.core.spring.key.PublicKeyBeanDefinitionParser;
@@ -18,7 +17,7 @@ public class SpringCryptoUtilsNamespaceHandler extends NamespaceHandlerSupport {
         // keystore
         registerBeanDefinitionParser("keystore", new KeyStoreBeanDefinitionParser());
         registerBeanDefinitionParser("keystoreRegistry", new KeyStoreRegistryBeanDefinitionParser());
-        registerBeanDefinitionParser("base64EncodedKeystore", new Base64EncodedKeyStoreBeanDefinitionParser());
+        registerBeanDefinitionParser("b64Keystore", new Base64EncodedKeyStoreBeanDefinitionParser());
 
         // key
         registerBeanDefinitionParser("publicKey", new PublicKeyBeanDefinitionParser());
@@ -33,16 +32,20 @@ public class SpringCryptoUtilsNamespaceHandler extends NamespaceHandlerSupport {
         registerBeanDefinitionParser("verifierWithChoosersByAlias", new VerifierWithChoosersByAliasBeanDefinitionParser());
         registerBeanDefinitionParser("signerWithChooserByPrivateKeyId", new SignerWithChooserByPrivateKeyIdBeanDefinitionParser());
         registerBeanDefinitionParser("verifierWithChooserByPublicKeyId", new VerifierWithChooserByPublicKeyIdBeanDefinitionParser());
-        registerBeanDefinitionParser("base64EncodedSigner", new Base64EncodedSignerBeanDefinitionParser());
-        registerBeanDefinitionParser("base64EncodedVerifier", new Base64EncodedVerifierBeanDefinitionParser());
-        registerBeanDefinitionParser("base64EncodedSignerWithChoosersByAlias", new Base64EncodedSignerWithChoosersByAliasBeanDefinitionParser());
-        registerBeanDefinitionParser("base64EncodedVerifierWithChoosersByAlias", new Base64EncodedVerifierWithChoosersByAliasBeanDefinitionParser());
-        registerBeanDefinitionParser("base64EncodedSignerWithChooserByPrivateKeyId", new Base64EncodedSignerWithChooserByPrivateKeyIdBeanDefinitionParser());
-        registerBeanDefinitionParser("base64EncodedVerifierWithChooserByPublicKeyId", new Base64EncodedVerifierWithChooserByPublicKeyIdBeanDefinitionParser());
+        registerBeanDefinitionParser("b64Signer", new Base64EncodedSignerBeanDefinitionParser());
+        registerBeanDefinitionParser("b64Verifier", new Base64EncodedVerifierBeanDefinitionParser());
+        registerBeanDefinitionParser("b64SignerWithChoosersByAlias", new Base64EncodedSignerWithChoosersByAliasBeanDefinitionParser());
+        registerBeanDefinitionParser("b64VerifierWithChoosersByAlias", new Base64EncodedVerifierWithChoosersByAliasBeanDefinitionParser());
+        registerBeanDefinitionParser("b64SignerWithChooserByPrivateKeyId", new Base64EncodedSignerWithChooserByPrivateKeyIdBeanDefinitionParser());
+        registerBeanDefinitionParser("b64VerifierWithChooserByPublicKeyId", new Base64EncodedVerifierWithChooserByPublicKeyIdBeanDefinitionParser());
 
         // symmetric ciphers
         registerBeanDefinitionParser("symmetricKeyGenerator", new SymmetricKeyGeneratorBeanDefinitionParser());
-        registerBeanDefinitionParser("base64EncodedSymmetricKeyGenerator", new Base64EncodedSymmetricKeyGeneratorBeanDefinitionParser());
+        registerBeanDefinitionParser("symmetricCipherer", new SymmetricCiphererBeanDefinitionParser());
+        registerBeanDefinitionParser("symmetricCiphererWithStaticKey", new SymmetricCiphererWithStaticKeyBeanDefinitionParser());
+        registerBeanDefinitionParser("b64SymmetricKeyGenerator", new Base64EncodedSymmetricKeyGeneratorBeanDefinitionParser());
+        registerBeanDefinitionParser("b64SymmetricCipherer", new Base64EncodedSymmetricCiphererBeanDefinitionParser());
+        registerBeanDefinitionParser("b64SymmetricCiphererWithStaticKey", new Base64EncodedSymmetricCiphererWithStaticKeyBeanDefinitionParser());
     }
 
 }
