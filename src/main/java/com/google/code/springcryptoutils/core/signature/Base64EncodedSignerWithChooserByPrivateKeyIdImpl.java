@@ -4,28 +4,62 @@ import java.security.PrivateKey;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * The default implementation for providing base64 encoded versions of digital signatures
+ * where the private key is configured in the underlying mapping using a logical name.
+ *
+ * @author Mirko Caserta (mirko.caserta@gmail.com)
+ */
 public class Base64EncodedSignerWithChooserByPrivateKeyIdImpl implements Base64EncodedSignerWithChooserByPrivateKeyId {
 
     private Map<String, Base64EncodedSigner> cache = new HashMap<String, Base64EncodedSigner>();
 
-    private String algorithm;
+    private String algorithm = "SHA1withRSA";
 
-    private String charsetName;
+    private String charsetName = "UTF-8";
 
     private Map<String, PrivateKey> privateKeyMap;
 
+    /**
+     * The signature algorithm. The default is SHA1withRSA.
+     *
+     * @param algorithm the signature algorithm
+     */
     public void setAlgorithm(String algorithm) {
         this.algorithm = algorithm;
     }
 
+    /**
+     * The charset to use when converting a string into a
+     * raw byte array representation. The default is UTF-8.
+     *
+     * @param charsetName the charset name (default: UTF-8)
+     */
     public void setCharsetName(String charsetName) {
         this.charsetName = charsetName;
     }
 
+    /**
+     * The map of private keys where the map keys are logical names
+     * which must match the privateKeyId parameter as specified in the
+     * sign method.
+     *
+     * @param privateKeyMap the private key map
+     * @see #sign(String, String)
+     */
     public void setPrivateKeyMap(Map<String, PrivateKey> privateKeyMap) {
         this.privateKeyMap = privateKeyMap;
     }
 
+    /**
+     * Signs a message.
+     *
+     * @param privateKeyId the logical name of the private key as configured
+     *                     in the underlying mapping
+     * @param message      the message to sign
+     * @return a base64 encoded version of the signature
+     * @see #setPrivateKeyMap(java.util.Map) 
+     */
     public String sign(String privateKeyId, String message) {
         Base64EncodedSigner signer = cache.get(privateKeyId);
 

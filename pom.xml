@@ -7,6 +7,8 @@
     <artifactId>spring-crypto-utils</artifactId>
     <version>0.9.1-SNAPSHOT</version>
     <name>Spring Cryptographic Utilities</name>
+    <url>https://code.google.com/p/spring-crypto-utils/</url>
+    <description>A framework for easier configuration of cryptographic utilities using Spring.</description>
 
     <properties>
         <spring.version>3.0.0.RELEASE</spring.version>
@@ -83,5 +85,18 @@
             </plugin>
         </plugins>
     </build>
+
+    <reporting>
+        <plugins>
+            <plugin>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <configuration>
+                    <show>public</show>
+                    <encoding>UTF-8</encoding>
+                    <excludePackageNames>*.springcryptoutils.core.spring</excludePackageNames>
+                </configuration>
+            </plugin>
+        </plugins>
+    </reporting>
 
 </project>
