@@ -1,6 +1,7 @@
 package com.google.code.springcryptoutils.core.spring;
 
 import com.google.code.springcryptoutils.core.spring.cipher.symmetric.Base64EncodedSymmetricKeyGeneratorBeanDefinitionParser;
+import com.google.code.springcryptoutils.core.spring.cipher.symmetric.SymmetricCiphererBeanDefinitionParser;
 import com.google.code.springcryptoutils.core.spring.cipher.symmetric.SymmetricKeyGeneratorBeanDefinitionParser;
 import com.google.code.springcryptoutils.core.spring.key.PrivateKeyBeanDefinitionParser;
 import com.google.code.springcryptoutils.core.spring.key.PrivateKeyRegistryByAliasBeanDefinitionParser;
@@ -43,6 +44,7 @@ public class SpringCryptoUtilsNamespaceHandler extends NamespaceHandlerSupport {
         // symmetric ciphers
         registerBeanDefinitionParser("symmetricKeyGenerator", new SymmetricKeyGeneratorBeanDefinitionParser());
         registerBeanDefinitionParser("base64EncodedSymmetricKeyGenerator", new Base64EncodedSymmetricKeyGeneratorBeanDefinitionParser());
+        registerBeanDefinitionParser("symmetricCipherer", new SymmetricCiphererBeanDefinitionParser());
     }
 
 }
