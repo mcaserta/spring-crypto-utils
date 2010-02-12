@@ -56,6 +56,7 @@ public class SignerWithChooserByPrivateKeyIdImpl implements SignerWithChooserByP
         }
 
         SignerImpl signerImpl = new SignerImpl();
+        // TODO: fail if key is not found
         signerImpl.setPrivateKey(privateKeyMap.get(privateKeyId));
         signerImpl.setAlgorithm(algorithm);
         cache.put(privateKeyId, signerImpl);
