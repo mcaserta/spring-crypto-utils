@@ -229,7 +229,7 @@
         <xsd:complexType>
             <xsd:complexContent>
                 <xsd:extension base="beans:identifiedType">
-                    <xsd:attribute name="algorithm" type="xsd:string" use="required"/>
+                    <xsd:attribute name="algorithm" type="xsd:string" default="DESede"/>
                 </xsd:extension>
             </xsd:complexContent>
         </xsd:complexType>
@@ -239,7 +239,7 @@
         <xsd:complexType>
             <xsd:complexContent>
                 <xsd:extension base="beans:identifiedType">
-                    <xsd:attribute name="algorithm" type="xsd:string" use="required"/>
+                    <xsd:attribute name="algorithm" type="xsd:string" default="DESede"/>
                     <xsd:attribute name="chunkOutput" type="xsd:boolean" default="false"/>
                 </xsd:extension>
             </xsd:complexContent>
@@ -250,8 +250,8 @@
         <xsd:complexType>
             <xsd:complexContent>
                 <xsd:extension base="beans:identifiedType">
-                    <xsd:attribute name="keyAlgorithm" type="xsd:string" use="required"/>
-                    <xsd:attribute name="cipherAlgorithm" type="xsd:string" use="required"/>
+                    <xsd:attribute name="keyAlgorithm" type="xsd:string" default="DESede"/>
+                    <xsd:attribute name="cipherAlgorithm" type="xsd:string" default="DESede/CBC/PKCS5Padding"/>
                     <xsd:attribute name="mode" type="cipherModeType" use="required"/>
                 </xsd:extension>
             </xsd:complexContent>
@@ -262,8 +262,8 @@
         <xsd:complexType>
             <xsd:complexContent>
                 <xsd:extension base="beans:identifiedType">
-                    <xsd:attribute name="keyAlgorithm" type="xsd:string" use="required"/>
-                    <xsd:attribute name="cipherAlgorithm" type="xsd:string" use="required"/>
+                    <xsd:attribute name="keyAlgorithm" type="xsd:string" default="DESede"/>
+                    <xsd:attribute name="cipherAlgorithm" type="xsd:string" default="DESede/CBC/PKCS5Padding"/>
                     <xsd:attribute name="key" type="xsd:string" use="required"/>
                     <xsd:attribute name="initializationVector" type="xsd:string" use="required"/>
                     <xsd:attribute name="mode" type="cipherModeType" use="required"/>
@@ -276,8 +276,8 @@
         <xsd:complexType>
             <xsd:complexContent>
                 <xsd:extension base="beans:identifiedType">
-                    <xsd:attribute name="keyAlgorithm" type="xsd:string" use="required"/>
-                    <xsd:attribute name="cipherAlgorithm" type="xsd:string" use="required"/>
+                    <xsd:attribute name="keyAlgorithm" type="xsd:string" default="DESede"/>
+                    <xsd:attribute name="cipherAlgorithm" type="xsd:string" default="DESede/CBC/PKCS5Padding"/>
                     <xsd:attribute name="mode" type="cipherModeType" use="required"/>
                     <xsd:attribute name="chunkOutput" type="xsd:boolean" default="false"/>
                     <xsd:attribute name="charsetName" type="xsd:string" default="UTF-8"/>
@@ -290,8 +290,8 @@
         <xsd:complexType>
             <xsd:complexContent>
                 <xsd:extension base="beans:identifiedType">
-                    <xsd:attribute name="keyAlgorithm" type="xsd:string" use="required"/>
-                    <xsd:attribute name="cipherAlgorithm" type="xsd:string" use="required"/>
+                    <xsd:attribute name="keyAlgorithm" type="xsd:string" default="DESede"/>
+                    <xsd:attribute name="cipherAlgorithm" type="xsd:string" default="DESede/CBC/PKCS5Padding"/>
                     <xsd:attribute name="key" type="xsd:string" use="required"/>
                     <xsd:attribute name="initializationVector" type="xsd:string" use="required"/>
                     <xsd:attribute name="mode" type="cipherModeType" use="required"/>
