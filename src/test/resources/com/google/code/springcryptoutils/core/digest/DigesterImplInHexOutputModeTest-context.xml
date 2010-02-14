@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:crypt="http://code.google.com/p/spring-crypto-utils/schema/crypt"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://code.google.com/p/spring-crypto-utils/schema/crypt http://code.google.com/p/spring-crypto-utils/schema/crypt.xsd">
 
-    <bean id="digester" class="com.google.code.springcryptoutils.core.digest.DigesterImpl"/>
+    <crypt:digester id="digester"/>
 
 </beans>

@@ -317,4 +317,26 @@
         </xsd:restriction>
     </xsd:simpleType>
 
+    <!-- MESSAGE DIGESTS -->
+
+    <xsd:element name="digester">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="beans:identifiedType">
+                    <xsd:attribute name="algorithm" type="xsd:string" default="SHA1"/>
+                    <xsd:attribute name="outputMode" type="outputModeType" default="HEX"/>
+                    <xsd:attribute name="charsetName" type="xsd:string" default="UTF-8"/>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:simpleType name="outputModeType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="BASE64"/>
+            <xsd:enumeration value="HEX"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+
 </xsd:schema>
