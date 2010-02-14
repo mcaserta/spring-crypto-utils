@@ -8,16 +8,33 @@ import java.security.PublicKey;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * A registry for selection of public keys at runtime.
+ *
+ * @author Mirko Caserta (mirko.caserta@gmail.com)
+ */
 public class PublicKeyRegistryByAliasImpl implements PublicKeyRegistryByAlias {
 
     private KeyStoreRegistry keyStoreRegistry;
 
     private Map<CacheKey, PublicKey> cache = new HashMap<CacheKey, PublicKey>();
 
+    /**
+     * Sets the keystore registry.
+     *
+     * @param keyStoreRegistry the keystore registry
+     */
     public void setKeyStoreRegistry(KeyStoreRegistry keyStoreRegistry) {
         this.keyStoreRegistry = keyStoreRegistry;
     }
 
+    /**
+     * Returns the selected public key or null if not found.
+     *
+     * @param keyStoreChooser the keystore chooser
+     * @param publicKeyChooserByAlias the public key chooser by alias
+     * @return the selected public key or null if not found
+     */
     public PublicKey get(KeyStoreChooser keyStoreChooser, PublicKeyChooserByAlias publicKeyChooserByAlias) {
         CacheKey cacheKey = new CacheKey(keyStoreChooser.getKeyStoreName(), publicKeyChooserByAlias.getAlias());
         PublicKey retrievedPublicKey = cache.get(cacheKey);

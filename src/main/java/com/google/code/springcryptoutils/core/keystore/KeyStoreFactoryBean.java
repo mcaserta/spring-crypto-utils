@@ -6,6 +6,11 @@ import org.springframework.core.io.Resource;
 
 import java.security.KeyStore;
 
+/**
+ * A spring bean factory for instancing KeyStore objects.
+ *
+ * @author Mirko Caserta (mirko.caserta@gmail.com)
+ */
 public class KeyStoreFactoryBean implements FactoryBean, InitializingBean {
 
     private Resource location;
@@ -14,6 +19,11 @@ public class KeyStoreFactoryBean implements FactoryBean, InitializingBean {
 
     private KeyStore keystore;
 
+    /**
+     * Sets the keystore location.
+     *
+     * @param location the keystore location
+     */
     public void setLocation(Resource location) {
         this.location = location;
     }

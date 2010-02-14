@@ -8,16 +8,33 @@ import java.security.PrivateKey;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * A registry for selection of private keys at runtime.
+ *
+ * @author Mirko Caserta (mirko.caserta@gmail.com)
+ */
 public class PrivateKeyRegistryByAliasImpl implements PrivateKeyRegistryByAlias {
 
     private KeyStoreRegistry keyStoreRegistry;
 
     private Map<CacheKey, PrivateKey> cache = new HashMap<CacheKey, PrivateKey>();
 
+    /**
+     * Sets the keystore registry.
+     *
+     * @param keyStoreRegistry the keystore registry
+     */
     public void setKeyStoreRegistry(KeyStoreRegistry keyStoreRegistry) {
         this.keyStoreRegistry = keyStoreRegistry;
     }
 
+    /**
+     * Returns the selected private key or null if not found.
+     *
+     * @param keyStoreChooser the keystore chooser
+     * @param privateKeyChooserByAlias the private key chooser by alias
+     * @return the selected private key or null if not found
+     */
     public PrivateKey get(KeyStoreChooser keyStoreChooser, PrivateKeyChooserByAlias privateKeyChooserByAlias) {
         CacheKey cacheKey = new CacheKey(keyStoreChooser.getKeyStoreName(), privateKeyChooserByAlias.getAlias());
         PrivateKey retrievedPrivateKey = cache.get(cacheKey);

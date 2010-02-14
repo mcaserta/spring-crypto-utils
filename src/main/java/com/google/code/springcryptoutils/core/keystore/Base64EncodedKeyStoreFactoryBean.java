@@ -7,6 +7,12 @@ import org.springframework.beans.factory.InitializingBean;
 import java.io.ByteArrayInputStream;
 import java.security.KeyStore;
 
+/**
+ * A spring bean factory for instancing KeyStore objects from a base64 encoded
+ * keystore file.
+ *
+ * @author Mirko Caserta (mirko.caserta@gmail.com)
+ */
 public class Base64EncodedKeyStoreFactoryBean implements FactoryBean, InitializingBean {
 
     private String base64EncodedKeyStoreFile;

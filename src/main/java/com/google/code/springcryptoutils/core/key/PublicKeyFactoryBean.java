@@ -7,6 +7,11 @@ import java.security.KeyStore;
 import java.security.PublicKey;
 import java.security.cert.Certificate;
 
+/**
+ * A spring bean factory for instancing public keys from a keystore reference.
+ *
+ * @author Mirko Caserta (mirko.caserta@gmail.com)
+ */
 public class PublicKeyFactoryBean implements FactoryBean, InitializingBean {
 
     private KeyStore keystore;
@@ -14,10 +19,20 @@ public class PublicKeyFactoryBean implements FactoryBean, InitializingBean {
 
     private PublicKey publicKey;
 
+    /**
+     * Sets the keystore holding the public key.
+     *
+     * @param keystore the keystore
+     */
     public void setKeystore(KeyStore keystore) {
         this.keystore = keystore;
     }
 
+    /**
+     * Sets the key alias as known in the keystore.
+     *
+     * @param alias the key alias
+     */
     public void setAlias(String alias) {
         this.alias = alias;
     }

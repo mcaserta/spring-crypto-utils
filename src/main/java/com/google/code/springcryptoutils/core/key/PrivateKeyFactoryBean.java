@@ -6,6 +6,11 @@ import org.springframework.beans.factory.InitializingBean;
 import java.security.KeyStore;
 import java.security.PrivateKey;
 
+/**
+ * A spring bean factory for instancing private keys from a keystore reference.
+ *
+ * @author Mirko Caserta (mirko.caserta@gmail.com)
+ */
 public class PrivateKeyFactoryBean implements FactoryBean, InitializingBean {
 
     private KeyStore keystore;
@@ -14,14 +19,29 @@ public class PrivateKeyFactoryBean implements FactoryBean, InitializingBean {
 
     private PrivateKey privateKey;
 
+    /**
+     * Sets the keystore holding the private key.
+     *
+     * @param keystore the keystore
+     */
     public void setKeystore(KeyStore keystore) {
         this.keystore = keystore;
     }
 
+    /**
+     * Sets the key alias as known in the keystore.
+     *
+     * @param alias the key alias
+     */
     public void setAlias(String alias) {
         this.alias = alias;
     }
 
+    /**
+     * Sets the password used to read the key from the keystore.
+     *
+     * @param password the password
+     */
     public void setPassword(String password) {
         this.password = password;
     }
