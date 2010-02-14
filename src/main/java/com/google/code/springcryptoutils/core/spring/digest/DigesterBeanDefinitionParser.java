@@ -16,7 +16,7 @@ public class DigesterBeanDefinitionParser extends AbstractSingleBeanDefinitionPa
     protected void doParse(Element element, BeanDefinitionBuilder bean) {
         bean.addPropertyValue("algorithm", element.getAttribute("algorithm"));
         bean.addPropertyValue("outputMode", element.getAttribute("outputMode"));
-        bean.addPropertyValue("charsetName", element.getAttribute("charsetName"));
+        bean.addPropertyValue("charsetName", element.getAttribute("charset"));
     }
 
 }

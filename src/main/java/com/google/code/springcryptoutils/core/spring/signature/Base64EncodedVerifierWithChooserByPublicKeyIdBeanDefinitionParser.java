@@ -15,7 +15,7 @@ public class Base64EncodedVerifierWithChooserByPublicKeyIdBeanDefinitionParser e
     protected void doParse(Element element, BeanDefinitionBuilder bean) {
         bean.addPropertyReference("publicKeyMap", element.getAttribute("publicKeyMap-ref"));
         bean.addPropertyValue("algorithm", element.getAttribute("algorithm"));
-        bean.addPropertyValue("charsetName", element.getAttribute("charsetName"));
+        bean.addPropertyValue("charsetName", element.getAttribute("charset"));
     }
 
 }

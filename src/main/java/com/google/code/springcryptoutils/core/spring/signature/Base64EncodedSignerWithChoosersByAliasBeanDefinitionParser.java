@@ -15,7 +15,7 @@ public class Base64EncodedSignerWithChoosersByAliasBeanDefinitionParser extends 
     protected void doParse(Element element, BeanDefinitionBuilder bean) {
         bean.addPropertyReference("privateKeyRegistryByAlias", element.getAttribute("privateKeyRegistryByAlias-ref"));
         bean.addPropertyValue("algorithm", element.getAttribute("algorithm"));
-        bean.addPropertyValue("charsetName", element.getAttribute("charsetName"));
+        bean.addPropertyValue("charsetName", element.getAttribute("charset"));
     }
 
 }

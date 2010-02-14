@@ -15,7 +15,7 @@ public class Base64EncodedSignerWithChooserByPrivateKeyIdBeanDefinitionParser ex
     protected void doParse(Element element, BeanDefinitionBuilder bean) {
         bean.addPropertyReference("privateKeyMap", element.getAttribute("privateKeyMap-ref"));
         bean.addPropertyValue("algorithm", element.getAttribute("algorithm"));
-        bean.addPropertyValue("charsetName", element.getAttribute("charsetName"));
+        bean.addPropertyValue("charsetName", element.getAttribute("charset"));
     }
 
 }

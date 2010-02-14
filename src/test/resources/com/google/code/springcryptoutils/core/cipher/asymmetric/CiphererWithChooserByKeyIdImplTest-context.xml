@@ -16,16 +16,8 @@
         </entry>
     </util:map>
 
-    <bean id="encrypter"
-          class="com.google.code.springcryptoutils.core.cipher.asymmetric.CiphererWithChooserByKeyIdImpl">
-        <property name="mode" value="ENCRYPT"/>
-        <property name="keyMap" ref="keyMap"/>
-    </bean>
+    <crypt:asymmetricCiphererWithChooserByKeyId id="encrypter" mode="ENCRYPT" keyMap-ref="keyMap"/>
 
-    <bean id="decrypter"
-          class="com.google.code.springcryptoutils.core.cipher.asymmetric.CiphererWithChooserByKeyIdImpl">
-        <property name="mode" value="DECRYPT"/>
-        <property name="keyMap" ref="keyMap"/>
-    </bean>
+    <crypt:asymmetricCiphererWithChooserByKeyId id="decrypter" mode="DECRYPT" keyMap-ref="keyMap"/>
 
 </beans>

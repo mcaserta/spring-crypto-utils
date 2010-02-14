@@ -1,11 +1,11 @@
-package com.google.code.springcryptoutils.core.spring.cipher.symmetric;
+package com.google.code.springcryptoutils.core.spring.cipher.asymmetric;
 
-import com.google.code.springcryptoutils.core.cipher.symmetric.Base64EncodedCiphererImpl;
+import com.google.code.springcryptoutils.core.cipher.asymmetric.Base64EncodedCiphererImpl;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.AbstractSingleBeanDefinitionParser;
 import org.w3c.dom.Element;
 
-public class Base64EncodedSymmetricCiphererBeanDefinitionParser extends AbstractSingleBeanDefinitionParser {
+public class Base64EncodedAsymmetricCiphererBeanDefinitionParser extends AbstractSingleBeanDefinitionParser {
 
     @Override
     protected Class getBeanClass(Element element) {
@@ -13,11 +13,10 @@ public class Base64EncodedSymmetricCiphererBeanDefinitionParser extends Abstract
     }
 
     protected void doParse(Element element, BeanDefinitionBuilder bean) {
-        bean.addPropertyValue("keyAlgorithm", element.getAttribute("keyAlgorithm"));
-        bean.addPropertyValue("cipherAlgorithm", element.getAttribute("cipherAlgorithm"));
+        bean.addPropertyValue("algorithm", element.getAttribute("algorithm"));
         bean.addPropertyValue("mode", element.getAttribute("mode"));
-        bean.addPropertyValue("chunkOutput", element.getAttribute("chunkOutput"));
         bean.addPropertyValue("charsetName", element.getAttribute("charset"));
+        bean.addPropertyReference("key", element.getAttribute("key-ref"));
     }
 
 }
