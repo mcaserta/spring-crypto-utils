@@ -31,7 +31,7 @@ public class PublicKeyRegistryByAliasImpl implements PublicKeyRegistryByAlias {
     /**
      * Returns the selected public key or null if not found.
      *
-     * @param keyStoreChooser the keystore chooser
+     * @param keyStoreChooser         the keystore chooser
      * @param publicKeyChooserByAlias the public key chooser by alias
      * @return the selected public key or null if not found
      */

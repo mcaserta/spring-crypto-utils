@@ -11,7 +11,7 @@ public class DigestException extends RuntimeException {
      * Creates a new exception.
      *
      * @param message the message
-     * @param cause the root cause
+     * @param cause   the root cause
      */
     public DigestException(String message, Throwable cause) {
         super(message, cause);

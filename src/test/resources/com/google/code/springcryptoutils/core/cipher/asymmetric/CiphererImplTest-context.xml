@@ -11,7 +11,7 @@
     <crypt:privateKey id="privateKey" keystore-ref="keystore" alias="test" password="password"/>
 
     <crypt:asymmetricCipherer id="encrypter" mode="ENCRYPT" key-ref="privateKey"/>
-    
+
     <crypt:asymmetricCipherer id="decrypter" mode="DECRYPT" key-ref="publicKey"/>
 
 </beans>

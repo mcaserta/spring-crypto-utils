@@ -84,7 +84,6 @@ public class CiphererWithStaticKeyImpl implements CiphererWithStaticKey, Initial
      * @return if in encryption mode, the encrypted message, otherwise the
      *         decrypted message
      * @throws SymmetricEncryptionException on runtime errors
-     *
      * @see #setMode(Mode)
      */
     public byte[] encrypt(byte[] message) {

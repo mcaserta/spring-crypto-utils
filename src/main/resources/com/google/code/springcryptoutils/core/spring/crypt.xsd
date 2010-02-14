@@ -231,7 +231,7 @@
         </xsd:complexType>
     </xsd:element>
 
-    <!-- SYMMETRIC CRYPTOGRAPHY -->    
+    <!-- SYMMETRIC CRYPTOGRAPHY -->
 
     <xsd:element name="symmetricKeyGenerator">
         <xsd:complexType>

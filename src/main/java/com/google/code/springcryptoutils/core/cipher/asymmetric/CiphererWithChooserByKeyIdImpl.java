@@ -50,7 +50,7 @@ public class CiphererWithChooserByKeyIdImpl implements CiphererWithChooserByKeyI
     /**
      * Encrypts/decrypts a message based on the underlying mode of operation.
      *
-     * @param keyId the key id
+     * @param keyId   the key id
      * @param message if in encryption mode, the clear-text message, otherwise
      *                the message to decrypt
      * @return if in encryption mode, the encrypted message, otherwise the

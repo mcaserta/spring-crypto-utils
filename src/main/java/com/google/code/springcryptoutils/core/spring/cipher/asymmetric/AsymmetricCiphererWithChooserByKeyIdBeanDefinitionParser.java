@@ -1,6 +1,5 @@
 package com.google.code.springcryptoutils.core.spring.cipher.asymmetric;
 
-import com.google.code.springcryptoutils.core.cipher.asymmetric.CiphererImpl;
 import com.google.code.springcryptoutils.core.cipher.asymmetric.CiphererWithChooserByKeyIdImpl;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.AbstractSingleBeanDefinitionParser;

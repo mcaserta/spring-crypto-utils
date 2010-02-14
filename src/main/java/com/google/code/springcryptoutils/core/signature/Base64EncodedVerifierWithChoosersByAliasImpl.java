@@ -90,5 +90,5 @@ public class Base64EncodedVerifierWithChoosersByAliasImpl implements Base64Encod
                 .append(publicKeyChooserByAlias.getAlias())
                 .toString();
     }
-    
+
 }

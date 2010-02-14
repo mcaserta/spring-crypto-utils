@@ -12,7 +12,7 @@ public class PublicKeyException extends RuntimeException {
      * Creates a new exception instance.
      *
      * @param message the exception message
-     * @param cause the root cause
+     * @param cause   the root cause
      */
     public PublicKeyException(String message, Throwable cause) {
         super(message, cause);

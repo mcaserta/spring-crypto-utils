@@ -62,7 +62,7 @@ public class Base64EncodedCiphererImpl implements Base64EncodedCipherer {
      * @param message if in encryption mode, the clear-text message, otherwise
      *                the base64 encoded message to decrypt
      * @return if in encryption mode, the base64 encoded encrypted message,
-     * otherwise the decrypted message
+     *         otherwise the decrypted message
      * @throws AsymmetricEncryptionException on runtime errors
      * @see #setMode(Mode)
      */

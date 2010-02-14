@@ -11,7 +11,7 @@ public class SymmetricEncryptionException extends RuntimeException {
      * Creates a new exception.
      *
      * @param message the exception message
-     * @param cause the wrapped exception
+     * @param cause   the wrapped exception
      */
     public SymmetricEncryptionException(String message, Exception cause) {
         super(message, cause);

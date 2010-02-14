@@ -1,7 +1,6 @@
 package com.google.code.springcryptoutils.core.spring.digest;
 
 import com.google.code.springcryptoutils.core.digest.DigesterImpl;
-import com.google.code.springcryptoutils.core.signature.Base64EncodedSignerImpl;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.AbstractSingleBeanDefinitionParser;
 import org.w3c.dom.Element;

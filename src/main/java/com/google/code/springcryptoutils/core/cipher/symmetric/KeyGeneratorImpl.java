@@ -2,7 +2,6 @@ package com.google.code.springcryptoutils.core.cipher.symmetric;
 
 import org.springframework.beans.factory.InitializingBean;
 
-import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 
 /**
@@ -38,5 +37,5 @@ public class KeyGeneratorImpl implements KeyGenerator, InitializingBean {
         generator = javax.crypto.KeyGenerator.getInstance(algorithm);
         generator.init(new SecureRandom());
     }
-    
+
 }

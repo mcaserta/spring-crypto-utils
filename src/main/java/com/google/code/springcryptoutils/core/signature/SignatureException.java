@@ -11,7 +11,7 @@ public class SignatureException extends RuntimeException {
      * Creates a new exception.
      *
      * @param message the message
-     * @param cause the root/wrapped exception
+     * @param cause   the root/wrapped exception
      */
     public SignatureException(String message, Exception cause) {
         super(message, cause);

@@ -23,7 +23,7 @@ public class Base64EncodedCiphererImpl implements Base64EncodedCipherer {
 
     /**
      * The symmetric key algorithm. The default is DESede (triple DES).
-     * 
+     *
      * @param keyAlgorithm the symmetric key algorithm
      */
     public void setKeyAlgorithm(String keyAlgorithm) {
@@ -82,7 +82,6 @@ public class Base64EncodedCiphererImpl implements Base64EncodedCipherer {
      * @return if in encryption mode, returns a base64 encoded version of the encrypted message,
      *         otherwise returns the decrypted clear-text message
      * @throws SymmetricEncryptionException on runtime errors
-     *
      * @see #setMode(com.google.code.springcryptoutils.core.cipher.Mode)
      */
     public String encrypt(String key, String initializationVector, String message) {
