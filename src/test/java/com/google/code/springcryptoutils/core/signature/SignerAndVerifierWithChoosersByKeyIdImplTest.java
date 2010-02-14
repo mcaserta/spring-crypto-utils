@@ -16,7 +16,7 @@ import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration
-public class SignerAndVerifierWithChooserByKeyIdImplTest {
+public class SignerAndVerifierWithChoosersByKeyIdImplTest {
 
     @Autowired
     private SignerWithChooserByPrivateKeyId signer;
