@@ -1,5 +1,6 @@
 package com.google.code.springcryptoutils.core.cipher.symmetric;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,11 +23,14 @@ public class CiphererWithStaticKeyImplTest {
     @Autowired
     private CiphererWithStaticKey decrypter;
 
-    @Test
-    public void testCipher() throws UnsupportedEncodingException {
+    @Before
+    public void setup() {
         assertNotNull(encrypter);
         assertNotNull(decrypter);
+    }
 
+    @Test
+    public void testCipher() throws UnsupportedEncodingException {
         final byte[] message = "this is a top-secret message".getBytes("UTF-8");
         byte[] encryptedMessage = encrypter.encrypt(message);
         assertNotNull(encryptedMessage);
@@ -37,9 +41,6 @@ public class CiphererWithStaticKeyImplTest {
 
     @Test
     public void testCipherInALoop() throws UnsupportedEncodingException {
-        assertNotNull(encrypter);
-        assertNotNull(decrypter);
-
         for (int i = 0; i < 100; i++) {
             final byte[] message = UUID.randomUUID().toString().getBytes("UTF-8");
             byte[] encryptedMessage = encrypter.encrypt(message);
@@ -48,6 +49,12 @@ public class CiphererWithStaticKeyImplTest {
             assertNotNull(decryptedMessage);
             assertArrayEquals(message, decryptedMessage);
         }
+    }
+
+    @Test(expected = SymmetricEncryptionException.class)
+    public void testCipherInDecryptionModeWithGarbageInputFails() throws UnsupportedEncodingException {
+        final byte[] message = "this is garbage".getBytes("UTF-8");
+        decrypter.encrypt(message);
     }
 
 }

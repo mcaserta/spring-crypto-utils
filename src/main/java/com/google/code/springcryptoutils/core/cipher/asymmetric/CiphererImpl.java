@@ -6,7 +6,8 @@ import javax.crypto.Cipher;
 import java.security.Key;
 
 /**
- * The default implementation for performing asymmetric encryption/decryption.
+ * The default implementation for performing asymmetric encryption/decryption
+ * with a static key.
  *
  * @author Mirko Caserta (mirko.caserta@gmail.com)
  */
@@ -14,13 +15,14 @@ public class CiphererImpl implements Cipherer {
 
     private String algorithm = "RSA";
     private Mode mode;
+    private Key key;
 
     /**
      * The asymmetric key algorithm. The default is RSA.
      *
      * @param algorithm the asymmetric key algorithm
      */
-    public void algorithm(String algorithm) {
+    public void setAlgorithm(String algorithm) {
         this.algorithm = algorithm;
     }
 
@@ -34,17 +36,25 @@ public class CiphererImpl implements Cipherer {
     }
 
     /**
+     * Sets the encryption key.
+     *
+     * @param key the encryption key
+     */
+    public void setKey(Key key) {
+        this.key = key;
+    }
+
+    /**
      * Encrypts/decrypts a message based on the underlying mode of operation.
      *
-     * @param key                  the encryption key
-     * @param message              if in encryption mode, the clear-text message, otherwise
-     *                             the message to decrypt
+     * @param message if in encryption mode, the clear-text message, otherwise
+     *                the message to decrypt
      * @return if in encryption mode, the encrypted message, otherwise the
      *         decrypted message
      * @throws AsymmetricEncryptionException on runtime errors
      * @see #setMode(Mode)
      */
-    public byte[] encrypt(Key key, byte[] message) {
+    public byte[] encrypt(byte[] message) {
         try {
             final Cipher cipher = Cipher.getInstance(algorithm);
             switch (mode) {

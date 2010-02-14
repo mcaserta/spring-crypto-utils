@@ -1,5 +1,6 @@
 package com.google.code.springcryptoutils.core.cipher.symmetric;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,18 +25,23 @@ public class CiphererImplTest {
     @Autowired
     private Cipherer decrypter;
 
-    private static final byte[] iv = new byte[]{1, 2, 3, 4, 5, 6, 7, 8};
+    private static final byte[] iv = new byte[] {1, 2, 3, 4, 5, 6, 7, 8};
 
-    @Test
-    public void testCipher() throws UnsupportedEncodingException {
+    private byte[] key;
+
+    @Before
+    public void setup() {
         assertNotNull(generator);
         assertNotNull(encrypter);
         assertNotNull(decrypter);
 
-        byte[] key = generator.generate();
+        key = generator.generate();
         assertNotNull(key);
         assertTrue(key.length > 0);
+    }
 
+    @Test
+    public void testCipher() throws UnsupportedEncodingException {
         final byte[] message = "this is a top-secret message".getBytes("UTF-8");
         byte[] encryptedMessage = encrypter.encrypt(key, iv, message);
         assertNotNull(encryptedMessage);
@@ -46,14 +52,6 @@ public class CiphererImplTest {
 
     @Test
     public void testCipherInALoop() throws UnsupportedEncodingException {
-        assertNotNull(generator);
-        assertNotNull(encrypter);
-        assertNotNull(decrypter);
-
-        byte[] key = generator.generate();
-        assertNotNull(key);
-        assertTrue(key.length > 0);
-
         for (int i = 0; i < 100; i++) {
             final byte[] message = UUID.randomUUID().toString().getBytes("UTF-8");
             byte[] encryptedMessage = encrypter.encrypt(key, iv, message);
@@ -62,6 +60,12 @@ public class CiphererImplTest {
             assertNotNull(decryptedMessage);
             assertArrayEquals(message, decryptedMessage);
         }
+    }
+
+    @Test(expected = SymmetricEncryptionException.class)
+    public void testCipherInDecryptionModeWithGarbageInputFails() throws UnsupportedEncodingException {
+        final byte[] message = "this is garbage".getBytes("UTF-8");
+        decrypter.encrypt(key, iv, message);
     }
 
 }

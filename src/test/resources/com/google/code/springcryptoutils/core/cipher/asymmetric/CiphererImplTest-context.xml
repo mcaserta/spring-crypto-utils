@@ -12,10 +12,12 @@
 
     <bean id="encrypter" class="com.google.code.springcryptoutils.core.cipher.asymmetric.CiphererImpl">
         <property name="mode" value="ENCRYPT"/>
+        <property name="key" ref="privateKey"/>
     </bean>
 
     <bean id="decrypter" class="com.google.code.springcryptoutils.core.cipher.asymmetric.CiphererImpl">
         <property name="mode" value="DECRYPT"/>
+        <property name="key" ref="publicKey"/>
     </bean>
 
 </beans>

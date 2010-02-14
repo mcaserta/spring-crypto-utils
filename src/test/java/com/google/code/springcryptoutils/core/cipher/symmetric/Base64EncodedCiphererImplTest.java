@@ -1,5 +1,6 @@
 package com.google.code.springcryptoutils.core.cipher.symmetric;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,17 +27,21 @@ public class Base64EncodedCiphererImplTest {
 
     private static final String iv = "AQIDBAUGAQI=";
 
+    private String key;
 
-    @Test
-    public void testCipher() throws UnsupportedEncodingException {
+    @Before
+    public void setup() {
         assertNotNull(generator);
         assertNotNull(encrypter);
         assertNotNull(decrypter);
 
-        String key = generator.generate();
+        key = generator.generate();
         assertNotNull(key);
         assertTrue(key.length() > 0);
+    }
 
+    @Test
+    public void testCipher() throws UnsupportedEncodingException {
         final String message = "this is a top-secret message";
         String encryptedMessage = encrypter.encrypt(key, iv, message);
         assertNotNull(encryptedMessage);
@@ -47,14 +52,6 @@ public class Base64EncodedCiphererImplTest {
 
     @Test
     public void testCipherInALoop() throws UnsupportedEncodingException {
-        assertNotNull(generator);
-        assertNotNull(encrypter);
-        assertNotNull(decrypter);
-
-        String key = generator.generate();
-        assertNotNull(key);
-        assertTrue(key.length() > 0);
-
         for (int i = 0; i < 100; i++) {
             final String message = UUID.randomUUID().toString();
             String encryptedMessage = encrypter.encrypt(key, iv, message);
@@ -63,6 +60,20 @@ public class Base64EncodedCiphererImplTest {
             assertNotNull(decryptedMessage);
             assertEquals(message, decryptedMessage);
         }
+    }
+
+    @Test(expected = SymmetricEncryptionException.class)
+    public void testCipherInDecryptionModeFailsWithValidBase64ButInvalidCipherInput() {
+        // this is valid base64 but invalid cipher
+        final String message = "Y2lwcGEK";
+        decrypter.encrypt(key, iv, message);
+    }
+
+    @Test(expected = SymmetricEncryptionException.class)
+    public void testCipherInDecryptionModeFailsWithInvalidBase64Input() {
+        // this is invalid base64 and invalid cipher
+        final String message = "this is not base64";
+        decrypter.encrypt(key, iv, message);
     }
 
 }
