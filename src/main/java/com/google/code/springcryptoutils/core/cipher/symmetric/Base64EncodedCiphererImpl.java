@@ -1,5 +1,6 @@
 package com.google.code.springcryptoutils.core.cipher.symmetric;
 
+import com.google.code.springcryptoutils.core.cipher.Mode;
 import org.apache.commons.codec.binary.Base64;
 
 import javax.crypto.Cipher;
@@ -82,7 +83,7 @@ public class Base64EncodedCiphererImpl implements Base64EncodedCipherer {
      *         otherwise returns the decrypted clear-text message
      * @throws SymmetricEncryptionException on runtime errors
      *
-     * @see #setMode(Mode)
+     * @see #setMode(com.google.code.springcryptoutils.core.cipher.Mode)
      */
     public String encrypt(String key, String initializationVector, String message) {
         try {

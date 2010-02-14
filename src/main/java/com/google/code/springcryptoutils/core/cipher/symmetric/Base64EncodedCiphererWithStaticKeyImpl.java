@@ -1,12 +1,12 @@
 package com.google.code.springcryptoutils.core.cipher.symmetric;
 
+import com.google.code.springcryptoutils.core.cipher.Mode;
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.InitializingBean;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
-import java.io.UnsupportedEncodingException;
 
 /**
  * The default implementation for performing symmetric encryption/decryption

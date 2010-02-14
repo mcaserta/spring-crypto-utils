@@ -1,5 +1,6 @@
 package com.google.code.springcryptoutils.core.cipher.symmetric;
 
+import com.google.code.springcryptoutils.core.cipher.Mode;
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.InitializingBean;
 

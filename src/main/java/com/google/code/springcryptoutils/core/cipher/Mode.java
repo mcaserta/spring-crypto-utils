@@ -1,4 +1,4 @@
-package com.google.code.springcryptoutils.core.cipher.symmetric;
+package com.google.code.springcryptoutils.core.cipher;
 
 /**
  * An enum for the symmetric encryption mode.

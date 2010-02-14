@@ -1,5 +1,7 @@
 package com.google.code.springcryptoutils.core.cipher.symmetric;
 
+import com.google.code.springcryptoutils.core.cipher.Mode;
+
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
