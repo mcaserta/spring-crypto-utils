@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:crypt="http://code.google.com/p/spring-crypto-utils/schema/crypt"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://code.google.com/p/spring-crypto-utils/schema/crypt http://code.google.com/p/spring-crypto-utils/schema/crypt.xsd">
+
+    <crypt:keystore id="keystore" location="classpath:keystore.jks" password="password"/>
+
+    <crypt:publicKey id="publicKey" keystore-ref="keystore" alias="test"/>
+
+    <crypt:privateKey id="privateKey" keystore-ref="keystore" alias="test" password="password"/>
+
+    <bean id="encrypter" class="com.google.code.springcryptoutils.core.cipher.asymmetric.Base64EncodedCiphererImpl">
+        <property name="mode" value="ENCRYPT"/>
+        <property name="key" ref="privateKey"/>
+    </bean>
+
+    <bean id="decrypter" class="com.google.code.springcryptoutils.core.cipher.asymmetric.Base64EncodedCiphererImpl">
+        <property name="mode" value="DECRYPT"/>
+        <property name="key" ref="publicKey"/>
+    </bean>
+
+</beans>

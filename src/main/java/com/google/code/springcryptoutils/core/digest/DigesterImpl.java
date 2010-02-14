@@ -39,7 +39,7 @@ public class DigesterImpl implements Digester, InitializingBean {
     }
 
     /**
-     * Sets the output mode.
+     * Sets the output mode. Default is HEX.
      *
      * @param outputMode the output mode
      */
