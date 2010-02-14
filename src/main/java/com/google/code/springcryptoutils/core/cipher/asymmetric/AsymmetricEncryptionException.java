@@ -17,4 +17,13 @@ public class AsymmetricEncryptionException extends RuntimeException {
         super(message, cause);
     }
 
+    /**
+     * Creates a new exception.
+     *
+     * @param message the exception message
+     */
+    public AsymmetricEncryptionException(String message) {
+        super(message);
+    }
+
 }
