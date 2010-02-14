@@ -14,9 +14,9 @@ public interface Base64EncodedSignerWithChoosersByAlias {
     /**
      * Signs a message.
      *
-     * @param keyStoreChooser the keystore chooser
+     * @param keyStoreChooser          the keystore chooser
      * @param privateKeyChooserByAlias the private key chooser
-     * @param message the message to sign
+     * @param message                  the message to sign
      * @return the base64 encoded signature
      */
     String sign(KeyStoreChooser keyStoreChooser, PrivateKeyChooserByAlias privateKeyChooserByAlias, String message);

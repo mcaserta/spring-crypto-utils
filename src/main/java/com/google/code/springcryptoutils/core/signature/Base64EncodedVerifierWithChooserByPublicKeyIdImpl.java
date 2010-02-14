@@ -60,7 +60,7 @@ public class Base64EncodedVerifierWithChooserByPublicKeyIdImpl implements Base64
      * @param message     the original message to verify
      * @param signature   the base64 encoded digital signature
      * @return true if the original message is verified by the digital signature
-     * @see #setPublicKeyMap(java.util.Map) 
+     * @see #setPublicKeyMap(java.util.Map)
      */
     public boolean verify(String publicKeyId, String message, String signature) {
         Base64EncodedVerifier verifier = cache.get(publicKeyId);

@@ -5,8 +5,8 @@ package com.google.code.springcryptoutils.core.keystore;
  * an implementation of this interface is used to return
  * the logical name of the keystore you want to choose.
  *
- * @see KeyStoreRegistry#get(KeyStoreChooser)
  * @author Mirko Caserta (mirko.caserta@gmail.com)
+ * @see KeyStoreRegistry#get(KeyStoreChooser)
  */
 public interface KeyStoreChooser {
 

@@ -55,7 +55,6 @@ public class CiphererImpl implements Cipherer {
      * @return if in encryption mode, the encrypted message, otherwise the
      *         decrypted message
      * @throws SymmetricEncryptionException on runtime errors
-     *
      * @see #setMode(Mode)
      */
     public byte[] encrypt(byte[] key, byte[] initializationVector, byte[] message) {

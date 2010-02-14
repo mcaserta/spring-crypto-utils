@@ -1,7 +1,5 @@
 package com.google.code.springcryptoutils.core.cipher.asymmetric;
 
-import java.security.Key;
-
 /**
  * An interface for performing asymmetric encryption/decryption with a key
  * configured in the underlying implementation.

@@ -14,9 +14,9 @@ public interface SignerWithChoosersByAlias {
     /**
      * Signs a message.
      *
-     * @param keyStoreChooser the keystore chooser
+     * @param keyStoreChooser          the keystore chooser
      * @param privateKeyChooserByAlias the private key chooser
-     * @param message the message to sign
+     * @param message                  the message to sign
      * @return the signature
      */
     byte[] sign(KeyStoreChooser keyStoreChooser, PrivateKeyChooserByAlias privateKeyChooserByAlias, byte[] message);

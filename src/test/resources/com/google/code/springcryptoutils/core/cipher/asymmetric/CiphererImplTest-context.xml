@@ -10,14 +10,8 @@
 
     <crypt:privateKey id="privateKey" keystore-ref="keystore" alias="test" password="password"/>
 
-    <bean id="encrypter" class="com.google.code.springcryptoutils.core.cipher.asymmetric.CiphererImpl">
-        <property name="mode" value="ENCRYPT"/>
-        <property name="key" ref="privateKey"/>
-    </bean>
+    <crypt:asymmetricCipherer id="encrypter" mode="ENCRYPT" key-ref="privateKey"/>
 
-    <bean id="decrypter" class="com.google.code.springcryptoutils.core.cipher.asymmetric.CiphererImpl">
-        <property name="mode" value="DECRYPT"/>
-        <property name="key" ref="publicKey"/>
-    </bean>
+    <crypt:asymmetricCipherer id="decrypter" mode="DECRYPT" key-ref="publicKey"/>
 
 </beans>

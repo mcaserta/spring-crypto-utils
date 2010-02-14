@@ -104,8 +104,7 @@ public class Base64EncodedCiphererWithStaticKeyImpl implements Base64EncodedCiph
      * @return if in encryption mode, returns a base64 encoded version of the
      *         encrypted message, otherwise returns the clear-text message
      * @throws SymmetricEncryptionException on runtime errors
-     *
-     * @see #setMode(Mode) 
+     * @see #setMode(Mode)
      */
     public String encrypt(String message) {
         try {

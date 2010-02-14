@@ -15,7 +15,7 @@ public class Base64EncodedSignerBeanDefinitionParser extends AbstractSingleBeanD
     protected void doParse(Element element, BeanDefinitionBuilder bean) {
         bean.addPropertyReference("privateKey", element.getAttribute("privateKey-ref"));
         bean.addPropertyValue("algorithm", element.getAttribute("algorithm"));
-        bean.addPropertyValue("charsetName", element.getAttribute("charsetName"));
+        bean.addPropertyValue("charsetName", element.getAttribute("charset"));
     }
 
 }

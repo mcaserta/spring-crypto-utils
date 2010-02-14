@@ -19,7 +19,7 @@ public class Base64EncodedSymmetricCiphererWithStaticKeyBeanDefinitionParser ext
         bean.addPropertyValue("cipherAlgorithm", element.getAttribute("cipherAlgorithm"));
         bean.addPropertyValue("mode", element.getAttribute("mode"));
         bean.addPropertyValue("chunkOutput", element.getAttribute("chunkOutput"));
-        bean.addPropertyValue("charsetName", element.getAttribute("charsetName"));
+        bean.addPropertyValue("charsetName", element.getAttribute("charset"));
     }
 
 }

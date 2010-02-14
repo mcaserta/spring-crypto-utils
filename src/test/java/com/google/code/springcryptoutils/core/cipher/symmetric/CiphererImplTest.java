@@ -25,7 +25,7 @@ public class CiphererImplTest {
     @Autowired
     private Cipherer decrypter;
 
-    private static final byte[] iv = new byte[] {1, 2, 3, 4, 5, 6, 7, 8};
+    private static final byte[] iv = new byte[]{1, 2, 3, 4, 5, 6, 7, 8};
 
     private byte[] key;
 

@@ -58,7 +58,7 @@ public class Base64EncodedSignerWithChooserByPrivateKeyIdImpl implements Base64E
      *                     in the underlying mapping
      * @param message      the message to sign
      * @return a base64 encoded version of the signature
-     * @see #setPrivateKeyMap(java.util.Map) 
+     * @see #setPrivateKeyMap(java.util.Map)
      */
     public String sign(String privateKeyId, String message) {
         Base64EncodedSigner signer = cache.get(privateKeyId);

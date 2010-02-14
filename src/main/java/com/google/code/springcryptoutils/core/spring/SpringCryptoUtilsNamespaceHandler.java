@@ -1,6 +1,11 @@
 package com.google.code.springcryptoutils.core.spring;
 
+import com.google.code.springcryptoutils.core.spring.cipher.asymmetric.AsymmetricCiphererBeanDefinitionParser;
+import com.google.code.springcryptoutils.core.spring.cipher.asymmetric.AsymmetricCiphererWithChooserByKeyIdBeanDefinitionParser;
+import com.google.code.springcryptoutils.core.spring.cipher.asymmetric.Base64EncodedAsymmetricCiphererBeanDefinitionParser;
+import com.google.code.springcryptoutils.core.spring.cipher.asymmetric.Base64EncodedAsymmetricCiphererWithChooserByKeyIdBeanDefinitionParser;
 import com.google.code.springcryptoutils.core.spring.cipher.symmetric.*;
+import com.google.code.springcryptoutils.core.spring.digest.DigesterBeanDefinitionParser;
 import com.google.code.springcryptoutils.core.spring.key.PrivateKeyBeanDefinitionParser;
 import com.google.code.springcryptoutils.core.spring.key.PrivateKeyRegistryByAliasBeanDefinitionParser;
 import com.google.code.springcryptoutils.core.spring.key.PublicKeyBeanDefinitionParser;
@@ -46,6 +51,15 @@ public class SpringCryptoUtilsNamespaceHandler extends NamespaceHandlerSupport {
         registerBeanDefinitionParser("b64SymmetricKeyGenerator", new Base64EncodedSymmetricKeyGeneratorBeanDefinitionParser());
         registerBeanDefinitionParser("b64SymmetricCipherer", new Base64EncodedSymmetricCiphererBeanDefinitionParser());
         registerBeanDefinitionParser("b64SymmetricCiphererWithStaticKey", new Base64EncodedSymmetricCiphererWithStaticKeyBeanDefinitionParser());
+
+        // asymmetric ciphers
+        registerBeanDefinitionParser("asymmetricCipherer", new AsymmetricCiphererBeanDefinitionParser());
+        registerBeanDefinitionParser("asymmetricCiphererWithChooserByKeyId", new AsymmetricCiphererWithChooserByKeyIdBeanDefinitionParser());
+        registerBeanDefinitionParser("b64AsymmetricCipherer", new Base64EncodedAsymmetricCiphererBeanDefinitionParser());
+        registerBeanDefinitionParser("b64AsymmetricCiphererWithChooserByKeyId", new Base64EncodedAsymmetricCiphererWithChooserByKeyIdBeanDefinitionParser());
+
+        // message digests
+        registerBeanDefinitionParser("digester", new DigesterBeanDefinitionParser());
     }
 
 }
