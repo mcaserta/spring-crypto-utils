@@ -74,7 +74,7 @@ public class DigesterImpl implements Digester, InitializingBean {
             throw new DigestException("error converting message to byte array: charsetName=" + charsetName, e);
         }
 
-        final byte[] digest = digester.digest(messageAsByteArray);
+        final byte[] digest = digest(messageAsByteArray);
 
         switch (outputMode) {
             case BASE64:
@@ -84,6 +84,16 @@ public class DigesterImpl implements Digester, InitializingBean {
             default:
                 return null;
         }
+    }
+
+    /**
+     * Returns the message digest in raw bytes format.
+     *
+     * @param message the message
+     * @return the message digest
+     */
+    public byte[] digest(byte[] message) {
+        return digester.digest(message);
     }
 
     public void afterPropertiesSet() throws Exception {

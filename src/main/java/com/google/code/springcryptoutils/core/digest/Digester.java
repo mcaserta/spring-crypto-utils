@@ -15,4 +15,12 @@ public interface Digester {
      */
     String digest(String message);
 
+    /**
+     * Returns the message digest in raw bytes format.
+     *
+     * @param message the message
+     * @return the message digest
+     */
+    byte[] digest(byte[] message);
+
 }
