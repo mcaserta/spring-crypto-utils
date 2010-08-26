@@ -10,7 +10,7 @@
     <description>A framework for easier configuration of cryptographic utilities using Spring.</description>
 
     <properties>
-        <spring.version>3.0.3.RELEASE</spring.version>
+        <spring.version>3.0.4.RELEASE</spring.version>
     </properties>
 
     <scm>
