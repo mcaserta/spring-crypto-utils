@@ -10,7 +10,7 @@
     <description>A framework for easier configuration of cryptographic utilities using Spring.</description>
 
     <properties>
-        <spring.version>3.0.4.RELEASE</spring.version>
+        <spring.version>3.0.5.RELEASE</spring.version>
     </properties>
 
     <scm>
@@ -23,6 +23,13 @@
         <system>Google Code Issues</system>
         <url>http://code.google.com/p/spring-crypto-utils/issues/list</url>
     </issueManagement>
+
+    <distributionManagement>
+        <repository>
+            <id>googlecode</id>
+            <url>svn:https://spring-crypto-utils.googlecode.com/svn/repo</url>
+        </repository>
+    </distributionManagement>
 
     <licenses>
         <license>
@@ -61,9 +68,17 @@
     </dependencies>
 
     <build>
+        <extensions>
+            <extension>
+                <groupId>org.jvnet.wagon-svn</groupId>
+                <artifactId>wagon-svn</artifactId>
+                <version>1.8</version>
+            </extension>
+        </extensions>
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
                 <configuration>
                     <source>1.5</source>
                     <target>1.5</target>
@@ -72,12 +87,14 @@
             </plugin>
             <plugin>
                 <artifactId>maven-resources-plugin</artifactId>
+                <version>2.4.3</version>
                 <configuration>
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
             <plugin>
                 <artifactId>maven-release-plugin</artifactId>
+                <version>2.1</version>
                 <configuration>
                     <tagBase>https://spring-crypto-utils.googlecode.com/svn/tags</tagBase>
                 </configuration>
@@ -89,6 +106,7 @@
         <plugins>
             <plugin>
                 <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.7</version>
                 <configuration>
                     <show>public</show>
                     <encoding>UTF-8</encoding>
