@@ -96,6 +96,8 @@ public class CiphererWithStaticKeyImpl implements CiphererWithStaticKey, Initial
                 case DECRYPT:
                     cipher.init(Cipher.DECRYPT_MODE, keySpec, initializationVectorSpec);
                     break;
+                default:
+                    throw new SymmetricEncryptionException("error encrypting/decrypting message: invalid mode; mode=" + mode);
             }
             return cipher.doFinal(message);
         } catch (Exception e) {
@@ -103,7 +105,7 @@ public class CiphererWithStaticKeyImpl implements CiphererWithStaticKey, Initial
         }
     }
 
-    public void afterPropertiesSet() throws Exception {
+    public void afterPropertiesSet() {
         this.keySpec = new SecretKeySpec(Base64.decodeBase64(key), keyAlgorithm);
     }
 

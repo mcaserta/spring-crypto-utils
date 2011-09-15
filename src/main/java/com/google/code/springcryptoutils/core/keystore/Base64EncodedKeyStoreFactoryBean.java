@@ -5,7 +5,11 @@ import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
 
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.security.KeyStore;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.security.cert.CertificateException;
 
 /**
  * A spring bean factory for instancing KeyStore objects from a base64 encoded
@@ -48,7 +52,7 @@ public class Base64EncodedKeyStoreFactoryBean implements FactoryBean, Initializi
         this.type = type;
     }
 
-    public Object getObject() throws Exception {
+    public Object getObject() {
         return keystore;
     }
 
@@ -60,7 +64,7 @@ public class Base64EncodedKeyStoreFactoryBean implements FactoryBean, Initializi
         return true;
     }
 
-    public void afterPropertiesSet() throws Exception {
+    public void afterPropertiesSet() throws KeyStoreException, IOException, NoSuchAlgorithmException, CertificateException {
         keystore = KeyStore.getInstance(type);
         ByteArrayInputStream in = new ByteArrayInputStream(Base64.decodeBase64(base64EncodedKeyStoreFile.getBytes()));
         keystore.load(in, password.toCharArray());

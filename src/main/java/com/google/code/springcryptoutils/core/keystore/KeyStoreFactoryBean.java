@@ -4,7 +4,11 @@ import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.core.io.Resource;
 
+import java.io.IOException;
 import java.security.KeyStore;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.security.cert.CertificateException;
 
 /**
  * A spring bean factory for instancing KeyStore objects.
@@ -46,7 +50,7 @@ public class KeyStoreFactoryBean implements FactoryBean, InitializingBean {
         this.type = type;
     }
 
-    public Object getObject() throws Exception {
+    public Object getObject() {
         return keystore;
     }
 
@@ -58,7 +62,7 @@ public class KeyStoreFactoryBean implements FactoryBean, InitializingBean {
         return true;
     }
 
-    public void afterPropertiesSet() throws Exception {
+    public void afterPropertiesSet() throws KeyStoreException, IOException, NoSuchAlgorithmException, CertificateException {
         keystore = KeyStore.getInstance(type);
         keystore.load(location.getInputStream(), password.toCharArray());
     }

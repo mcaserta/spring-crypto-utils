@@ -66,7 +66,7 @@ public class PrivateKeyRegistryByAliasImpl implements PrivateKeyRegistryByAlias 
         return null;
     }
 
-    private final static class CacheKey {
+    private static final class CacheKey {
 
         private String keyStoreName;
         private String privateKeyAlias;

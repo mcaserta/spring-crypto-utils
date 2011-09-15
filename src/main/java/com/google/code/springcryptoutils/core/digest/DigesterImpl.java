@@ -6,6 +6,7 @@ import org.springframework.beans.factory.InitializingBean;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 /**
  * Default implementation of the message digester.
@@ -96,7 +97,7 @@ public class DigesterImpl implements Digester, InitializingBean {
         return digester.digest(message);
     }
 
-    public void afterPropertiesSet() throws Exception {
+    public void afterPropertiesSet() throws NoSuchAlgorithmException {
         digester = MessageDigest.getInstance(algorithm);
     }
 

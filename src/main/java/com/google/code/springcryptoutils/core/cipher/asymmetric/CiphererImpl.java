@@ -64,6 +64,8 @@ public class CiphererImpl implements Cipherer {
                 case DECRYPT:
                     cipher.init(Cipher.DECRYPT_MODE, key);
                     break;
+                default:
+                    throw new AsymmetricEncryptionException("error encrypting/decrypting message: invalid mode; mode=" + mode);
             }
             return cipher.doFinal(message);
         } catch (Exception e) {

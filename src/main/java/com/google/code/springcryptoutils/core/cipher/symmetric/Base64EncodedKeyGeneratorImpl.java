@@ -22,7 +22,7 @@ public class Base64EncodedKeyGeneratorImpl implements Base64EncodedKeyGenerator 
      * @throws NoSuchAlgorithmException if the algorithm is not supported by the
      *                                  underlying cryptographic provider
      */
-    public void setAlgorithm(String algorithm) throws Exception {
+    public void setAlgorithm(String algorithm) throws NoSuchAlgorithmException {
         generator = new KeyGeneratorImpl();
         generator.setAlgorithm(algorithm);
         generator.afterPropertiesSet();

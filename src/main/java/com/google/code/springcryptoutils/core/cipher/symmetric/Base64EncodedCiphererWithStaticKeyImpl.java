@@ -126,7 +126,7 @@ public class Base64EncodedCiphererWithStaticKeyImpl implements Base64EncodedCiph
         }
     }
 
-    public void afterPropertiesSet() throws Exception {
+    public void afterPropertiesSet() {
         this.keySpec = new SecretKeySpec(Base64.decodeBase64(key), keyAlgorithm);
     }
 

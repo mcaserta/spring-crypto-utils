@@ -69,6 +69,8 @@ public class CiphererImpl implements Cipherer {
                 case DECRYPT:
                     cipher.init(Cipher.DECRYPT_MODE, skey, initializationVectorSpec);
                     break;
+                default:
+                    throw new SymmetricEncryptionException("error encrypting/decrypting message: invalid mode; mode=" + mode);
             }
             return cipher.doFinal(message);
         } catch (Exception e) {
