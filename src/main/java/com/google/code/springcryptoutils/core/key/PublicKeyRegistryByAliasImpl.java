@@ -67,6 +67,8 @@ public class PublicKeyRegistryByAliasImpl implements PublicKeyRegistryByAlias {
 
     private static final class CacheKey {
 
+        private static final int INT_HASHCODE_BASE = 31;
+
         private String keyStoreName;
         private String publicKeyAlias;
 
@@ -77,8 +79,12 @@ public class PublicKeyRegistryByAliasImpl implements PublicKeyRegistryByAlias {
 
         @Override
         public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
             CacheKey cacheKey = (CacheKey) o;
             return !(keyStoreName != null ? !keyStoreName.equals(cacheKey.keyStoreName) : cacheKey.keyStoreName != null) && !(publicKeyAlias != null ? !publicKeyAlias.equals(cacheKey.publicKeyAlias) : cacheKey.publicKeyAlias != null);
         }
@@ -86,7 +92,7 @@ public class PublicKeyRegistryByAliasImpl implements PublicKeyRegistryByAlias {
         @Override
         public int hashCode() {
             int result = keyStoreName != null ? keyStoreName.hashCode() : 0;
-            result = 31 * result + (publicKeyAlias != null ? publicKeyAlias.hashCode() : 0);
+            result = INT_HASHCODE_BASE * result + (publicKeyAlias != null ? publicKeyAlias.hashCode() : 0);
             return result;
         }
 

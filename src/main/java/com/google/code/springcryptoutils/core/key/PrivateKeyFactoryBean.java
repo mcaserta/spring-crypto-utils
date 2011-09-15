@@ -3,8 +3,7 @@ package com.google.code.springcryptoutils.core.key;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
 
-import java.security.KeyStore;
-import java.security.PrivateKey;
+import java.security.*;
 
 /**
  * A spring bean factory for instancing private keys from a keystore reference.
@@ -46,7 +45,7 @@ public class PrivateKeyFactoryBean implements FactoryBean, InitializingBean {
         this.password = password;
     }
 
-    public Object getObject() throws Exception {
+    public Object getObject() {
         return privateKey;
     }
 
@@ -58,7 +57,7 @@ public class PrivateKeyFactoryBean implements FactoryBean, InitializingBean {
         return true;
     }
 
-    public void afterPropertiesSet() throws Exception {
+    public void afterPropertiesSet() throws NoSuchAlgorithmException, UnrecoverableEntryException, KeyStoreException {
         KeyStore.PrivateKeyEntry privateKeyEntry = (KeyStore.PrivateKeyEntry) keystore.getEntry(alias, new KeyStore.PasswordProtection(password.toCharArray()));
         this.privateKey = privateKeyEntry.getPrivateKey();
     }

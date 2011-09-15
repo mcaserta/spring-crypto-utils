@@ -4,6 +4,7 @@ import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
 
 import java.security.KeyStore;
+import java.security.KeyStoreException;
 import java.security.PublicKey;
 import java.security.cert.Certificate;
 
@@ -37,7 +38,7 @@ public class PublicKeyFactoryBean implements FactoryBean, InitializingBean {
         this.alias = alias;
     }
 
-    public Object getObject() throws Exception {
+    public Object getObject() {
         return publicKey;
     }
 
@@ -49,7 +50,7 @@ public class PublicKeyFactoryBean implements FactoryBean, InitializingBean {
         return true;
     }
 
-    public void afterPropertiesSet() throws Exception {
+    public void afterPropertiesSet() throws KeyStoreException {
         Certificate certificate = keystore.getCertificate(alias);
         publicKey = certificate.getPublicKey();
     }

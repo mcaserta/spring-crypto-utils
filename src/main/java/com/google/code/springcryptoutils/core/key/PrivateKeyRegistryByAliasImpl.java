@@ -68,6 +68,8 @@ public class PrivateKeyRegistryByAliasImpl implements PrivateKeyRegistryByAlias 
 
     private static final class CacheKey {
 
+        private static final int INT_HASHCODE_BASE = 31;
+
         private String keyStoreName;
         private String privateKeyAlias;
 
@@ -78,8 +80,12 @@ public class PrivateKeyRegistryByAliasImpl implements PrivateKeyRegistryByAlias 
 
         @Override
         public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
             CacheKey cacheKey = (CacheKey) o;
             return !(keyStoreName != null ? !keyStoreName.equals(cacheKey.keyStoreName) : cacheKey.keyStoreName != null) && !(privateKeyAlias != null ? !privateKeyAlias.equals(cacheKey.privateKeyAlias) : cacheKey.privateKeyAlias != null);
         }
@@ -87,7 +93,7 @@ public class PrivateKeyRegistryByAliasImpl implements PrivateKeyRegistryByAlias 
         @Override
         public int hashCode() {
             int result = keyStoreName != null ? keyStoreName.hashCode() : 0;
-            result = 31 * result + (privateKeyAlias != null ? privateKeyAlias.hashCode() : 0);
+            result = INT_HASHCODE_BASE * result + (privateKeyAlias != null ? privateKeyAlias.hashCode() : 0);
             return result;
         }
 
