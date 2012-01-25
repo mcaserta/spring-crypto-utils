@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.google.code.spring-crypto-utils</groupId>
     <artifactId>spring-crypto-utils</artifactId>
-    <version>1.0.2-SNAPSHOT</version>
+    <version>1.0.1-SNAPSHOT</version>
     <name>Spring Cryptographic Utilities</name>
     <url>https://code.google.com/p/spring-crypto-utils/</url>
     <description>A framework for easier configuration of cryptographic utilities using Spring.</description>
