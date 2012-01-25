@@ -22,6 +22,14 @@
         </xsd:complexType>
     </xsd:element>
 
+    <xsd:element name="defaultKeystore">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="beans:identifiedType"/>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
     <xsd:element name="b64Keystore">
         <xsd:complexType>
             <xsd:complexContent>

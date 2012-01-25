@@ -11,6 +11,7 @@ import com.google.code.springcryptoutils.core.spring.key.PrivateKeyRegistryByAli
 import com.google.code.springcryptoutils.core.spring.key.PublicKeyBeanDefinitionParser;
 import com.google.code.springcryptoutils.core.spring.key.PublicKeyRegistryByAliasBeanDefinitionParser;
 import com.google.code.springcryptoutils.core.spring.keystore.Base64EncodedKeyStoreBeanDefinitionParser;
+import com.google.code.springcryptoutils.core.spring.keystore.DefaultKeyStoreBeanDefinitionParser;
 import com.google.code.springcryptoutils.core.spring.keystore.KeyStoreBeanDefinitionParser;
 import com.google.code.springcryptoutils.core.spring.keystore.KeyStoreRegistryBeanDefinitionParser;
 import com.google.code.springcryptoutils.core.spring.signature.*;
@@ -21,6 +22,7 @@ public class SpringCryptoUtilsNamespaceHandler extends NamespaceHandlerSupport {
     public void init() {
         // keystore
         registerBeanDefinitionParser("keystore", new KeyStoreBeanDefinitionParser());
+        registerBeanDefinitionParser("defaultKeystore", new DefaultKeyStoreBeanDefinitionParser());
         registerBeanDefinitionParser("keystoreRegistry", new KeyStoreRegistryBeanDefinitionParser());
         registerBeanDefinitionParser("b64Keystore", new Base64EncodedKeyStoreBeanDefinitionParser());
 
