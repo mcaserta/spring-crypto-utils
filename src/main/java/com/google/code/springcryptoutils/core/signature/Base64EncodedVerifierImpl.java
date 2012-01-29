@@ -13,7 +13,7 @@ import java.security.PublicKey;
  */
 public class Base64EncodedVerifierImpl implements Base64EncodedVerifier {
 
-    private VerifierImpl verifier = new VerifierImpl();
+    private final VerifierImpl verifier = new VerifierImpl();
 
     private String charsetName = "UTF-8";
 

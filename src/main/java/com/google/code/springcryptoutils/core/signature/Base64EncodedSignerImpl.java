@@ -12,7 +12,7 @@ import java.security.PrivateKey;
  */
 public class Base64EncodedSignerImpl implements Base64EncodedSigner {
 
-    private SignerImpl signer = new SignerImpl();
+    private final SignerImpl signer = new SignerImpl();
 
     private String charsetName = "UTF-8";
 

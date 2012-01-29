@@ -6,14 +6,13 @@ import com.google.code.springcryptoutils.core.spring.cipher.asymmetric.Base64Enc
 import com.google.code.springcryptoutils.core.spring.cipher.asymmetric.Base64EncodedAsymmetricCiphererWithChooserByKeyIdBeanDefinitionParser;
 import com.google.code.springcryptoutils.core.spring.cipher.symmetric.*;
 import com.google.code.springcryptoutils.core.spring.digest.DigesterBeanDefinitionParser;
-import com.google.code.springcryptoutils.core.spring.key.PrivateKeyBeanDefinitionParser;
-import com.google.code.springcryptoutils.core.spring.key.PrivateKeyRegistryByAliasBeanDefinitionParser;
-import com.google.code.springcryptoutils.core.spring.key.PublicKeyBeanDefinitionParser;
-import com.google.code.springcryptoutils.core.spring.key.PublicKeyRegistryByAliasBeanDefinitionParser;
+import com.google.code.springcryptoutils.core.spring.key.*;
 import com.google.code.springcryptoutils.core.spring.keystore.Base64EncodedKeyStoreBeanDefinitionParser;
 import com.google.code.springcryptoutils.core.spring.keystore.DefaultKeyStoreBeanDefinitionParser;
 import com.google.code.springcryptoutils.core.spring.keystore.KeyStoreBeanDefinitionParser;
 import com.google.code.springcryptoutils.core.spring.keystore.KeyStoreRegistryBeanDefinitionParser;
+import com.google.code.springcryptoutils.core.spring.mac.Base64EncodedMacBeanDefinitionParser;
+import com.google.code.springcryptoutils.core.spring.mac.MacBeanDefinitionParser;
 import com.google.code.springcryptoutils.core.spring.signature.*;
 import org.springframework.beans.factory.xml.NamespaceHandlerSupport;
 
@@ -29,6 +28,7 @@ public class SpringCryptoUtilsNamespaceHandler extends NamespaceHandlerSupport {
         // key
         registerBeanDefinitionParser("publicKey", new PublicKeyBeanDefinitionParser());
         registerBeanDefinitionParser("privateKey", new PrivateKeyBeanDefinitionParser());
+        registerBeanDefinitionParser("secretKey", new SecretKeyBeanDefinitionParser());
         registerBeanDefinitionParser("publicKeyRegistryByAlias", new PublicKeyRegistryByAliasBeanDefinitionParser());
         registerBeanDefinitionParser("privateKeyRegistryByAlias", new PrivateKeyRegistryByAliasBeanDefinitionParser());
 
@@ -62,6 +62,10 @@ public class SpringCryptoUtilsNamespaceHandler extends NamespaceHandlerSupport {
 
         // message digests
         registerBeanDefinitionParser("digester", new DigesterBeanDefinitionParser());
+
+        // message authentication codes
+        registerBeanDefinitionParser("mac", new MacBeanDefinitionParser());
+        registerBeanDefinitionParser("b64Mac", new Base64EncodedMacBeanDefinitionParser());
     }
 
 }

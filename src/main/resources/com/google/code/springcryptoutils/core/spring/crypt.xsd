@@ -99,6 +99,18 @@
         </xsd:complexType>
     </xsd:element>
 
+    <xsd:element name="secretKey">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="beans:identifiedType">
+                    <xsd:attribute name="keystore-ref" type="xsd:string" use="required"/>
+                    <xsd:attribute name="alias" type="xsd:string" use="required"/>
+                    <xsd:attribute name="password" type="xsd:string" use="required"/>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
     <!-- DIGITAL SIGNATURE -->
 
     <xsd:element name="signer">
@@ -379,6 +391,30 @@
                     <xsd:attribute name="algorithm" type="xsd:string" default="SHA1"/>
                     <xsd:attribute name="outputMode" type="outputModeType" default="HEX"/>
                     <xsd:attribute name="charset" type="xsd:string" default="UTF-8"/>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
+    <!-- MAC (Message Authentication Codes) -->
+
+    <xsd:element name="mac">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="beans:identifiedType">
+                    <xsd:attribute name="secretKey-ref" type="xsd:string" use="required"/>
+                    <xsd:attribute name="algorithm" type="xsd:string" default="HmacSHA1"/>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="b64Mac">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="beans:identifiedType">
+                    <xsd:attribute name="secretKey-ref" type="xsd:string" use="required"/>
+                    <xsd:attribute name="algorithm" type="xsd:string" default="HmacSHA1"/>
                 </xsd:extension>
             </xsd:complexContent>
         </xsd:complexType>
