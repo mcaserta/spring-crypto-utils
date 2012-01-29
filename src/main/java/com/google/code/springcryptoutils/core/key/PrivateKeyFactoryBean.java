@@ -6,7 +6,7 @@ import org.springframework.beans.factory.InitializingBean;
 import java.security.*;
 
 /**
- * A spring bean factory for instancing private keys from a keystore reference.
+ * A spring bean factory for retrieving private keys from a keystore reference.
  *
  * @author Mirko Caserta (mirko.caserta@gmail.com)
  */
@@ -59,6 +59,11 @@ public class PrivateKeyFactoryBean implements FactoryBean, InitializingBean {
 
     public void afterPropertiesSet() throws NoSuchAlgorithmException, UnrecoverableEntryException, KeyStoreException {
         KeyStore.PrivateKeyEntry privateKeyEntry = (KeyStore.PrivateKeyEntry) keystore.getEntry(alias, new KeyStore.PasswordProtection(password.toCharArray()));
+
+        if (privateKeyEntry == null) {
+            throw new PrivateKeyException("no such private key with alias: " + alias);
+        }
+
         this.privateKey = privateKeyEntry.getPrivateKey();
     }
 

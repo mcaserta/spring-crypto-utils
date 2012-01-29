@@ -12,6 +12,15 @@ public class PrivateKeyException extends RuntimeException {
      * Creates a new exception instance.
      *
      * @param message the exception message
+     */
+    public PrivateKeyException(String message) {
+        super(message);
+    }
+
+    /**
+     * Creates a new exception instance.
+     *
+     * @param message the exception message
      * @param cause   the root cause
      */
     public PrivateKeyException(String message, Throwable cause) {

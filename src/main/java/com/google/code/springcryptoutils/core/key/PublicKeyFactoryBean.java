@@ -9,7 +9,7 @@ import java.security.PublicKey;
 import java.security.cert.Certificate;
 
 /**
- * A spring bean factory for instancing public keys from a keystore reference.
+ * A spring bean factory for retrieving public keys from a keystore reference.
  *
  * @author Mirko Caserta (mirko.caserta@gmail.com)
  */
@@ -52,6 +52,11 @@ public class PublicKeyFactoryBean implements FactoryBean, InitializingBean {
 
     public void afterPropertiesSet() throws KeyStoreException {
         Certificate certificate = keystore.getCertificate(alias);
+
+        if (certificate == null) {
+            throw new PublicKeyException("no such public key with alias: " + alias);
+        }
+
         publicKey = certificate.getPublicKey();
     }
 

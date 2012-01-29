@@ -12,6 +12,15 @@ public class PublicKeyException extends RuntimeException {
      * Creates a new exception instance.
      *
      * @param message the exception message
+     */
+    public PublicKeyException(String message) {
+        super(message);
+    }
+
+    /**
+     * Creates a new exception instance.
+     *
+     * @param message the exception message
      * @param cause   the root cause
      */
     public PublicKeyException(String message, Throwable cause) {
