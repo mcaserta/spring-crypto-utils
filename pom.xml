@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.google.code.spring-crypto-utils</groupId>
     <artifactId>spring-crypto-utils</artifactId>
-    <version>1.1.1</version>
+    <version>1.1.2-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>Spring Cryptographic Utilities</name>
     <description>A framework for easier configuration of cryptographic utilities using Spring.</description>
@@ -22,9 +22,9 @@
     </properties>
 
     <scm>
-        <developerConnection>scm:svn:https://spring-crypto-utils.googlecode.com/svn/tags/spring-crypto-utils-1.1.1</developerConnection>
-        <connection>scm:svn:http://spring-crypto-utils.googlecode.com/svn/tags/spring-crypto-utils-1.1.1</connection>
-        <url>scm:svn:https://spring-crypto-utils.googlecode.com/svn/tags/spring-crypto-utils-1.1.1</url>
+        <developerConnection>scm:svn:https://spring-crypto-utils.googlecode.com/svn/trunk</developerConnection>
+        <connection>scm:svn:http://spring-crypto-utils.googlecode.com/svn/trunk</connection>
+        <url>http://code.google.com/p/spring-crypto-utils/source/browse/</url>
     </scm>
 
     <issueManagement>
