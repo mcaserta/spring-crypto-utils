@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Spring Crypto Utils - Documentation</title>
+
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"/>
+    <![endif]-->
+
+    <link href="css/bootstrap.css" type="text/css" rel="stylesheet">
+    <link href="css/docs.css" type="text/css" rel="stylesheet">
+    <link href="css/prettify.css" type="text/css" rel="stylesheet">
+    <style type="text/css">
+        body {
+            padding-top: 60px;
+            padding-bottom: 40px;
+        }
+    </style>
+
+    <!-- TODO: fix these icons
+    <link rel="shortcut icon" href="img/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+     -->
+</head>
+
+<body data-spy="scroll" data-target=".subnav" data-offset="50">
+
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+            <a class="brand" href="index.html">Spring Crypto Utils</a>
+
+            <div class="nav-collapse">
+                <ul class="nav">
+                    <li><a href="index.html">Home</a></li>
+                    <li class="active"><a href="documentation.html">Documentation</a></li>
+                    <li><a href="https://github.com/mcaserta/spring-crypto-utils/downloads">Download</a></li>
+                    <li><a href="https://github.com/mcaserta/spring-crypto-utils">Source</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+
+<header class="jumbotron subhead" id="overview">
+    <h1>Documentation</h1>
+
+    <p class="lead">
+
+    <div class="subnav">
+        <ul class="nav nav-pills">
+            <li><a href="#setup">Setup</a></li>
+            <li><a href="#keystore">Keystore</a></li>
+            <li><a href="#keys">Keys</a></li>
+            <!--<li><a href="#symmetric">Symmetric Enc.</a></li>-->
+            <!--<li><a href="#asymmetric">Asymmetric Enc.</a></li>-->
+            <!--<li><a href="#digest">Digest</a></li>-->
+            <!--<li><a href="#mac">Mac</a></li>-->
+            <!--<li><a href="#changelog">ChangeLog</a></li>-->
+            <!--<li><a href="#roadmap">Road Map</a></li>-->
+        </ul>
+    </div>
+</header>
+
+<section id="setup">
+    <div class="page-header">
+        <h1>Setup
+            <small>Getting started</small>
+        </h1>
+    </div>
+    <div class="row">
+        <div class="span3 columns">
+            <h3>About setup</h3>
+
+            <p>Your setup will depend on whether or not you use maven. Also, if you're going to use the xml
+                configuration, there's a bit of xml namespace setup to do.</p>
+        </div>
+        <div class="span9 columns">
+            <h2>With maven</h2>
+
+            <p>Add the following dependency block to your pom:</p>
+
+                <pre class="prettyprint">
+    &lt;dependency&gt;
+        &lt;groupId&gt;com.google.code.spring-crypto-utils&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-crypto-utils&lt;/artifactId&gt;
+        &lt;version&gt;1.1.1&lt;/version&gt;
+    &lt;/dependency&gt;</pre>
+
+            <div class="alert alert-info">
+                <h4 class="alert-heading">Good to know</h4>
+                Spring Crypto Utils is in <a
+                    href="http://repo1.maven.org/maven2/com/google/code/spring-crypto-utils/spring-crypto-utils/"
+                    target="_blank">maven central</a>, so there's no extra repository to setup in the pom. If you
+                had previously setup our custom repository, you can safely remove it from your poms now as all
+                publicily released versions have been (and will be) uploaded to central.
+            </div>
+
+            <h2>Without maven</h2>
+
+            <p>Download the latest jar from the download page and put the file in the classpath of your
+                application.</p>
+
+            <p>The following jars are also needed:</p>
+
+            <ul>
+                <li>Apache Commons
+                    <ul>
+                        <li>commons-logging:commons-logging:jar:1.1.1
+                            <a href="http://repo1.maven.org/maven2/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1.jar"><span
+                                    class="label label-info">download</span></a></li>
+                        <li>commons-codec:commons-codec:jar:1.6
+                            <a href="http://repo1.maven.org/maven2/commons-codec/commons-codec/1.6/commons-codec-1.6.jar"><span
+                                    class="label label-info">download</span></a></li>
+                    </ul>
+                </li>
+                <li>Spring Framework
+                    <ul>
+                        <li>org.springframework:spring-context:jar:3.1.0.RELEASE
+                            <a href="http://repo1.maven.org/maven2/org/springframework/spring-context/3.1.0.RELEASE/spring-context-3.1.0.RELEASE.jar"><span
+                                    class="label label-info">download</span></a></li>
+                        <li>org.springframework:spring-beans:jar:3.1.0.RELEASE
+                            <a href="http://repo1.maven.org/maven2/org/springframework/spring-beans/3.1.0.RELEASE/spring-beans-3.1.0.RELEASE.jar"><span
+                                    class="label label-info">download</span></a></li>
+                        <li>org.springframework:spring-core:jar:3.1.0.RELEASE
+                            <a href="http://repo1.maven.org/maven2/org/springframework/spring-core/3.1.0.RELEASE/spring-core-3.1.0.RELEASE.jar"><span
+                                    class="label label-info">download</span></a></li>
+                        <li>org.springframework:spring-expression:jar:3.1.0.RELEASE
+                            <a href="http://repo1.maven.org/maven2/org/springframework/spring-expression/3.1.0.RELEASE/spring-expression-3.1.0.RELEASE.jar"><span
+                                    class="label label-info">download</span></a></li>
+                        <li>org.springframework:spring-asm:jar:3.1.0.RELEASE
+                            <a href="http://repo1.maven.org/maven2/org/springframework/spring-asm/3.1.0.RELEASE/spring-asm-3.1.0.RELEASE.jar"><span
+                                    class="label label-info">download</span></a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h2>Xml Namespace</h2>
+
+            <p>If you want to use the xml in configuring the framework, you will need to declare the crypt namespace
+                in your spring context xml configuration files, like this:</p>
+
+                <pre class="prettyprint">
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:crypt="http://code.google.com/p/spring-crypto-utils/schema/crypt"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://code.google.com/p/spring-crypto-utils/schema/crypt
+        http://code.google.com/p/spring-crypto-utils/schema/crypt.xsd"&gt;
+
+&lt;/beans&gt;</pre>
+
+            <p>This gets you full autocompletion support in an xsd aware editor such as Intellij Idea.</p>
+        </div>
+    </div>
+</section>
+
+<section id="keystore">
+    <div class="page-header">
+        <h1>Keystore
+            <small>Keep your keys handy</small>
+        </h1>
+    </div>
+    <div class="row">
+        <div class="span3 columns">
+            <h3>About keystores</h3>
+
+            <p>Most cryptographic operations require keys. Keys are usually best kept in a keystore file.</p>
+
+            <p>To manipulate keystore files, we suggest the excellent, cross platform and free <a
+                    href="http://www.lazgosoftware.com/kse/index.html" target="_blank">Keystore Explorer</a>.</p>
+        </div>
+        <div class="span9 columns">
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#keystore-simple" data-toggle="tab">keystore</a></li>
+                <li><a href="#keystore-default" data-toggle="tab">defaultKeystore</a></li>
+                <li><a href="#keystore-b64" data-toggle="tab">b64Keystore</a></li>
+            </ul>
+
+            <div class="tab-content">
+                <div class="tab-pane active" id="keystore-simple">
+                    <p>To get a reference to a keystore, use the <code>&lt;crypt:keystore&gt;</code> element:</p>
+
+                    <pre class="prettyprint">&lt;crypt:keystore id="fooKeystore" location="classpath:keystore-foo.jks" password="password" type="JKS"/&gt;</pre>
+
+                    <ul>
+                        <li><code>JKS</code> is the default keystore type if no <code>type</code> attribute is
+                            specified
+                        </li>
+                        <li>the <code>location</code> attribute follows the spring resources conventions (see table
+                            5.1 in the <a
+                                    href="http://static.springsource.org/spring/docs/3.1.x/spring-framework-reference/html/resources.html#resources-resourceloader"
+                                    target="_blank">spring reference documentation</a> for an overview)
+                        </li>
+                    </ul>
+                </div>
+                <div class="tab-pane" id="keystore-default">
+                    <p><span class="label">Since 1.0.1</span></p>
+
+                    <p>If you prefer to configure the keystore by defining the java system properties
+                        <code>javax.net.ssl.keyStore</code> and <code>javax.net.ssl.keyStorePassword</code>, you can get
+                        a reference to the
+                        keystore simply with:</p>
+
+                    <pre class="prettyprint">&lt;crypt:defaultKeystore id="defaultKeystore"/&gt;</pre>
+
+                </div>
+                <div class="tab-pane" id="keystore-b64">
+                    <p>A keystore can also be embedded in the xml config file itself using the base64 encoding:</p>
+<pre class="prettyprint">&lt;crypt:b64Keystore id="keystore" password="password" type="JKS"&gt;
+    &lt;crypt:file&gt;
+        /u3+7QAAAAIAAAABAAAAAQAEdGVzdAAAASazcnA7AAACvTCCArkwDgYKKwYBBAEq
+        AhEBAQUABIICpXWgVfoBjEXhW7TUr4i8npIcnRfWKy8i5Mly28DaiNQIcbUmqVol
+        hfjbmoz930cT+puKpVmt+Rv28MEWEHDH3JFixM7aQgjmMsXL4z0AE/cgW0bn5C3P
+        LBrvG3Ieq0Kj1ZebLuBtHM92LwrkctTq3dvy6sCQHLtpefInmdjqfAbJnls/y2RX
+        PoNwwwu6yIWw6GnXQ41TjhIOcXhmog4e7aH+2Ch+6vFsnNf0hHDdGI/PPvGnIvf9
+        kGb1a9894sy1xApi1oV/OzH3ZZ8WKlXZmycke3QtVfREFRv22400tayoFyQzCbNE
+        jNpzExRhHd5W1fEaVBXIjw73eB8l31XgIQlBFnUBkBXkQ56nYPRL6ODPNIYEYJSE
+        XJnN8POgc+TFEisP4MK4fzr7pb5iVBokbWMS6ixCayaUSksn/U8mtAQSSy3Wx8KS
+        0S+HvHCv7g8qflLuQD3TC7dBF4ai8O7U4TXljqugW53UzmcSHbY+3js2R3SYdOxI
+        1CZ+Ly59WYHsAwtVhor1QFqmx1GwI/OJFy5cdd0Kcn2IKcQwEuTZcNEL7ZzBSrKQ
+        WQ/Vysn2rHr/iWZBg7H/8Ybk3yBoPvn9xi6IFOV74a9EPn3eb8h4yF6yFLieIKXo
+        2pM1BFmvkbQYcg8HhWWb8ppJC5He2j6LCmhMBciVY5ltSXe8siyPqGi1uSNeqduv
+        O+JGfCgpcAezpGL2KFCbcHyISPlhDERKWdI560OR8ytQXmX996OcM34aRl0D+cgL
+        hblZOzXCv9bj9ePWMTytF/YeVebsjU4clxLWnGBU9hbkvdBTf8q795DAcbqnL6QC
+        mo+1wq8OZTxRcF2Er97A3QCSrvK5hWrG2rkUcw55TSPeoaobj6YgYOnv1dpuHCXs
+        6J8V/b4FGCDn2XAcgEUOAAAAAQAFWC41MDkAAAI5MIICNTCCAZ6gAwIBAgIES3GF
+        tjANBgkqhkiG9w0BAQUFADBfMQswCQYDVQQGEwJJVDELMAkGA1UECBMCUk0xDTAL
+        BgNVBAcTBFJvbWUxDTALBgNVBAoTBE5vbmUxDTALBgNVBAsTBE5vbmUxFjAUBgNV
+        BAMTDU1pcmtvIENhc2VydGEwHhcNMTAwMjA5MTU1NjM4WhcNMTAwNTEwMTU1NjM4
+        WjBfMQswCQYDVQQGEwJJVDELMAkGA1UECBMCUk0xDTALBgNVBAcTBFJvbWUxDTAL
+        BgNVBAoTBE5vbmUxDTALBgNVBAsTBE5vbmUxFjAUBgNVBAMTDU1pcmtvIENhc2Vy
+        dGEwgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAKjtmUJ2Y06oi/e90tgfvNLt
+        TadWre36dsKvhrhxaXtcGC54cjaN/r2iAlLnTrqJN9K7cWYHI5Rh1bYZzOSGY2PX
+        6DoLis5OsDzP/9rXZRMVfNynLsjTeIkG579qht6j6JAtyvHIdH5hrDjE32xx/X78
+        iLTYMAuXb+Uo8VNZTft7AgMBAAEwDQYJKoZIhvcNAQEFBQADgYEApXFvvASzzw4G
+        VmbJB1os/PnKAD82WpDDP6pjDOE4ALAzJoP71uqvLffr4qRBmMOMX6IGmLBckYRS
+        axQ8OCU6QBU4RU1cY/xxrXgfKditL8SAY4Ll07uwoilBJqxM9clT0AtYwxTgS5KF
+        7bw6Q7mk5Ki1d9hpmBBn+HGB9+MCqTCz/VETRUu45lQPtwUuwvOmff2WHg==
+    &lt;/crypt:file&gt;
+&lt;/crypt:b64Keystore&gt;</pre>
+
+                    <p>The Base64 block above was generated with:</p>
+
+                    <pre class="prettyprint lang-sh">$ openssl enc -base64 -in keystore.jks</pre>
+                </div>
+            </div>
+
+            <script>
+                $(function () {
+                    $('.tabs a:last').tab('show')
+                })
+            </script>
+        </div>
+    </div>
+</section>
+
+<section id="keys">
+    <div class="page-header">
+        <h1>Keys
+            <small>Private, public and secret</small>
+        </h1>
+    </div>
+
+    <div class="row">
+        <div class="span3 columns">
+            <h3>Keys</h3>
+
+            <p>Once you have setup a keystore, it's time to use those keys.</p>
+        </div>
+
+        <div class="span9 columns">
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#key-private" data-toggle="tab">privateKey</a></li>
+                <li><a href="#key-public" data-toggle="tab">publicKey</a></li>
+                <li><a href="#key-secret" data-toggle="tab">secretKey</a></li>
+            </ul>
+
+            <div class="tab-content">
+                <div class="tab-pane active" id="key-private">
+<pre class="prettyprint">&lt;crypt:privateKey id="privateKey" keystore-ref="keystore" alias="test" password="password"/&gt;
+
+&lt;crypt:keystore id="keystore" location="classpath:keystore.jks" password="password"/&gt;</pre>
+                </div>
+
+                <div class="tab-pane" id="key-public">
+<pre class="prettyprint">&lt;crypt:publicKey id="publicKey" keystore-ref="keystore" alias="test"/&gt;
+
+&lt;crypt:keystore id="keystore" location="classpath:keystore.jks" password="password"/&gt;</pre>
+                </div>
+
+                <div class="tab-pane" id="key-secret">
+<pre class="prettyprint">&lt;crypt:secretKey id="secretKey" keystore-ref="keystore" alias="hmac" password="changeit"/&gt;
+
+&lt;crypt:keystore id="keystore" location="classpath:keystore.jceks" password="changeit" type="JCEKS"/&gt;</pre>
+
+                    <div class="alert alert-info">
+                        <h4 class="alert-heading">JCEKS keystores</h4>
+                        Please note that in order to use secret keys, you will need to employ a keystore in JCEKS format.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<hr>
+
+<footer>
+    <p>&copy; Mirko Caserta 2012. The Spring Framework is &copy; <a href="http://www.springsource.org/"
+                                                                    target="_blank">SpringSource</a>. Full
+        disclosure: we are in no way affiliated to SpringSource: we just use their open source products everyday and
+        we think they're awesome and you should use them too. </p>
+</footer>
+
+</div>
+
+<script src="js/jquery.js" type="text/javascript"></script>
+<script src="js/prettify.js" type="text/javascript"></script>
+<script src="js/bootstrap.js" type="text/javascript"></script>
+<script src="js/application.js" type="text/javascript"></script>
+
+</body>
+</html>
