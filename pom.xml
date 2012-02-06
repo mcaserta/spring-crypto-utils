@@ -22,9 +22,9 @@
     </properties>
 
     <scm>
-        <developerConnection>scm:svn:https://spring-crypto-utils.googlecode.com/svn/trunk</developerConnection>
-        <connection>scm:svn:http://spring-crypto-utils.googlecode.com/svn/trunk</connection>
-        <url>http://code.google.com/p/spring-crypto-utils/source/browse/</url>
+        <connection>scm:git:git@github.com:mcaserta/spring-crypto-utils.git</connection>
+        <developerConnection>scm:git:git@github.com:mcaserta/spring-crypto-utils.git</developerConnection>
+        <url>https://github.com/mcaserta/spring-crypto-utils</url>
     </scm>
 
     <issueManagement>
