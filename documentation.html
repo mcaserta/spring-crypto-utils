@@ -62,6 +62,7 @@
             <li><a href="#setup">Setup</a></li>
             <li><a href="#keystore">Keystore</a></li>
             <li><a href="#keys">Keys</a></li>
+            <li><a href="#signature">Signature</a></li>
             <!--<li><a href="#symmetric">Symmetric Enc.</a></li>-->
             <!--<li><a href="#asymmetric">Asymmetric Enc.</a></li>-->
             <!--<li><a href="#digest">Digest</a></li>-->
@@ -98,7 +99,7 @@
     &lt;/dependency&gt;</pre>
 
             <div class="alert alert-info">
-                <h4 class="alert-heading">Good to know</h4>
+                <h4 class="alert-heading">Maven Central Ready</h4>
                 Spring Crypto Utils is in <a
                     href="http://repo1.maven.org/maven2/com/google/code/spring-crypto-utils/spring-crypto-utils/"
                     target="_blank">maven central</a>, so there's no extra repository to setup in the pom. If you
@@ -154,12 +155,12 @@
 &lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;beans xmlns="http://www.springframework.org/schema/beans"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:crypt="http://code.google.com/p/spring-crypto-utils/schema/crypt"
+    <strong>xmlns:crypt="http://code.google.com/p/spring-crypto-utils/schema/crypt"</strong>
     xsi:schemaLocation="
         http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
-        http://code.google.com/p/spring-crypto-utils/schema/crypt
-        http://code.google.com/p/spring-crypto-utils/schema/crypt.xsd"&gt;
+        <strong>http://code.google.com/p/spring-crypto-utils/schema/crypt
+        http://code.google.com/p/spring-crypto-utils/schema/crypt.xsd</strong>"&gt;
 
 &lt;/beans&gt;</pre>
 
@@ -196,16 +197,18 @@
 
                     <pre class="prettyprint">&lt;crypt:keystore id="fooKeystore" location="classpath:keystore-foo.jks" password="password" type="JKS"/&gt;</pre>
 
-                    <ul>
-                        <li><code>JKS</code> is the default keystore type if no <code>type</code> attribute is
-                            specified
-                        </li>
-                        <li>the <code>location</code> attribute follows the spring resources conventions (see table
-                            5.1 in the <a
-                                    href="http://static.springsource.org/spring/docs/3.1.x/spring-framework-reference/html/resources.html#resources-resourceloader"
-                                    target="_blank">spring reference documentation</a> for an overview)
-                        </li>
-                    </ul>
+                    <div class="alert alert-info">
+                        <h4 class="alert-heading">type</h4>
+                        The <code>type</code> attribute is optional: <code>JKS</code> is the default keystore type if no <code>type</code> attribute is specified.
+                    </div>
+
+                    <div class="alert alert-info">
+                        <h4 class="alert-heading">location</h4>
+                        The <code>location</code> attribute follows the spring resources conventions (see table
+                        5.1 in the <a
+                            href="http://static.springsource.org/spring/docs/3.1.x/spring-framework-reference/html/resources.html#resources-resourceloader"
+                            target="_blank">spring reference documentation</a> for an overview)
+                    </div>
                 </div>
                 <div class="tab-pane" id="keystore-default">
                     <p><span class="label">Since 1.0.1</span></p>
@@ -291,19 +294,19 @@
 
             <div class="tab-content">
                 <div class="tab-pane active" id="key-private">
-<pre class="prettyprint">&lt;crypt:privateKey id="privateKey" keystore-ref="keystore" alias="test" password="password"/&gt;
+<pre class="prettyprint"><strong>&lt;crypt:privateKey id="privateKey" keystore-ref="keystore" alias="test" password="password"/&gt;</strong>
 
 &lt;crypt:keystore id="keystore" location="classpath:keystore.jks" password="password"/&gt;</pre>
                 </div>
 
                 <div class="tab-pane" id="key-public">
-<pre class="prettyprint">&lt;crypt:publicKey id="publicKey" keystore-ref="keystore" alias="test"/&gt;
+<pre class="prettyprint"><strong>&lt;crypt:publicKey id="publicKey" keystore-ref="keystore" alias="test"/&gt;</strong>
 
 &lt;crypt:keystore id="keystore" location="classpath:keystore.jks" password="password"/&gt;</pre>
                 </div>
 
                 <div class="tab-pane" id="key-secret">
-<pre class="prettyprint">&lt;crypt:secretKey id="secretKey" keystore-ref="keystore" alias="hmac" password="changeit"/&gt;
+<pre class="prettyprint"><strong>&lt;crypt:secretKey id="secretKey" keystore-ref="keystore" alias="hmac" password="changeit"/&gt;</strong>
 
 &lt;crypt:keystore id="keystore" location="classpath:keystore.jceks" password="changeit" type="JCEKS"/&gt;</pre>
 
@@ -311,6 +314,97 @@
                         <h4 class="alert-heading">JCEKS keystores</h4>
                         Please note that in order to use secret keys, you will need to employ a keystore in JCEKS format.
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="signature">
+    <div class="page-header">
+        <h1>Signature
+            <small>Signing and Verifying</small>
+        </h1>
+    </div>
+
+    <div class="row">
+        <div class="span3 columns">
+            <h3>Digital Signatures</h3>
+
+            <p>In order to sign a document you'll need a private key. To verify a signature you'll need the public key
+                that was extracted from the private key used to generate the signature.</p>
+            
+            <p>There are base64 versions of all signers and verifiers so you won't have to worry about byte
+                encodings when exchanging data with other machines over a network.</p>
+        </div>
+
+        <div class="span9 columns">
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#signer" data-toggle="tab">signer</a></li>
+                <li><a href="#b64Signer" data-toggle="tab">b64Signer</a></li>
+            </ul>
+
+            <div class="tab-content">
+                <div class="tab-pane active" id="signer">
+                    <p>A simple signer is useful when you need to sign something with a preconfigured static private key.</p>
+
+<pre class="prettyprint"><strong>&lt;crypt:signer id="signer" privateKey-ref="privateKey" algorithm="SHA1withRSA"/&gt;</strong>
+
+&lt;crypt:privateKey id="privateKey" keystore-ref="keystore" alias="test" password="password"/&gt;
+
+&lt;crypt:keystore id="keystore" location="classpath:keystore.jks" password="password"/&gt;
+</pre>
+
+                    <div class="alert alert-info">
+                        <h4 class="alert-heading">algorithm</h4>
+                        <code>SHA1withRSA</code> is the default algorithm and can be omitted.
+                    </div>
+
+                    <p>The signer can then be used like this:</p>
+
+<pre class="prettyprint">
+<strong>import com.google.code.springcryptoutils.core.signature.Signer;</strong>
+
+public class MyBusinessSigner {
+
+    <strong>@Autowired
+    private Signer signer;</strong>
+
+    public byte[] signOrder(byte[] order) {
+        <strong>byte[] signature = signer.sign(order);</strong>
+        log.debug("signed: order={}, signature={}", order, signature);
+        return signature;
+    }
+}</pre>
+                </div>
+
+                <div class="tab-pane" id="b64Signer">
+                    
+                    <p>Because you don't usually work directly with byte arrays, but rather with a base64 encoded
+                        version of such data, there is also a base64 version of the signer.</p>
+                    
+<pre class="prettyprint"><strong>&lt;crypt:b64Signer id="signer" privateKey-ref="privateKey" algorithm="SHA1withRSA"/&gt;</strong>
+
+&lt;crypt:privateKey id="privateKey" keystore-ref="keystore" alias="test" password="password"/&gt;
+
+&lt;crypt:keystore id="keystore" location="classpath:keystore.jks" password="password"/&gt;
+</pre>
+                    
+                    <p>And this is how you use it:</p>
+
+<pre class="prettyprint">
+<strong>import com.google.code.springcryptoutils.core.signature.Base64EncodedSigner;</strong>
+
+public class MyBase64BusinessSigner {
+
+    <strong>@Autowired
+    private Base64EncodedSigner signer;</strong>
+
+    public void myBusinessMethod(String clientName) {
+        String messageToBeTrusted = "Please pay 250 euro to " + clientName;
+        <strong>String b64signature = signer.sign(messageToBeTrusted);</strong>
+    }
+}</pre>
                 </div>
             </div>
         </div>
