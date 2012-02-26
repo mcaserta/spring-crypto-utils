@@ -1,8 +1,8 @@
 .com { color: #93a1a1; }
 .lit { color: #195f91; }
 .pun, .opn, .clo { color: #93a1a1; }
-.fun { color: #dc322f; }
-.str, .atv { color: #D14; }
+.fun { color: #3d0b0b; }
+.str, .atv { color: #780b25; }
 .kwd, .linenums .tag { color: #1e347b; }
 .typ, .atn, .dec, .var { color: teal; }
 .pln { color: #48484c; }
