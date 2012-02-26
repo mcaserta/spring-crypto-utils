@@ -92,11 +92,11 @@
             <p>Add the following dependency block to your pom:</p>
 
                 <pre class="prettyprint">
-    &lt;dependency&gt;
-        &lt;groupId&gt;com.google.code.spring-crypto-utils&lt;/groupId&gt;
-        &lt;artifactId&gt;spring-crypto-utils&lt;/artifactId&gt;
-        &lt;version&gt;1.1.1&lt;/version&gt;
-    &lt;/dependency&gt;</pre>
+&lt;dependency&gt;
+    &lt;groupId&gt;com.google.code.spring-crypto-utils&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-crypto-utils&lt;/artifactId&gt;
+    &lt;version&gt;1.1.1&lt;/version&gt;
+&lt;/dependency&gt;</pre>
 
             <div class="alert alert-info">
                 <h4 class="alert-heading">Maven Central Ready</h4>
@@ -195,11 +195,13 @@
                 <div class="tab-pane active" id="keystore-simple">
                     <p>To get a reference to a keystore, use the <code>&lt;crypt:keystore&gt;</code> element:</p>
 
-                    <pre class="prettyprint">&lt;crypt:keystore id="fooKeystore" location="classpath:keystore-foo.jks" password="password" type="JKS"/&gt;</pre>
+                    <pre class="prettyprint">&lt;crypt:keystore id="fooKeystore" location="classpath:keystore-foo.jks"
+    password="password" type="JKS"/&gt;</pre>
 
                     <div class="alert alert-info">
                         <h4 class="alert-heading">type</h4>
-                        The <code>type</code> attribute is optional: <code>JKS</code> is the default keystore type if no <code>type</code> attribute is specified.
+                        The <code>type</code> attribute is optional: <code>JKS</code> is the default keystore type if no
+                        <code>type</code> attribute is specified.
                     </div>
 
                     <div class="alert alert-info">
@@ -294,9 +296,11 @@
 
             <div class="tab-content">
                 <div class="tab-pane active" id="key-private">
-<pre class="prettyprint"><strong>&lt;crypt:privateKey id="privateKey" keystore-ref="keystore" alias="test" password="password"/&gt;</strong>
+<pre class="prettyprint"><strong>&lt;crypt:privateKey id="privateKey" keystore-ref="keystore" alias="test"
+    password="password"/&gt;</strong>
 
-&lt;crypt:keystore id="keystore" location="classpath:keystore.jks" password="password"/&gt;</pre>
+&lt;crypt:keystore id="keystore" location="classpath:keystore.jks"
+    password="password"/&gt;</pre>
                 </div>
 
                 <div class="tab-pane" id="key-public">
@@ -306,13 +310,16 @@
                 </div>
 
                 <div class="tab-pane" id="key-secret">
-<pre class="prettyprint"><strong>&lt;crypt:secretKey id="secretKey" keystore-ref="keystore" alias="hmac" password="changeit"/&gt;</strong>
+<pre class="prettyprint"><strong>&lt;crypt:secretKey id="secretKey" keystore-ref="keystore" alias="hmac"
+    password="changeit"/&gt;</strong>
 
-&lt;crypt:keystore id="keystore" location="classpath:keystore.jceks" password="changeit" type="JCEKS"/&gt;</pre>
+&lt;crypt:keystore id="keystore" location="classpath:keystore.jceks"
+    password="changeit" type="JCEKS"/&gt;</pre>
 
                     <div class="alert alert-info">
                         <h4 class="alert-heading">JCEKS keystores</h4>
-                        Please note that in order to use secret keys, you will need to employ a keystore in JCEKS format.
+                        Please note that in order to use secret keys, you will need to employ a keystore in JCEKS
+                        format.
                     </div>
                 </div>
             </div>
@@ -333,7 +340,7 @@
 
             <p>In order to sign a document you'll need a private key. To verify a signature you'll need the public key
                 that was extracted from the private key used to generate the signature.</p>
-            
+
             <p>There are base64 versions of all signers and verifiers so you won't have to worry about byte
                 encodings when exchanging data with other machines over a network.</p>
         </div>
@@ -342,17 +349,27 @@
             <ul class="nav nav-tabs">
                 <li class="active"><a href="#signer" data-toggle="tab">signer</a></li>
                 <li><a href="#b64Signer" data-toggle="tab">b64Signer</a></li>
+                <li><a href="#verifier" data-toggle="tab">verifier</a></li>
+                <li><a href="#b64Verifier" data-toggle="tab">b64Verifier</a></li>
+                <li><a href="#signerWithChooserByPrivateKeyId" data-toggle="tab">signerWithChooserByPrivateKeyId</a></li>
+                <li><a href="#b64SignerWithChooserByPrivateKeyId" data-toggle="tab">b64SignerWithChooserByPrivateKeyId</a></li>
+                <li><a href="#verifierWithChooserByPublicKeyId" data-toggle="tab">verifierWithChooserByPublicKeyId</a></li>
+                <li><a href="#b64VerifierWithChooserByPublicKeyId" data-toggle="tab">b64VerifierWithChooserByPublicKeyId</a></li>
             </ul>
 
             <div class="tab-content">
                 <div class="tab-pane active" id="signer">
-                    <p>A simple signer is useful when you need to sign something with a preconfigured static private key.</p>
+                    <p>A simple signer is useful when you need to sign something with a preconfigured static private
+                        key.</p>
 
-<pre class="prettyprint"><strong>&lt;crypt:signer id="signer" privateKey-ref="privateKey" algorithm="SHA1withRSA"/&gt;</strong>
+<pre class="prettyprint"><strong>&lt;crypt:signer id="signer" privateKey-ref="privateKey"
+    algorithm="SHA1withRSA"/&gt;</strong>
 
-&lt;crypt:privateKey id="privateKey" keystore-ref="keystore" alias="test" password="password"/&gt;
+&lt;crypt:privateKey id="privateKey" keystore-ref="keystore" alias="test"
+    password="password"/&gt;
 
-&lt;crypt:keystore id="keystore" location="classpath:keystore.jks" password="password"/&gt;
+&lt;crypt:keystore id="keystore" location="classpath:keystore.jks"
+    password="password"/&gt;
 </pre>
 
                     <div class="alert alert-info">
@@ -365,47 +382,314 @@
 <pre class="prettyprint">
 <strong>import com.google.code.springcryptoutils.core.signature.Signer;</strong>
 
-public class MyBusinessSigner {
+public class MyPaymentSigner {
 
     <strong>@Autowired
     private Signer signer;</strong>
 
-    public byte[] signOrder(byte[] order) {
-        <strong>byte[] signature = signer.sign(order);</strong>
-        log.debug("signed: order={}, signature={}", order, signature);
+    public byte[] signPayment(byte[] payment) {
+        <strong>byte[] signature = signer.sign(payment);</strong>
+        log.debug("signed: payment={}, signature={}", payment, signature);
         return signature;
     }
 }</pre>
                 </div>
 
                 <div class="tab-pane" id="b64Signer">
-                    
+
                     <p>Because you don't usually work directly with byte arrays, but rather with a base64 encoded
                         version of such data, there is also a base64 version of the signer.</p>
                     
-<pre class="prettyprint"><strong>&lt;crypt:b64Signer id="signer" privateKey-ref="privateKey" algorithm="SHA1withRSA"/&gt;</strong>
+<pre class="prettyprint"><strong>&lt;crypt:b64Signer id="signer" privateKey-ref="privateKey"
+    algorithm="SHA1withRSA"/&gt;</strong>
 
-&lt;crypt:privateKey id="privateKey" keystore-ref="keystore" alias="test" password="password"/&gt;
+&lt;crypt:privateKey id="privateKey" keystore-ref="keystore" alias="test"
+    password="password"/&gt;
 
-&lt;crypt:keystore id="keystore" location="classpath:keystore.jks" password="password"/&gt;
+&lt;crypt:keystore id="keystore" location="classpath:keystore.jks"
+    password="password"/&gt;
 </pre>
-                    
+
+                    <div class="alert alert-info">
+                        <h4 class="alert-heading">algorithm</h4>
+                        <code>SHA1withRSA</code> is the default algorithm and can be omitted.
+                    </div>
+
                     <p>And this is how you use it:</p>
 
 <pre class="prettyprint">
 <strong>import com.google.code.springcryptoutils.core.signature.Base64EncodedSigner;</strong>
 
-public class MyBase64BusinessSigner {
+public class MyBase64PaymentSigner {
 
     <strong>@Autowired
     private Base64EncodedSigner signer;</strong>
 
-    public void myBusinessMethod(String clientName) {
+    public void makePayment(String clientName) {
         String messageToBeTrusted = "Please pay 250 euro to " + clientName;
         <strong>String b64signature = signer.sign(messageToBeTrusted);</strong>
     }
 }</pre>
                 </div>
+
+                <div class="tab-pane" id="verifier">
+                    <p>A simple verifier is useful when you need to verify something with a preconfigured static public
+                        key.</p>
+
+<pre class="prettyprint"><strong>&lt;crypt:verifier id="verifier" publicKey-ref="publicKey" algorithm="SHA1withRSA"/&gt;</strong>
+
+&lt;crypt:publicKey id="publicKey" keystore-ref="keystore" alias="test"/&gt;
+
+&lt;crypt:keystore id="keystore" location="classpath:keystore.jks"
+    password="password"/&gt;
+</pre>
+
+                    <div class="alert alert-info">
+                        <h4 class="alert-heading">algorithm</h4>
+                        <code>SHA1withRSA</code> is the default algorithm and can be omitted.
+                    </div>
+
+                    <p>Here is an example usage of the verifier:</p>
+
+<pre class="prettyprint">
+<strong>import com.google.code.springcryptoutils.core.signature.Verifier;</strong>
+
+public class MyPaymentVerifier {
+
+    <strong>@Autowired
+    private Verifier verifier;</strong>
+
+    public void process(byte[] payment, byte[] signature) {
+        if (<strong>verifier.verify(payment, signature)</strong>) {
+            proceed(payment);
+        } else {
+            callTheCops("I have a bad feeling about this.");
+        }
+    }
+}</pre>
+                </div>
+
+                <div class="tab-pane" id="b64Verifier">
+
+                    <p>Because you don't usually work directly with byte arrays, but rather with a base64 encoded
+                        version of such data, there is also a base64 version of the signer.</p>
+
+<pre class="prettyprint"><strong>&lt;crypt:b64Verifier id="verifier" publicKey-ref="publicKey"
+    algorithm="SHA1withRSA"/&gt;</strong>
+
+&lt;crypt:publicKey id="publicKey" keystore-ref="keystore" alias="test"/&gt;
+
+&lt;crypt:keystore id="keystore" location="classpath:keystore.jks"
+    password="password"/&gt;
+</pre>
+
+                    <div class="alert alert-info">
+                        <h4 class="alert-heading">algorithm</h4>
+                        <code>SHA1withRSA</code> is the default algorithm and can be omitted.
+                    </div>
+
+                    <p>Here is an example usage of the base64 verifier:</p>
+
+<pre class="prettyprint">
+<strong>import com.google.code.springcryptoutils.core.signature.Base64EncodedVerifier;</strong>
+
+public class VaderVerifier {
+
+    <strong>@Autowired
+    private Base64EncodedVerifier verifier;</strong>
+
+    public void process(String b64signature) {
+        String statement = "I am your father";
+
+        if (<strong>verifier.verify(statement, b64signature)</strong>) {
+            scream("Nooooooo!");
+        } else {
+            log("You are not the father I'm looking for.");
+        }
+    }
+}</pre>
+                </div>
+
+                <div class="tab-pane" id="signerWithChooserByPrivateKeyId">
+
+                    <p>Sometimes you need to be able to select signing keys at runtime. This is how you do it.</p>
+
+<pre class="prettyprint"><strong>&lt;crypt:signerWithChooserByPrivateKeyId id="signer" privateKeyMap-ref="privateKeyMap"
+    algorithm="SHA1withRSA"/&gt;</strong>
+
+&lt;util:map id="privateKeyMap"&gt;
+    &lt;entry key="mcDonalds"&gt;
+        &lt;crypt:privateKey keystore-ref="mcDonaldsKeystore" alias="ronald"
+            password="ketchup"/&gt;
+    &lt;/entry&gt;
+    &lt;entry key="burgerKing"&gt;
+        &lt;crypt:privateKey keystore-ref="burgerKingKeystore" alias="cowboy"
+            password="meatIsMurder"/&gt;
+    &lt;/entry&gt;
+&lt;/util:map&gt;
+
+&lt;crypt:keystore id="mcDonaldsKeystore" location="classpath:keystore-mcdonalds.jks"
+    password="royaleWithCheese"/&gt;
+
+&lt;crypt:keystore id="burgerKingKeystore" location="classpath:keystore-burger-king.jks"
+    password="r0naldSucksStinkyMeat"/&gt;
+</pre>
+
+                    <div class="alert alert-info">
+                        <h4 class="alert-heading">algorithm</h4>
+                        <code>SHA1withRSA</code> is the default algorithm and can be omitted.
+                    </div>
+
+                    <p>The signer can then be used like this:</p>
+
+<pre class="prettyprint">
+<strong>import com.google.code.springcryptoutils.core.signature.SignerWithChooserByPrivateKeyId;</strong>
+
+public class MyBusinessSigner {
+
+    <strong>@Autowired
+    private SignerWithChooserByPrivateKeyId signer;</strong>
+
+    public void myBusinessMethod(byte[] messageToBeTrusted) {
+        byte[] mcsignature = signer.sign("mcDonalds", messageToBeTrusted);
+        byte[] bksignature = signer.sign("burgerKing", messageToBeTrusted);
+    }
+}</pre>
+                </div>
+
+                <div class="tab-pane" id="b64SignerWithChooserByPrivateKeyId">
+
+                    <p>Because you don't usually work directly with byte arrays, but rather with a base64 encoded
+                        version of such data, there also is a base64 version of the signer.</p>
+
+<pre class="prettyprint"><strong>&lt;crypt:b64SignerWithChooserByPrivateKeyId id="signer" privateKeyMap-ref="privateKeyMap"
+    algorithm="SHA1withRSA"/&gt;</strong>
+
+&lt;util:map id="privateKeyMap"&gt;
+    &lt;entry key="mcDonalds"&gt;
+        &lt;crypt:privateKey keystore-ref="mcDonaldsKeystore" alias="ronald"
+            password="ketchup"/&gt;
+    &lt;/entry&gt;
+    &lt;entry key="burgerKing"&gt;
+        &lt;crypt:privateKey keystore-ref="burgerKingKeystore" alias="cowboy"
+            password="meatIsMurder"/&gt;
+    &lt;/entry&gt;
+&lt;/util:map&gt;
+
+&lt;crypt:keystore id="mcDonaldsKeystore" location="classpath:keystore-mcdonalds.jks"
+    password="royaleWithCheese"/&gt;
+
+&lt;crypt:keystore id="burgerKingKeystore" location="classpath:keystore-burger-king.jks"
+    password="r0naldSucksStinkyMeat"/&gt;
+</pre>
+
+                    <div class="alert alert-info">
+                        <h4 class="alert-heading">algorithm</h4>
+                        <code>SHA1withRSA</code> is the default algorithm and can be omitted.
+                    </div>
+
+                    <p>The signer can then be used like this:</p>
+
+<pre class="prettyprint">
+<strong>import com.google.code.springcryptoutils.core.signature.Base64EncodedSignerWithChooserByPrivateKeyId;</strong>
+
+public class MyBusinessSigner {
+
+    <strong>@Autowired
+    private Base64EncodedSignerWithChooserByPrivateKeyId signer;</strong>
+
+    public void myBusinessMethod(String messageToBeTrusted) {
+        String b64MCsignature = signer.sign("mcDonalds", messageToBeTrusted);
+        String b64BKsignature = signer.sign("burgerKing", messageToBeTrusted);
+    }
+}</pre>
+                </div>
+
+                <div class="tab-pane" id="verifierWithChooserByPublicKeyId">
+
+                    <p>Sometimes you need to be able to select verifying keys at runtime. This is how you do it.</p>
+
+<pre class="prettyprint"><strong>&lt;crypt:verifierWithChooserByPublicKeyId id="verifier" publicKeyMap-ref="publicKeyMap"
+    algorithm="SHA1withRSA"/&gt;</strong>
+    
+&lt;util:map id="publicKeyMap"&gt;
+    &lt;entry key="mcDonalds"&gt;
+        &lt;crypt:publicKey keystore-ref="mcDonaldsKeystore" alias="ronald"/&gt;
+    &lt;/entry&gt;
+    &lt;entry key="burgerKing"&gt;
+        &lt;crypt:publicKey keystore-ref="burgerKingKeystore" alias="cowboy"/&gt;
+    &lt;/entry&gt;
+&lt;/util:map&gt;
+    
+&lt;crypt:keystore id="mcDonaldsKeystore" location="classpath:keystore-mcdonalds.jks"
+    password="royaleWithCheese"/&gt;
+
+&lt;crypt:keystore id="burgerKingKeystore" location="classpath:keystore-burger-king.jks"
+    password="r0naldSucksStinkyMeat"/&gt;
+</pre>
+                    
+                    <p>Here is an example usage of the verifier:</p>
+                    
+<pre class="prettyprint">
+<strong>import com.google.code.springcryptoutils.core.signature.VerifierWithChooserByPublicKeyId;</strong>
+
+public class MyBusinessVerifier {
+
+    @Autowired
+    <strong>private VerifierWithChooserByPublicKeyId verifier;</strong>
+
+    public void myBusinessMethod(byte[] messageToBeTrusted, byte[] signature) {
+        <strong>boolean verified = verifier.verify("mcDonalds", messageToBeTrusted, signature);</strong>
+    }
+}
+</pre>
+                </div>
+
+                <div class="tab-pane" id="b64VerifierWithChooserByPublicKeyId">
+
+                    <p>Because you don't usually work directly with byte arrays, but rather with a base64 encoded
+                        version of such data, there also is a base64 version of the verifier.</p>
+
+<pre class="prettyprint"><strong>&lt;crypt:b64VerifierWithChooserByPublicKeyId id="verifier" publicKeyMap-ref="publicKeyMap"
+    algorithm="SHA1withRSA"/&gt;</strong>
+
+&lt;util:map id="publicKeyMap"&gt;
+    &lt;entry key="mcDonalds"&gt;
+        &lt;crypt:publicKey keystore-ref="mcDonaldsKeystore" alias="ronald"/&gt;
+    &lt;/entry&gt;
+    &lt;entry key="burgerKing"&gt;
+        &lt;crypt:publicKey keystore-ref="burgerKingKeystore" alias="cowboy"/&gt;
+    &lt;/entry&gt;
+&lt;/util:map&gt;
+
+&lt;crypt:keystore id="mcDonaldsKeystore" location="classpath:keystore-mcdonalds.jks"
+    password="royaleWithCheese"/&gt;
+
+&lt;crypt:keystore id="burgerKingKeystore" location="classpath:keystore-burger-king.jks"
+    password="r0naldSucksStinkyMeat"/&gt;
+</pre>
+
+                    <p>Here is an example usage of the verifier:</p>
+
+<pre class="prettyprint">
+<strong>import com.google.code.springcryptoutils.core.signature.Base64EncodedVerifierWithChooserByPublicKeyId;</strong>
+
+public class MyBusinessVerifier {
+
+    @Autowired
+    <strong>private Base64EncodedVerifierWithChooserByPublicKeyId verifier;</strong>
+
+    public void myBusinessMethod(String message, String b64signature) {
+        if (<strong>verifier.verify("mcDonalds", message, b64signature)</strong>) {
+            proceedWithOrder(message);
+        } else {
+            // ignore order
+        }
+    }
+}
+</pre>
+                </div>
+
             </div>
         </div>
     </div>
@@ -413,12 +697,8 @@ public class MyBase64BusinessSigner {
 
 <hr>
 
-<footer>
-    <p>&copy; Mirko Caserta 2012. The Spring Framework is &copy; <a href="http://www.springsource.org/"
-                                                                    target="_blank">SpringSource</a>. Full
-        disclosure: we are in no way affiliated to SpringSource: we just use their open source products everyday and
-        we think they're awesome and you should use them too. </p>
-</footer>
+<footer><p> &copy; <a href="https://twitter.com/#!/mirkocaserta">Mirko Caserta</a> 2012. Licensed under the Apache
+    License, Version 2.0. The Spring Framework is &copy; SpringSource. </p></footer>
 
 </div>
 
