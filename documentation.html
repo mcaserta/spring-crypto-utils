@@ -359,8 +359,7 @@
 
             <div class="tab-content">
                 <div class="tab-pane active" id="signer">
-                    <p>A simple signer is useful when you need to sign something with a preconfigured static private
-                        key.</p>
+                    <p>A simple signer is useful when you need to sign something with a single private key.</p>
 
 <pre class="prettyprint"><strong>&lt;crypt:signer id="signer" privateKey-ref="privateKey"
     algorithm="SHA1withRSA"/&gt;</strong>
@@ -433,8 +432,7 @@ public class MyBase64PaymentSigner {
                 </div>
 
                 <div class="tab-pane" id="verifier">
-                    <p>A simple verifier is useful when you need to verify something with a preconfigured static public
-                        key.</p>
+                    <p>A simple verifier is useful when you need to verify something with a single public key.</p>
 
 <pre class="prettyprint"><strong>&lt;crypt:verifier id="verifier" publicKey-ref="publicKey" algorithm="SHA1withRSA"/&gt;</strong>
 
