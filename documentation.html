@@ -8,7 +8,7 @@
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"/>
     <![endif]-->
 
-    <link href="css/bootstrap.css" type="text/css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" type="text/css" rel="stylesheet">
     <link href="css/docs.css" type="text/css" rel="stylesheet">
     <link href="css/prettify.css" type="text/css" rel="stylesheet">
     <style type="text/css">
@@ -42,8 +42,7 @@
                 <ul class="nav">
                     <li><a href="index.html">Home</a></li>
                     <li class="active"><a href="documentation.html">Documentation</a></li>
-                    <li><a href="https://github.com/mcaserta/spring-crypto-utils/downloads">Download</a></li>
-                    <li><a href="https://github.com/mcaserta/spring-crypto-utils">Source</a></li>
+                    <li><a href="https://github.com/mcaserta/spring-crypto-utils">GitHub</a></li>
                 </ul>
             </div>
         </div>
@@ -62,12 +61,13 @@
             <li><a href="#setup">Setup</a></li>
             <li><a href="#keystore">Keystore</a></li>
             <li><a href="#keys">Keys</a></li>
-            <li><a href="#signature">Signature</a></li>
+            <li><a href="#signatureSingle">Signature (Single Key)</a></li>
+            <li><a href="#signatureMulti">Signature (Multi Key)</a></li>
             <!--<li><a href="#symmetric">Symmetric Enc.</a></li>-->
             <!--<li><a href="#asymmetric">Asymmetric Enc.</a></li>-->
             <!--<li><a href="#digest">Digest</a></li>-->
             <!--<li><a href="#mac">Mac</a></li>-->
-            <!--<li><a href="#changelog">ChangeLog</a></li>-->
+            <li><a href="#changelog">ChangeLog</a></li>
             <!--<li><a href="#roadmap">Road Map</a></li>-->
         </ul>
     </div>
@@ -327,16 +327,16 @@
     </div>
 </section>
 
-<section id="signature">
+<section id="signatureSingle">
     <div class="page-header">
         <h1>Signature
-            <small>Signing and Verifying</small>
+            <small>with Single Keys</small>
         </h1>
     </div>
 
     <div class="row">
         <div class="span3 columns">
-            <h3>Digital Signatures</h3>
+            <h3>Digital Signatures with Single Keys</h3>
 
             <p>In order to sign a document you'll need a private key. To verify a signature you'll need the public key
                 that was extracted from the private key used to generate the signature.</p>
@@ -351,10 +351,6 @@
                 <li><a href="#b64Signer" data-toggle="tab">b64Signer</a></li>
                 <li><a href="#verifier" data-toggle="tab">verifier</a></li>
                 <li><a href="#b64Verifier" data-toggle="tab">b64Verifier</a></li>
-                <li><a href="#signerWithChooserByPrivateKeyId" data-toggle="tab">signerWithChooserByPrivateKeyId</a></li>
-                <li><a href="#b64SignerWithChooserByPrivateKeyId" data-toggle="tab">b64SignerWithChooserByPrivateKeyId</a></li>
-                <li><a href="#verifierWithChooserByPublicKeyId" data-toggle="tab">verifierWithChooserByPublicKeyId</a></li>
-                <li><a href="#b64VerifierWithChooserByPublicKeyId" data-toggle="tab">b64VerifierWithChooserByPublicKeyId</a></li>
             </ul>
 
             <div class="tab-content">
@@ -507,8 +503,35 @@ public class VaderVerifier {
     }
 }</pre>
                 </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-                <div class="tab-pane" id="signerWithChooserByPrivateKeyId">
+<section id="signatureMulti">
+    <div class="page-header">
+        <h1>Signature
+            <small>with Multiple Keys</small>
+        </h1>
+    </div>
+
+    <div class="row">
+        <div class="span3 columns">
+            <h3>Digital Signatures with Multiple Keys</h3>
+
+            <p>If you need to switch keys when signing or verifying, use one of these.</p>
+        </div>
+
+        <div class="span9 columns">
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#signerWithChooserByPrivateKeyId" data-toggle="tab">signerWithChooserByPrivateKeyId</a></li>
+                <li><a href="#b64SignerWithChooserByPrivateKeyId" data-toggle="tab">b64SignerWithChooserByPrivateKeyId</a></li>
+                <li><a href="#verifierWithChooserByPublicKeyId" data-toggle="tab">verifierWithChooserByPublicKeyId</a></li>
+                <li><a href="#b64VerifierWithChooserByPublicKeyId" data-toggle="tab">b64VerifierWithChooserByPublicKeyId</a></li>
+            </ul>
+
+            <div class="tab-content">
+                <div class="tab-pane active" id="signerWithChooserByPrivateKeyId">
 
                     <p>Sometimes you need to be able to select signing keys at runtime. This is how you do it.</p>
 
@@ -609,7 +632,7 @@ public class MyBusinessSigner {
 
 <pre class="prettyprint"><strong>&lt;crypt:verifierWithChooserByPublicKeyId id="verifier" publicKeyMap-ref="publicKeyMap"
     algorithm="SHA1withRSA"/&gt;</strong>
-    
+
 &lt;util:map id="publicKeyMap"&gt;
     &lt;entry key="mcDonalds"&gt;
         &lt;crypt:publicKey keystore-ref="mcDonaldsKeystore" alias="ronald"/&gt;
@@ -618,16 +641,16 @@ public class MyBusinessSigner {
         &lt;crypt:publicKey keystore-ref="burgerKingKeystore" alias="cowboy"/&gt;
     &lt;/entry&gt;
 &lt;/util:map&gt;
-    
+
 &lt;crypt:keystore id="mcDonaldsKeystore" location="classpath:keystore-mcdonalds.jks"
     password="royaleWithCheese"/&gt;
 
 &lt;crypt:keystore id="burgerKingKeystore" location="classpath:keystore-burger-king.jks"
     password="r0naldSucksStinkyMeat"/&gt;
 </pre>
-                    
+
                     <p>Here is an example usage of the verifier:</p>
-                    
+
 <pre class="prettyprint">
 <strong>import com.google.code.springcryptoutils.core.signature.VerifierWithChooserByPublicKeyId;</strong>
 
@@ -693,6 +716,58 @@ public class MyBusinessVerifier {
     </div>
 </section>
 
+<section id="changelog">
+    <div class="page-header">
+        <h1>ChangeLog
+            <small>The sources, they are a changin'</small>
+        </h1>
+    </div>
+
+    <div class="row">
+        <div class="span3 columns">
+            <h3>ChangeLog</h3>
+
+            <p>This is what happens between releases.</p>
+        </div>
+
+        <div class="span9 columns">
+            <h2>release 1.1.1 - (2012-02-02)</h2>
+
+            <ul>
+                <li>spring crypto utils is now in
+                    <a href="http://repo1.maven.org/maven2/com/google/code/spring-crypto-utils/spring-crypto-utils/">maven
+                        central</a>, so there's no extra repository to setup in the pom.
+
+                    If you had previously setup our custom repository, you can safely remove it from your poms now as
+                    all previous versions have also been uploaded to central. There are no source code changes in
+                    this release.</li>
+            </ul>
+
+            <h2>release 1.1.0 - (2012-01-29)</h2>
+
+            <ul>
+                <li>fix: non-existant alias name should throw an error</li>
+                <li>new: added crypt:secretKey element</li>
+                <li>new: added support for mac (message authentication codes)</li>
+            </ul>
+
+            <h2>release 1.0.1 - (2012-01-25)</h2>
+
+            <ul>
+                <li>new: added support for configuring a keystore using conventional java system properties
+                    <code>javax.net.ssl.keyStore</code> and <code>javax.net.ssl.keyStorePassword</code> throgh the
+                    <code>&lt;crypt:defaultKeystore/&gt;</code> configuration element</li>
+            </ul>
+
+            <h2>release 1.0.0 - (2011-09-15)</h2>
+
+            <ul>
+                <li>first public stable release</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
 <hr>
 
 <footer><p> &copy; <a href="https://twitter.com/#!/mirkocaserta">Mirko Caserta</a> 2012. Licensed under the Apache
@@ -702,7 +777,7 @@ public class MyBusinessVerifier {
 
 <script src="js/jquery.js" type="text/javascript"></script>
 <script src="js/prettify.js" type="text/javascript"></script>
-<script src="js/bootstrap.js" type="text/javascript"></script>
+<script src="js/bootstrap.min.js" type="text/javascript"></script>
 <script src="js/application.js" type="text/javascript"></script>
 
 </body>
