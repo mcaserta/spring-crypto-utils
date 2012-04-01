@@ -3,11 +3,6 @@
 <head>
     <meta charset="utf-8">
     <title>Spring Crypto Utils - Documentation</title>
-
-    <!--[if lt IE 9]>
-    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"/>
-    <![endif]-->
-
     <link href="css/bootstrap.min.css" type="text/css" rel="stylesheet">
     <link href="css/docs.css" type="text/css" rel="stylesheet">
     <link href="css/prettify.css" type="text/css" rel="stylesheet">
@@ -19,14 +14,8 @@
     </style>
     <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-    <link href='http://fonts.googleapis.com/css?family=PT+Mono' rel='stylesheet' type='text/css'>
-
-    <!-- TODO: fix these icons
+    <link href="http://fonts.googleapis.com/css?family=PT+Mono" rel="stylesheet" type="text/css">
     <link rel="shortcut icon" href="img/favicon.ico">
-    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
-     -->
 </head>
 
 <body data-spy="scroll" data-target=".subnav" data-offset="50">
@@ -34,7 +23,8 @@
 <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
         <div class="container">
-            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <a class="btn btn-navbar" data-toggle="collapse"
+               data-target=".nav-collapse">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -44,7 +34,8 @@
             <div class="nav-collapse">
                 <ul class="nav">
                     <li><a href="index.html">Home</a></li>
-                    <li class="active"><a href="documentation.html">Documentation</a></li>
+                    <li class="active"><a
+                            href="documentation.html">Documentation</a></li>
                     <li><a href="https://github.com/mcaserta/spring-crypto-utils">GitHub</a></li>
                 </ul>
             </div>
@@ -61,20 +52,47 @@
 
     <div class="subnav">
         <ul class="nav nav-pills">
+            <li><a href="#foreword">Foreword</a></li>
             <li><a href="#setup">Setup</a></li>
             <li><a href="#keystore">Keystore</a></li>
-            <li><a href="#keys">Keys</a></li>
-            <li><a href="#signatureSingle">Signature (Single Key)</a></li>
-            <li><a href="#signatureMulti">Signature (Multi Key)</a></li>
-            <!--<li><a href="#symmetric">Symmetric Enc.</a></li>-->
-            <!--<li><a href="#asymmetric">Asymmetric Enc.</a></li>-->
-            <!--<li><a href="#digest">Digest</a></li>-->
-            <!--<li><a href="#mac">Mac</a></li>-->
+            <li><a href="#keys">Key</a></li>
+            <li><a href="#signatureSingle">Sign-S</a></li>
+            <li><a href="#signatureMulti">Sign-M</a></li>
+            <li><a href="#symmetric">Symm</a></li>
+            <li><a href="#asymmetric">Asymm</a></li>
+            <li><a href="#digest">Digest</a></li>
+            <li><a href="#mac">Mac</a></li>
             <li><a href="#changelog">ChangeLog</a></li>
-            <!--<li><a href="#roadmap">Road Map</a></li>-->
+            <li><a href="#roadmap">RoadMap</a></li>
         </ul>
     </div>
 </header>
+
+<section id="foreword">
+    <div class="page-header">
+        <h1>Foreword
+            <small>Before getting started</small>
+        </h1>
+    </div>
+    <div class="row">
+        <div class="span3 columns">
+            <h3>Foreword</h3>
+        </div>
+        <div class="span9 columns">
+            <h2>What's a public key?</h2>
+
+            <p>If you are asking questions such as this, go get yourself a copy of <a target="_blank"
+                    href="http://www.schneier.com/book-applied.html">Bruce Schneier's Applied Cryptography</a>.
+                Seriously, he told you so:</p>
+
+            <p><a target="_blank" href="http://www.schneier.com/book-applied.html"><img
+                    src="img/applied-cryptography.jpg" width="500" height="374"></a></p>
+
+            <p>Fun fact: <a target="_blank" href="http://www.schneierfacts.com/fact/18">Bruce Schneier knows Alice
+                and Bob's shared secret</a>.</p>
+        </div>
+    </div>
+</section>
 
 <section id="setup">
     <div class="page-header">
@@ -344,8 +362,8 @@
             <p>In order to sign a document you'll need a private key. To verify a signature you'll need the public key
                 that was extracted from the private key used to generate the signature.</p>
 
-            <p>There are base64 versions of all signers and verifiers so you won't have to worry about byte
-                encodings when exchanging data with other machines over a network.</p>
+            <p>There are base64 versions of all signers and verifiers so you won't have to worry about encoding when
+                exchanging data over a network.</p>
         </div>
 
         <div class="span9 columns">
@@ -719,6 +737,84 @@ public class MyBusinessVerifier {
     </div>
 </section>
 
+<section id="symmetric">
+    <div class="page-header">
+        <h1>Symmetric Encryption
+            <!--<small>Faster but safer</small>-->
+        </h1>
+    </div>
+
+    <div class="row">
+        <div class="span3 columns">
+            <h3>Symmetric Encryption</h3>
+
+            <p>Symmetric Encryption employs a shared secret in order to exchange messages securely.</p>
+        </div>
+
+        <div class="span9 columns">
+            <h2>TODO</h2>
+        </div>
+    </div>
+</section>
+
+<section id="asymmetric">
+    <div class="page-header">
+        <h1>Asymmetric Encryption
+            <!--<small>Faster but safer</small>-->
+        </h1>
+    </div>
+
+    <div class="row">
+        <div class="span3 columns">
+            <h3>Asymmetric Encryption</h3>
+
+            <p>Asymmetric Encryption employs key couples in order to exchange messages securely.</p>
+        </div>
+
+        <div class="span9 columns">
+            <h2>TODO</h2>
+        </div>
+    </div>
+</section>
+
+<section id="digest">
+    <div class="page-header">
+        <h1>Message Digests
+            <small>Hmm... more yummy bytes, please?</small>
+        </h1>
+    </div>
+
+    <div class="row">
+        <div class="span3 columns">
+            <h3>Message Digests</h3>
+        </div>
+
+        <div class="span9 columns">
+            <h2>TODO</h2>
+        </div>
+    </div>
+</section>
+
+<section id="mac">
+    <div class="page-header">
+        <h1>Message Authentication Codes
+            <small></small>
+        </h1>
+    </div>
+
+    <div class="row">
+        <div class="span3 columns">
+            <h3>Message Authentication Codes</h3>
+
+            <p>In God we trust. All others must submit an X.509 certificate.</p>
+        </div>
+
+        <div class="span9 columns">
+            <h2>TODO</h2>
+        </div>
+    </div>
+</section>
+
 <section id="changelog">
     <div class="page-header">
         <h1>ChangeLog
@@ -771,10 +867,52 @@ public class MyBusinessVerifier {
     </div>
 </section>
 
+<section id="roadmap">
+    <div class="page-header">
+        <h1>RoadMap
+            <small>What's the future bringing us?</small>
+        </h1>
+    </div>
+
+    <div class="row">
+        <div class="span3 columns">
+            <h3>RoadMap</h3>
+
+            <p>This is a list of what's actually done and what needs to be done. Pull requests welcome!</p>
+        </div>
+
+        <div class="span9 columns">
+            <h2>Implemented</h2>
+
+            <ul>
+                <li>configuration of keystores</li>
+                <li>configuration of public and private keys</li>
+                <li>selection at runtime of the keys to use</li>
+                <li>configuration of signers and verifiers</li>
+                <li>configuration of symmetric key cipherers</li>
+                <li>configuration of asymmetric key cipherers</li>
+                <li>configuration of message digesters (md5, sha1, etc)</li>
+                <li>configuration of mac (message authentication codes) digesters</li>
+                <li>base64 versions for all of the above</li>
+                <li>javadoc for all classes</li>
+                <li>complete documentation of all features</li>
+            </ul>
+
+            <h2>Wish List</h2>
+
+            <ul>
+                <li>configuration with annotations and Spring 3.1 JavaConfig style</li>
+                <li>pkcs#7 signatures</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
 <hr>
 
-<footer><p> &copy; <a href="https://twitter.com/#!/mirkocaserta">Mirko Caserta</a> 2012. Licensed under the Apache
-    License, Version 2.0. The Spring Framework is &copy; SpringSource. </p></footer>
+<footer><p> &copy; <a href="https://twitter.com/#!/mirkocaserta">Mirko
+    Caserta</a> 2012. Licensed under the Apache License, Version 2.0. The Spring
+    Framework is &copy; SpringSource. </p></footer>
 
 </div>
 
