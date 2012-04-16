@@ -57,6 +57,8 @@ public class Base64EncodedVerifierImpl implements Base64EncodedVerifier {
             return verifier.verify(message.getBytes(charsetName), Base64.decodeBase64(signature));
         } catch (UnsupportedEncodingException e) {
             throw new SignatureException("unsupported encoding: charsetName=" + charsetName, e);
+        } catch (Exception e) {
+            return false;
         }
     }
 

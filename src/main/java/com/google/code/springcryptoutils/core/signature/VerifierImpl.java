@@ -46,6 +46,8 @@ public class VerifierImpl implements Verifier {
             signatureInstance.initVerify(publicKey);
             signatureInstance.update(message);
             return signatureInstance.verify(signature);
+        } catch (java.security.SignatureException e) {
+            return false;
         } catch (Exception e) {
             throw new SignatureException("error verifying signature", e);
         }
