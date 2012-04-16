@@ -63,7 +63,7 @@
             <li><a href="#symmetric">Symm</a></li>
             <li><a href="#asymmetric">Asymm</a></li>
             <li><a href="#digest">Digest</a></li>
-            <li><a href="#mac">Mac</a></li>
+            <li><a href="#messageAuthenticationCodes">Mac</a></li>
         </ul>
     </div>
 </header>
@@ -740,7 +740,7 @@ public class MyBusinessVerifier {
 <section id="symmetric">
     <div class="page-header">
         <h1>Symmetric Encryption
-            <!--<small>Faster but safer</small>-->
+            <small>Fast and furious</small>
         </h1>
     </div>
 
@@ -752,7 +752,35 @@ public class MyBusinessVerifier {
         </div>
 
         <div class="span9 columns">
-            <h2>TODO</h2>
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#symmetricKeyGenerator" data-toggle="tab">symmetricKeyGenerator</a></li>
+                <li><a href="#b64SymmetricKeyGenerator" data-toggle="tab">b64SymmetricKeyGenerator</a></li>
+                <li><a href="#symmetricCipherer" data-toggle="tab">symmetricCipherer</a></li>
+                <li><a href="#b64SymmetricCipherer" data-toggle="tab">b64SymmetricCipherer</a></li>
+                <li><a href="#symmetricCiphererWithStaticKey" data-toggle="tab">symmetricCiphererWithStaticKey</a></li>
+                <li><a href="#b64SymmetricCiphererWithStaticKey" data-toggle="tab">b64SymmetricCiphererWithStaticKey</a></li>
+            </ul>
+
+            <div class="tab-content">
+                <div class="tab-pane active" id="symmetricKeyGenerator">
+                    TODO
+                </div>
+                <div class="tab-pane" id="b64SymmetricKeyGenerator">
+                    TODO
+                </div>
+                <div class="tab-pane" id="symmetricCipherer">
+                    TODO
+                </div>
+                <div class="tab-pane" id="b64SymmetricCipherer">
+                    TODO
+                </div>
+                <div class="tab-pane" id="symmetricCiphererWithStaticKey">
+                    TODO
+                </div>
+                <div class="tab-pane" id="b64SymmetricCiphererWithStaticKey">
+                    TODO
+                </div>
+            </div>
         </div>
     </div>
 </section>
@@ -760,7 +788,7 @@ public class MyBusinessVerifier {
 <section id="asymmetric">
     <div class="page-header">
         <h1>Asymmetric Encryption
-            <!--<small>Faster but safer</small>-->
+            <small>Slow Trane</small>
         </h1>
     </div>
 
@@ -772,7 +800,27 @@ public class MyBusinessVerifier {
         </div>
 
         <div class="span9 columns">
-            <h2>TODO</h2>
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#asymmetricCipherer" data-toggle="tab">asymmetricCipherer</a></li>
+                <li><a href="#b64AsymmetricCipherer" data-toggle="tab">b64AsymmetricCipherer</a></li>
+                <li><a href="#symmetricCipherer" data-toggle="tab">asymmetricCiphererWithChooserByKeyId</a></li>
+                <li><a href="#b64AsymmetricCiphererWithChooserByKeyId" data-toggle="tab">b64AsymmetricCiphererWithChooserByKeyId</a></li>
+            </ul>
+
+            <div class="tab-content">
+                <div class="tab-pane active" id="asymmetricCipherer">
+                    TODO
+                </div>
+                <div class="tab-pane" id="b64AsymmetricCipherer">
+                    TODO
+                </div>
+                <div class="tab-pane" id="asymmetricCiphererWithChooserByKeyId">
+                    TODO
+                </div>
+                <div class="tab-pane" id="b64AsymmetricCiphererWithChooserByKeyId">
+                    TODO
+                </div>
+            </div>
         </div>
     </div>
 </section>
@@ -795,10 +843,10 @@ public class MyBusinessVerifier {
     </div>
 </section>
 
-<section id="mac">
+<section id="messageAuthenticationCodes">
     <div class="page-header">
         <h1>Message Authentication Codes
-            <small></small>
+            <small>Trust me on this one</small>
         </h1>
     </div>
 
@@ -810,7 +858,19 @@ public class MyBusinessVerifier {
         </div>
 
         <div class="span9 columns">
-            <h2>TODO</h2>
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#mac" data-toggle="tab">mac</a></li>
+                <li><a href="#b64Mac" data-toggle="tab">b64Mac</a></li>
+            </ul>
+
+            <div class="tab-content">
+                <div class="tab-pane active" id="mac">
+                    TODO
+                </div>
+                <div class="tab-pane" id="b64Mac">
+                    TODO
+                </div>
+            </div>
         </div>
     </div>
 </section>
