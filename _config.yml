@@ -1,0 +1,6 @@
+auto: true
+markdown: rdiscount
+pygments: true
+safe: true
+
+title: Spring Crypto Utils

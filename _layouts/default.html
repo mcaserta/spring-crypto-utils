@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    {% if page.title %}
+    <title>{{ site.title }} - {{ page.title }}</title>
+    {% else %}
+    <title>{{ site.title }}</title>
+    {% endif %}
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/syntax.css" rel="stylesheet">
+    <style type="text/css">
+        body {
+            padding-top: 60px;
+            padding-bottom: 40px;
+        }
+    </style>
+    <!--<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">-->
+    <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=PT+Mono" rel="stylesheet" type="text/css">
+    <link rel="shortcut icon" href="assets/img/favicon.ico">
+</head>
+
+<body>
+<div class="container">
+{% include navbar.html %}
+
+{{ content }}
+
+{% include footer.html %}
+</div>
+
+{% include js.html %}
+</body>
+</html>
