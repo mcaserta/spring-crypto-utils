@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    {% if page.title %}
+    <title>{{ site.title }} - Docs - {{ page.title }}</title>
+    {% else %}
+    <title>{{ site.title }}</title>
+    {% endif %}
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/docs.css" type="text/css" rel="stylesheet">
+    <link href="assets/css/syntax.css" rel="stylesheet">
+    <style type="text/css">
+        body {
+            padding-top: 60px;
+            padding-bottom: 40px;
+        }
+    </style>
+    <!--<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">-->
+    <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=PT+Mono" rel="stylesheet" type="text/css">
+    <link rel="shortcut icon" href="assets/img/favicon.ico">
+</head>
+
+<body>
+<div class="container">
+{% include navbar.html %}
+
+<header class="jumbotron subhead" id="overview">
+    <h1>Documentation</h1>
+</header>
+
+<section>
+    <div class="page-header">
+        <h1>{{ page.title }}
+            {% if page.subtitle %}
+            <small>{{ page.subtitle }}</small>
+            {% endif %}
+        </h1>
+    </div>
+    <div class="row">
+        <div class="span3 columns">
+            <h3>{{ page.blurb_title }}</h3>
+            {{ page.blurb }}
+        </div>
+        <div class="span9 columns">
+            {{ content }}
+        </div>
+    </div>
+</section>
+
+
+{% include footer.html %}
+</div>
+
+{% include js.html %}
+</body>
+</html>
