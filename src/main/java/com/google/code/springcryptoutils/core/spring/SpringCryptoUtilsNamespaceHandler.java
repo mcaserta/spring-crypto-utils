@@ -1,5 +1,7 @@
 package com.google.code.springcryptoutils.core.spring;
 
+import com.google.code.springcryptoutils.core.spring.certificate.CertificateBeanDefinitionParser;
+import com.google.code.springcryptoutils.core.spring.certificate.CertificateRegistryByAliasBeanDefinitionParser;
 import com.google.code.springcryptoutils.core.spring.cipher.asymmetric.AsymmetricCiphererBeanDefinitionParser;
 import com.google.code.springcryptoutils.core.spring.cipher.asymmetric.AsymmetricCiphererWithChooserByKeyIdBeanDefinitionParser;
 import com.google.code.springcryptoutils.core.spring.cipher.asymmetric.Base64EncodedAsymmetricCiphererBeanDefinitionParser;
@@ -31,6 +33,10 @@ public class SpringCryptoUtilsNamespaceHandler extends NamespaceHandlerSupport {
         registerBeanDefinitionParser("secretKey", new SecretKeyBeanDefinitionParser());
         registerBeanDefinitionParser("publicKeyRegistryByAlias", new PublicKeyRegistryByAliasBeanDefinitionParser());
         registerBeanDefinitionParser("privateKeyRegistryByAlias", new PrivateKeyRegistryByAliasBeanDefinitionParser());
+
+        // certificate
+        registerBeanDefinitionParser("certificateRegistryByAlias", new CertificateRegistryByAliasBeanDefinitionParser());
+        registerBeanDefinitionParser("certificate", new CertificateBeanDefinitionParser());
 
         // signature
         registerBeanDefinitionParser("signer", new SignerBeanDefinitionParser());

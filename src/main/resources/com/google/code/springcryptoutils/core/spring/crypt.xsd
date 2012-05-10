@@ -111,6 +111,29 @@
         </xsd:complexType>
     </xsd:element>
 
+    <!-- CERTIFICATE -->
+
+    <xsd:element name="certificateRegistryByAlias">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="beans:identifiedType">
+                    <xsd:attribute name="keystoreRegistry-ref" type="xsd:string" use="required"/>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="certificate">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="beans:identifiedType">
+                    <xsd:attribute name="keystore-ref" type="xsd:string" use="required"/>
+                    <xsd:attribute name="alias" type="xsd:string" use="required"/>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
     <!-- DIGITAL SIGNATURE -->
 
     <xsd:element name="signer">
