@@ -14,7 +14,7 @@ public class CertificateFactoryBean implements FactoryBean, InitializingBean {
     private Certificate certificate;
 
     /**
-     * Sets the keystore holding the public key.
+     * Sets the keystore holding the certificate.
      *
      * @param keystore the keystore
      */

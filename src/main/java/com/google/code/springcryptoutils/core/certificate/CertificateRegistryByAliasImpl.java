@@ -29,15 +29,15 @@ public class CertificateRegistryByAliasImpl implements CertificateRegistryByAlia
      * Returns the selected certificate or null if not found.
      *
      * @param keyStoreChooser         the keystore chooser
-     * @param certificateChooserByAlias the public key chooser by alias
-     * @return the selected public key or null if not found
+     * @param certificateChooserByAlias the certificate chooser by alias
+     * @return the selected certificate or null if not found
      */
     public Certificate get(KeyStoreChooser keyStoreChooser, CertificateChooserByAlias certificateChooserByAlias) {
         CacheCert cacheCert = new CacheCert(keyStoreChooser.getKeyStoreName(), certificateChooserByAlias.getAlias());
-        Certificate retrievedPublicKey = cache.get(cacheCert);
+        Certificate retrievedCertificate = cache.get(cacheCert);
 
-        if (retrievedPublicKey != null) {
-            return retrievedPublicKey;
+        if (retrievedCertificate != null) {
+            return retrievedCertificate;
         }
 
         KeyStore keyStore = keyStoreRegistry.get(keyStoreChooser);
