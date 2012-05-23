@@ -1,0 +1,184 @@
+---
+layout: docs-full
+title: Signature (with Sigle Key)
+navbar:
+  active_item: docs
+---
+<div class="page-header">
+    <h1>Signature
+        <small>with Single Keys</small>
+    </h1>
+</div>
+
+<div class="row">
+    <div class="span3 columns">
+        <h3>Digital Signatures with Single Keys</h3>
+
+        <p>In order to sign a document you'll need a private key. To verify a signature you'll need the public key
+            that was extracted from the private key used to generate the signature.</p>
+
+        <p>There are base64 versions of all signers and verifiers so you won't have to worry about encoding when
+            exchanging data over a network.</p>
+    </div>
+
+    <div class="span9 columns">
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#signer" data-toggle="tab">signer</a></li>
+            <li><a href="#b64Signer" data-toggle="tab">b64Signer</a></li>
+            <li><a href="#verifier" data-toggle="tab">verifier</a></li>
+            <li><a href="#b64Verifier" data-toggle="tab">b64Verifier</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div class="tab-pane active" id="signer">
+                <p>A simple signer is useful when you need to sign something with a single private key.</p>
+
+<pre class="prettyprint"><strong>&lt;crypt:signer id="signer" privateKey-ref="privateKey"
+    algorithm="SHA1withRSA"/&gt;</strong>
+
+&lt;crypt:privateKey id="privateKey" keystore-ref="keystore" alias="test"
+    password="password"/&gt;
+
+&lt;crypt:keystore id="keystore" location="classpath:keystore.jks"
+    password="password"/&gt;
+</pre>
+
+                <div class="alert alert-info">
+                    <h4 class="alert-heading">algorithm</h4>
+                    <code>SHA1withRSA</code> is the default algorithm and can be omitted.
+                </div>
+
+                <p>The signer can then be used like this:</p>
+
+<pre class="prettyprint">
+<strong>import com.google.code.springcryptoutils.core.signature.Signer;</strong>
+
+public class MyPaymentSigner {
+
+    <strong>@Autowired
+    private Signer signer;</strong>
+
+    public byte[] signPayment(byte[] payment) {
+        <strong>byte[] signature = signer.sign(payment);</strong>
+        log.debug("signed: payment={}, signature={}", payment, signature);
+        return signature;
+    }
+}</pre>
+            </div>
+
+            <div class="tab-pane" id="b64Signer">
+
+                <p>Because you don't usually work directly with byte arrays, but rather with a base64 encoded
+                    version of such data, there is also a base64 version of the signer.</p>
+
+<pre class="prettyprint"><strong>&lt;crypt:b64Signer id="signer" privateKey-ref="privateKey"
+    algorithm="SHA1withRSA"/&gt;</strong>
+
+&lt;crypt:privateKey id="privateKey" keystore-ref="keystore" alias="test"
+    password="password"/&gt;
+
+&lt;crypt:keystore id="keystore" location="classpath:keystore.jks"
+    password="password"/&gt;
+</pre>
+
+                <div class="alert alert-info">
+                    <h4 class="alert-heading">algorithm</h4>
+                    <code>SHA1withRSA</code> is the default algorithm and can be omitted.
+                </div>
+
+                <p>And this is how you use it:</p>
+
+<pre class="prettyprint">
+<strong>import com.google.code.springcryptoutils.core.signature.Base64EncodedSigner;</strong>
+
+public class MyBase64PaymentSigner {
+
+    <strong>@Autowired
+    private Base64EncodedSigner signer;</strong>
+
+    public void makePayment(String clientName) {
+        String messageToBeTrusted = "Please pay 250 euro to " + clientName;
+        <strong>String b64signature = signer.sign(messageToBeTrusted);</strong>
+    }
+}</pre>
+            </div>
+
+            <div class="tab-pane" id="verifier">
+                <p>A simple verifier is useful when you need to verify something with a single public key.</p>
+
+<pre class="prettyprint"><strong>&lt;crypt:verifier id="verifier" publicKey-ref="publicKey" algorithm="SHA1withRSA"/&gt;</strong>
+
+&lt;crypt:publicKey id="publicKey" keystore-ref="keystore" alias="test"/&gt;
+
+&lt;crypt:keystore id="keystore" location="classpath:keystore.jks"
+    password="password"/&gt;
+</pre>
+
+                <div class="alert alert-info">
+                    <h4 class="alert-heading">algorithm</h4>
+                    <code>SHA1withRSA</code> is the default algorithm and can be omitted.
+                </div>
+
+                <p>Here is an example usage of the verifier:</p>
+
+<pre class="prettyprint">
+<strong>import com.google.code.springcryptoutils.core.signature.Verifier;</strong>
+
+public class MyPaymentVerifier {
+
+    <strong>@Autowired
+    private Verifier verifier;</strong>
+
+    public void process(byte[] payment, byte[] signature) {
+        if (<strong>verifier.verify(payment, signature)</strong>) {
+            proceed(payment);
+        } else {
+            callTheCops("I have a bad feeling about this.");
+        }
+    }
+}</pre>
+            </div>
+
+            <div class="tab-pane" id="b64Verifier">
+
+                <p>Because you don't usually work directly with byte arrays, but rather with a base64 encoded
+                    version of such data, there is also a base64 version of the signer.</p>
+
+<pre class="prettyprint"><strong>&lt;crypt:b64Verifier id="verifier" publicKey-ref="publicKey"
+    algorithm="SHA1withRSA"/&gt;</strong>
+
+&lt;crypt:publicKey id="publicKey" keystore-ref="keystore" alias="test"/&gt;
+
+&lt;crypt:keystore id="keystore" location="classpath:keystore.jks"
+    password="password"/&gt;
+</pre>
+
+                <div class="alert alert-info">
+                    <h4 class="alert-heading">algorithm</h4>
+                    <code>SHA1withRSA</code> is the default algorithm and can be omitted.
+                </div>
+
+                <p>Here is an example usage of the base64 verifier:</p>
+
+<pre class="prettyprint">
+<strong>import com.google.code.springcryptoutils.core.signature.Base64EncodedVerifier;</strong>
+
+public class VaderVerifier {
+
+    <strong>@Autowired
+    private Base64EncodedVerifier verifier;</strong>
+
+    public void process(String b64signature) {
+        String statement = "I am your father";
+
+        if (<strong>verifier.verify(statement, b64signature)</strong>) {
+            scream("Nooooooo!");
+        } else {
+            log("You are not the father I'm looking for.");
+        }
+    }
+}</pre>
+            </div>
+        </div>
+    </div>
+</div>

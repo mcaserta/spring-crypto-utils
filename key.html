@@ -1,0 +1,57 @@
+---
+layout: docs-full
+title: Keys
+navbar:
+  active_item: docs
+---
+<div class="page-header">
+    <h1>Keys
+        <small>Private, public and secret</small>
+    </h1>
+</div>
+
+<div class="row">
+    <div class="span3 columns">
+        <h3>Keys</h3>
+
+        <p>Once you have setup a keystore, it's time to use those keys.</p>
+    </div>
+
+    <div class="span9 columns">
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#key-private" data-toggle="tab">privateKey</a></li>
+            <li><a href="#key-public" data-toggle="tab">publicKey</a></li>
+            <li><a href="#key-secret" data-toggle="tab">secretKey</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div class="tab-pane active" id="key-private">
+<pre class="prettyprint"><strong>&lt;crypt:privateKey id="privateKey" keystore-ref="keystore" alias="test"
+    password="password"/&gt;</strong>
+
+&lt;crypt:keystore id="keystore" location="classpath:keystore.jks"
+    password="password"/&gt;</pre>
+            </div>
+
+            <div class="tab-pane" id="key-public">
+<pre class="prettyprint"><strong>&lt;crypt:publicKey id="publicKey" keystore-ref="keystore" alias="test"/&gt;</strong>
+
+&lt;crypt:keystore id="keystore" location="classpath:keystore.jks" password="password"/&gt;</pre>
+            </div>
+
+            <div class="tab-pane" id="key-secret">
+<pre class="prettyprint"><strong>&lt;crypt:secretKey id="secretKey" keystore-ref="keystore" alias="hmac"
+    password="changeit"/&gt;</strong>
+
+&lt;crypt:keystore id="keystore" location="classpath:keystore.jceks"
+    password="changeit" type="JCEKS"/&gt;</pre>
+
+                <div class="alert alert-info">
+                    <h4 class="alert-heading">JCEKS keystores</h4>
+                    Please note that in order to use secret keys, you will need to employ a keystore in JCEKS
+                    format.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
