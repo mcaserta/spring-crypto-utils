@@ -34,7 +34,7 @@ navbar:
 ### release 1.0.1 - (2012-01-25)
 
 * new: added support for configuring a keystore using conventional java system properties
-  <code>javax.net.ssl.keyStore</code> and <code>javax.net.ssl.keyStorePassword</code> throgh the
+  <code>javax.net.ssl.keyStore</code> and <code>javax.net.ssl.keyStorePassword</code> through the
   <code>&lt;crypt:defaultKeystore/&gt;</code> configuration element
 
 
