@@ -8,7 +8,7 @@ navbar:
   active_item: docs
 ---
 
-### release 1.2.0 - (2012-10-20)
+### release 1.2.0 - (2012-05-10)
 
 * new: added certificate element (Chad Johnston)
 
