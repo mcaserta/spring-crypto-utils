@@ -1,42 +1,58 @@
 package com.google.code.springcryptoutils.core.cipher.symmetric;
 
-import org.springframework.beans.factory.InitializingBean;
-
 import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
 import java.security.SecureRandom;
+
+import org.springframework.beans.factory.InitializingBean;
 
 /**
  * The default implementation for generating symmetric encryption keys.
- *
+ * 
  * @author Mirko Caserta (mirko.caserta@gmail.com)
  */
 public class KeyGeneratorImpl implements KeyGenerator, InitializingBean {
 
-    private javax.crypto.KeyGenerator generator;
+	private javax.crypto.KeyGenerator generator;
 
-    private String algorithm = "DESede";
+	private String algorithm = "DESede";
+	private String provider;
 
-    /**
-     * Sets the key algorithm. Default is DESede (triple DES).
-     *
-     * @param algorithm the algorithm
-     */
-    public void setAlgorithm(String algorithm) {
-        this.algorithm = algorithm;
-    }
+	/**
+	 * Sets the key algorithm. Default is DESede (triple DES).
+	 * 
+	 * @param algorithm the algorithm
+	 */
+	public void setAlgorithm(String algorithm) {
+		this.algorithm = algorithm;
+	}
 
-    /**
-     * Generates a new symmetric encryption key.
-     *
-     * @return the new symmetric encryption key
-     */
-    public byte[] generate() {
-        return generator.generateKey().getEncoded();
-    }
+	/**
+	 * Sets the provider name of the specific implementation requested (e.g.,
+	 * "BC" for BouncyCastle, "SunJCE" for the default Sun JCE provider).
+	 * 
+	 * @param provider the provider to set
+	 */
+	public void setProvider(String provider) {
+		this.provider = provider;
+	}
 
-    public void afterPropertiesSet() throws NoSuchAlgorithmException {
-        generator = javax.crypto.KeyGenerator.getInstance(algorithm);
-        generator.init(new SecureRandom());
-    }
+	/**
+	 * Generates a new symmetric encryption key.
+	 * 
+	 * @return the new symmetric encryption key
+	 */
+	public byte[] generate() {
+		return generator.generateKey().getEncoded();
+	}
+
+	public void afterPropertiesSet() throws NoSuchAlgorithmException, NoSuchProviderException {
+		if ((provider == null) || (provider.length() == 0)) {
+			generator = javax.crypto.KeyGenerator.getInstance(algorithm);
+		} else {
+			generator = javax.crypto.KeyGenerator.getInstance(algorithm, provider);
+		}
+		generator.init(new SecureRandom());
+	}
 
 }
