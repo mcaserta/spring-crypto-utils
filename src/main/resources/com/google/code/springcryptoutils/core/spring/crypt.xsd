@@ -17,6 +17,7 @@
                     <xsd:attribute name="location" type="xsd:string" use="required"/>
                     <xsd:attribute name="password" type="xsd:string" use="required"/>
                     <xsd:attribute name="type" type="xsd:string" default="JKS"/>
+					<xsd:attribute name="provider" type="xsd:string" use="optional" />
                 </xsd:extension>
             </xsd:complexContent>
         </xsd:complexType>
@@ -39,6 +40,7 @@
                     </xsd:sequence>
                     <xsd:attribute name="password" type="xsd:string" use="required"/>
                     <xsd:attribute name="type" type="xsd:string" default="JKS"/>
+					<xsd:attribute name="provider" type="xsd:string" use="optional" />
                 </xsd:extension>
             </xsd:complexContent>
         </xsd:complexType>
@@ -142,6 +144,7 @@
                 <xsd:extension base="beans:identifiedType">
                     <xsd:attribute name="privateKey-ref" type="xsd:string" use="required"/>
                     <xsd:attribute name="algorithm" type="xsd:string" default="SHA1withRSA"/>
+                    <xsd:attribute name="provider" type="xsd:string" use="optional" />
                 </xsd:extension>
             </xsd:complexContent>
         </xsd:complexType>
@@ -153,6 +156,7 @@
                 <xsd:extension base="beans:identifiedType">
                     <xsd:attribute name="publicKey-ref" type="xsd:string" use="required"/>
                     <xsd:attribute name="algorithm" type="xsd:string" default="SHA1withRSA"/>
+                    <xsd:attribute name="provider" type="xsd:string" use="optional" />
                 </xsd:extension>
             </xsd:complexContent>
         </xsd:complexType>
@@ -164,6 +168,7 @@
                 <xsd:extension base="beans:identifiedType">
                     <xsd:attribute name="privateKeyRegistryByAlias-ref" type="xsd:string" use="required"/>
                     <xsd:attribute name="algorithm" type="xsd:string" default="SHA1withRSA"/>
+                    <xsd:attribute name="provider" type="xsd:string" use="optional" />
                 </xsd:extension>
             </xsd:complexContent>
         </xsd:complexType>
@@ -175,6 +180,7 @@
                 <xsd:extension base="beans:identifiedType">
                     <xsd:attribute name="publicKeyRegistryByAlias-ref" type="xsd:string" use="required"/>
                     <xsd:attribute name="algorithm" type="xsd:string" default="SHA1withRSA"/>
+                    <xsd:attribute name="provider" type="xsd:string" use="optional" />
                 </xsd:extension>
             </xsd:complexContent>
         </xsd:complexType>
@@ -186,6 +192,7 @@
                 <xsd:extension base="beans:identifiedType">
                     <xsd:attribute name="privateKeyMap-ref" type="xsd:string" use="required"/>
                     <xsd:attribute name="algorithm" type="xsd:string" default="SHA1withRSA"/>
+                    <xsd:attribute name="provider" type="xsd:string" use="optional" />
                 </xsd:extension>
             </xsd:complexContent>
         </xsd:complexType>
@@ -197,6 +204,7 @@
                 <xsd:extension base="beans:identifiedType">
                     <xsd:attribute name="publicKeyMap-ref" type="xsd:string" use="required"/>
                     <xsd:attribute name="algorithm" type="xsd:string" default="SHA1withRSA"/>
+                    <xsd:attribute name="provider" type="xsd:string" use="optional" />
                 </xsd:extension>
             </xsd:complexContent>
         </xsd:complexType>
@@ -209,6 +217,7 @@
                     <xsd:attribute name="privateKey-ref" type="xsd:string" use="required"/>
                     <xsd:attribute name="algorithm" type="xsd:string" default="SHA1withRSA"/>
                     <xsd:attribute name="charset" type="xsd:string" default="UTF-8"/>
+                    <xsd:attribute name="provider" type="xsd:string" use="optional" />
                 </xsd:extension>
             </xsd:complexContent>
         </xsd:complexType>
@@ -221,6 +230,7 @@
                     <xsd:attribute name="publicKey-ref" type="xsd:string" use="required"/>
                     <xsd:attribute name="algorithm" type="xsd:string" default="SHA1withRSA"/>
                     <xsd:attribute name="charset" type="xsd:string" default="UTF-8"/>
+                    <xsd:attribute name="provider" type="xsd:string" use="optional" />
                 </xsd:extension>
             </xsd:complexContent>
         </xsd:complexType>
@@ -233,6 +243,7 @@
                     <xsd:attribute name="privateKeyRegistryByAlias-ref" type="xsd:string" use="required"/>
                     <xsd:attribute name="algorithm" type="xsd:string" default="SHA1withRSA"/>
                     <xsd:attribute name="charset" type="xsd:string" default="UTF-8"/>
+                    <xsd:attribute name="provider" type="xsd:string" use="optional" />
                 </xsd:extension>
             </xsd:complexContent>
         </xsd:complexType>
@@ -245,6 +256,7 @@
                     <xsd:attribute name="publicKeyRegistryByAlias-ref" type="xsd:string" use="required"/>
                     <xsd:attribute name="algorithm" type="xsd:string" default="SHA1withRSA"/>
                     <xsd:attribute name="charset" type="xsd:string" default="UTF-8"/>
+                    <xsd:attribute name="provider" type="xsd:string" use="optional" />
                 </xsd:extension>
             </xsd:complexContent>
         </xsd:complexType>
@@ -257,6 +269,7 @@
                     <xsd:attribute name="privateKeyMap-ref" type="xsd:string" use="required"/>
                     <xsd:attribute name="algorithm" type="xsd:string" default="SHA1withRSA"/>
                     <xsd:attribute name="charset" type="xsd:string" default="UTF-8"/>
+                    <xsd:attribute name="provider" type="xsd:string" use="optional" />
                 </xsd:extension>
             </xsd:complexContent>
         </xsd:complexType>
@@ -269,6 +282,7 @@
                     <xsd:attribute name="publicKeyMap-ref" type="xsd:string" use="required"/>
                     <xsd:attribute name="algorithm" type="xsd:string" default="SHA1withRSA"/>
                     <xsd:attribute name="charset" type="xsd:string" default="UTF-8"/>
+                    <xsd:attribute name="provider" type="xsd:string" use="optional" />
                 </xsd:extension>
             </xsd:complexContent>
         </xsd:complexType>
@@ -281,6 +295,7 @@
             <xsd:complexContent>
                 <xsd:extension base="beans:identifiedType">
                     <xsd:attribute name="algorithm" type="xsd:string" default="DESede"/>
+                    <xsd:attribute name="provider" type="xsd:string" use="optional" />
                 </xsd:extension>
             </xsd:complexContent>
         </xsd:complexType>
@@ -292,6 +307,7 @@
                 <xsd:extension base="beans:identifiedType">
                     <xsd:attribute name="algorithm" type="xsd:string" default="DESede"/>
                     <xsd:attribute name="chunkOutput" type="xsd:boolean" default="false"/>
+                    <xsd:attribute name="provider" type="xsd:string" use="optional" />
                 </xsd:extension>
             </xsd:complexContent>
         </xsd:complexType>
@@ -303,6 +319,7 @@
                 <xsd:extension base="beans:identifiedType">
                     <xsd:attribute name="keyAlgorithm" type="xsd:string" default="DESede"/>
                     <xsd:attribute name="cipherAlgorithm" type="xsd:string" default="DESede/CBC/PKCS5Padding"/>
+                    <xsd:attribute name="provider" type="xsd:string" use="optional" />
                     <xsd:attribute name="mode" type="cipherModeType" use="required"/>
                 </xsd:extension>
             </xsd:complexContent>
@@ -315,6 +332,7 @@
                 <xsd:extension base="beans:identifiedType">
                     <xsd:attribute name="keyAlgorithm" type="xsd:string" default="DESede"/>
                     <xsd:attribute name="cipherAlgorithm" type="xsd:string" default="DESede/CBC/PKCS5Padding"/>
+                    <xsd:attribute name="provider" type="xsd:string" use="optional" />
                     <xsd:attribute name="key" type="xsd:string" use="required"/>
                     <xsd:attribute name="initializationVector" type="xsd:string" use="required"/>
                     <xsd:attribute name="mode" type="cipherModeType" use="required"/>
@@ -329,6 +347,7 @@
                 <xsd:extension base="beans:identifiedType">
                     <xsd:attribute name="keyAlgorithm" type="xsd:string" default="DESede"/>
                     <xsd:attribute name="cipherAlgorithm" type="xsd:string" default="DESede/CBC/PKCS5Padding"/>
+                    <xsd:attribute name="provider" type="xsd:string" use="optional" />
                     <xsd:attribute name="mode" type="cipherModeType" use="required"/>
                     <xsd:attribute name="chunkOutput" type="xsd:boolean" default="false"/>
                     <xsd:attribute name="charset" type="xsd:string" default="UTF-8"/>
@@ -343,6 +362,7 @@
                 <xsd:extension base="beans:identifiedType">
                     <xsd:attribute name="keyAlgorithm" type="xsd:string" default="DESede"/>
                     <xsd:attribute name="cipherAlgorithm" type="xsd:string" default="DESede/CBC/PKCS5Padding"/>
+                    <xsd:attribute name="provider" type="xsd:string" use="optional" />
                     <xsd:attribute name="key" type="xsd:string" use="required"/>
                     <xsd:attribute name="initializationVector" type="xsd:string" use="required"/>
                     <xsd:attribute name="mode" type="cipherModeType" use="required"/>
@@ -360,6 +380,7 @@
             <xsd:complexContent>
                 <xsd:extension base="beans:identifiedType">
                     <xsd:attribute name="algorithm" type="xsd:string" default="RSA"/>
+                    <xsd:attribute name="provider" type="xsd:string" use="optional" />
                     <xsd:attribute name="mode" type="cipherModeType" use="required"/>
                     <xsd:attribute name="key-ref" type="xsd:string" use="required"/>
                 </xsd:extension>
@@ -372,6 +393,7 @@
             <xsd:complexContent>
                 <xsd:extension base="beans:identifiedType">
                     <xsd:attribute name="algorithm" type="xsd:string" default="RSA"/>
+                    <xsd:attribute name="provider" type="xsd:string" use="optional" />
                     <xsd:attribute name="mode" type="cipherModeType" use="required"/>
                     <xsd:attribute name="keyMap-ref" type="xsd:string" use="required"/>
                 </xsd:extension>
@@ -384,6 +406,7 @@
             <xsd:complexContent>
                 <xsd:extension base="beans:identifiedType">
                     <xsd:attribute name="algorithm" type="xsd:string" default="RSA"/>
+                    <xsd:attribute name="provider" type="xsd:string" use="optional" />
                     <xsd:attribute name="mode" type="cipherModeType" use="required"/>
                     <xsd:attribute name="charset" type="xsd:string" default="UTF-8"/>
                     <xsd:attribute name="key-ref" type="xsd:string" use="required"/>
@@ -397,6 +420,7 @@
             <xsd:complexContent>
                 <xsd:extension base="beans:identifiedType">
                     <xsd:attribute name="algorithm" type="xsd:string" default="RSA"/>
+                    <xsd:attribute name="provider" type="xsd:string" use="optional" />
                     <xsd:attribute name="mode" type="cipherModeType" use="required"/>
                     <xsd:attribute name="charset" type="xsd:string" default="UTF-8"/>
                     <xsd:attribute name="keyMap-ref" type="xsd:string" use="required"/>
@@ -412,6 +436,7 @@
             <xsd:complexContent>
                 <xsd:extension base="beans:identifiedType">
                     <xsd:attribute name="algorithm" type="xsd:string" default="SHA1"/>
+                    <xsd:attribute name="provider" type="xsd:string" use="optional" />
                     <xsd:attribute name="outputMode" type="outputModeType" default="HEX"/>
                     <xsd:attribute name="charset" type="xsd:string" default="UTF-8"/>
                 </xsd:extension>
@@ -426,6 +451,7 @@
             <xsd:complexContent>
                 <xsd:extension base="beans:identifiedType">
                     <xsd:attribute name="secretKey-ref" type="xsd:string" use="required"/>
+                    <xsd:attribute name="provider" type="xsd:string" use="optional" />
                     <xsd:attribute name="algorithm" type="xsd:string" default="HmacSHA1"/>
                 </xsd:extension>
             </xsd:complexContent>
@@ -437,6 +463,7 @@
             <xsd:complexContent>
                 <xsd:extension base="beans:identifiedType">
                     <xsd:attribute name="secretKey-ref" type="xsd:string" use="required"/>
+                    <xsd:attribute name="provider" type="xsd:string" use="optional" />
                     <xsd:attribute name="algorithm" type="xsd:string" default="HmacSHA1"/>
                 </xsd:extension>
             </xsd:complexContent>

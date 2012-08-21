@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:crypt="http://code.google.com/p/spring-crypto-utils/schema/crypt"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://code.google.com/p/spring-crypto-utils/schema/crypt http://code.google.com/p/spring-crypto-utils/schema/crypt.xsd">
+
+    <crypt:keystore id="keystore" location="classpath:keystore.jks" password="password" provider="SUN"/>
+
+    <crypt:publicKey id="publicKey" keystore-ref="keystore" alias="test"/>
+
+    <crypt:privateKey id="privateKey" keystore-ref="keystore" alias="test" password="password"/>
+
+    <crypt:signer id="signer" privateKey-ref="privateKey" algorithm="SHA1withRSA" provider="SunRsaSign"/>
+
+    <crypt:verifier id="verifier" publicKey-ref="publicKey" algorithm="SHA1withRSA" provider="SunRsaSign"/>
+
+</beans>
