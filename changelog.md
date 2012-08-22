@@ -8,6 +8,21 @@ navbar:
   active_item: docs
 ---
 
+### release 1.3.0 - (2012-08-22)
+
+* new: added provider attribute to almost all elements so that
+  a custom provider can be configured 
+  (think <a href="http://www.bouncycastle.org/java.html">BouncyCastle</a>) (Martin Bosak)
+* new: the namespace for the whole project has been moved to springcryptoutils.com.
+  
+  <strong>Migration guide:</strong> a very simple search and 
+  replace in your projects will do the trick:
+  * in the xml files: <code>http://code.google.com/p/spring-crypto-utils/schema/crypt</code> 
+    becomes <code>http://springcryptoutils.com/schema/crypt</code>
+  * in the java files: <code>import com.google.code.springcryptoutils</code> becomes
+    <code>import com.springcryptoutils</code>
+
+
 ### release 1.2.0 - (2012-05-10)
 
 * new: added certificate element (Chad Johnston)

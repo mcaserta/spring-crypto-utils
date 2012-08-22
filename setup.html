@@ -25,7 +25,7 @@ navbar:
 &lt;dependency&gt;
     &lt;groupId&gt;com.google.code.spring-crypto-utils&lt;/groupId&gt;
     &lt;artifactId&gt;spring-crypto-utils&lt;/artifactId&gt;
-    &lt;version&gt;1.2.0&lt;/version&gt;
+    &lt;version&gt;1.3.0&lt;/version&gt;
 &lt;/dependency&gt;</pre>
 
         <div class="alert alert-info">
@@ -39,7 +39,7 @@ navbar:
 
         <h2>Without maven</h2>
 
-        <p>Download <a href="http://repo1.maven.org/maven2/com/google/code/spring-crypto-utils/spring-crypto-utils/1.2.0/spring-crypto-utils-1.2.0.jar">the latest jar</a>
+        <p>Download <a href="http://repo1.maven.org/maven2/com/google/code/spring-crypto-utils/spring-crypto-utils/1.3.0/spring-crypto-utils-1.3.0.jar">the latest jar</a>
             and put the file in the classpath of your application.</p>
 
         <p>The following jars are also needed:</p>
@@ -57,20 +57,20 @@ navbar:
             </li>
             <li>Spring Framework
                 <ul>
-                    <li>org.springframework:spring-context:jar:3.1.0.RELEASE
-                        <a href="http://repo1.maven.org/maven2/org/springframework/spring-context/3.1.0.RELEASE/spring-context-3.1.0.RELEASE.jar"><span
+                    <li>org.springframework:spring-context:jar:3.1.2.RELEASE
+                        <a href="http://repo1.maven.org/maven2/org/springframework/spring-context/3.1.2.RELEASE/spring-context-3.1.2.RELEASE.jar"><span
                                 class="label label-info">download</span></a></li>
-                    <li>org.springframework:spring-beans:jar:3.1.0.RELEASE
-                        <a href="http://repo1.maven.org/maven2/org/springframework/spring-beans/3.1.0.RELEASE/spring-beans-3.1.0.RELEASE.jar"><span
+                    <li>org.springframework:spring-beans:jar:3.1.2.RELEASE
+                        <a href="http://repo1.maven.org/maven2/org/springframework/spring-beans/3.1.2.RELEASE/spring-beans-3.1.2.RELEASE.jar"><span
                                 class="label label-info">download</span></a></li>
-                    <li>org.springframework:spring-core:jar:3.1.0.RELEASE
-                        <a href="http://repo1.maven.org/maven2/org/springframework/spring-core/3.1.0.RELEASE/spring-core-3.1.0.RELEASE.jar"><span
+                    <li>org.springframework:spring-core:jar:3.1.2.RELEASE
+                        <a href="http://repo1.maven.org/maven2/org/springframework/spring-core/3.1.2.RELEASE/spring-core-3.1.2.RELEASE.jar"><span
                                 class="label label-info">download</span></a></li>
-                    <li>org.springframework:spring-expression:jar:3.1.0.RELEASE
-                        <a href="http://repo1.maven.org/maven2/org/springframework/spring-expression/3.1.0.RELEASE/spring-expression-3.1.0.RELEASE.jar"><span
+                    <li>org.springframework:spring-expression:jar:3.1.2.RELEASE
+                        <a href="http://repo1.maven.org/maven2/org/springframework/spring-expression/3.1.2.RELEASE/spring-expression-3.1.2.RELEASE.jar"><span
                                 class="label label-info">download</span></a></li>
-                    <li>org.springframework:spring-asm:jar:3.1.0.RELEASE
-                        <a href="http://repo1.maven.org/maven2/org/springframework/spring-asm/3.1.0.RELEASE/spring-asm-3.1.0.RELEASE.jar"><span
+                    <li>org.springframework:spring-asm:jar:3.1.2.RELEASE
+                        <a href="http://repo1.maven.org/maven2/org/springframework/spring-asm/3.1.2.RELEASE/spring-asm-3.1.2.RELEASE.jar"><span
                                 class="label label-info">download</span></a></li>
                 </ul>
             </li>
@@ -78,19 +78,19 @@ navbar:
 
         <h2>Xml Namespace</h2>
 
-        <p>If you want to use the xml in configuring the framework, you will need to declare the crypt namespace
+        <p>To use the xml configuration, you will need to declare the crypt namespace
             in your spring context xml configuration files, like this:</p>
 
                 <pre class="prettyprint">
 &lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;beans xmlns="http://www.springframework.org/schema/beans"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    <strong>xmlns:crypt="http://code.google.com/p/spring-crypto-utils/schema/crypt"</strong>
+    <strong>xmlns:crypt="http://springcryptoutils.com/schema/crypt"</strong>
     xsi:schemaLocation="
         http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
-        <strong>http://code.google.com/p/spring-crypto-utils/schema/crypt
-            http://code.google.com/p/spring-crypto-utils/schema/crypt.xsd</strong>"&gt;
+        <strong>http://springcryptoutils.com/schema/crypt
+            http://springcryptoutils.com/schema/crypt.xsd</strong>"&gt;
 
 &lt;/beans&gt;</pre>
 
