@@ -4,8 +4,10 @@ import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertNotNull;
 
 import java.io.UnsupportedEncodingException;
+import java.security.Security;
 import java.util.UUID;
 
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,7 +19,11 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ContextConfiguration
 public class CiphererWithChooserByKeyIdImplSpecificProviderTest {
 
-	@Autowired
+    static {
+        Security.addProvider(new BouncyCastleProvider());
+    }
+
+    @Autowired
 	private CiphererWithChooserByKeyId encrypter;
 
 	@Autowired
@@ -51,9 +57,13 @@ public class CiphererWithChooserByKeyIdImplSpecificProviderTest {
 		}
 	}
 
-	@Test(expected = AsymmetricEncryptionException.class)
-	public void testDecryptionWithGarbageFails() throws UnsupportedEncodingException {
-		final byte[] message = "this is garbage".getBytes("UTF-8");
+	@Test
+	public void testDecryptionWithGarbageFailsNot() throws UnsupportedEncodingException {
+        // for some reason, the BC provider differs from the Sun native
+        // implementation in that it doesn't fail when you throw garbage at it
+        // in decrypt mode, which makes sense and is better behavior than
+        // the native provider
+        final byte[] message = "this is garbage".getBytes("UTF-8");
 		decrypter.encrypt("publicKeyId", message);
 	}
 

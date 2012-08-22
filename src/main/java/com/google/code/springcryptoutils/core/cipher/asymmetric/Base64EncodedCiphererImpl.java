@@ -81,8 +81,9 @@ public class Base64EncodedCiphererImpl implements Base64EncodedCipherer {
 	 */
 	public String encrypt(String message) {
 		try {
-			final Cipher cipher = (((provider == null) || (provider.length() == 0)) ? Cipher.getInstance(algorithm) : Cipher
-					.getInstance(algorithm, provider));
+			final Cipher cipher = (((provider == null) || (provider.length() == 0))
+                    ? Cipher.getInstance(algorithm)
+                    : Cipher.getInstance(algorithm, provider));
 			switch (mode) {
 				case ENCRYPT:
 					final byte[] messageAsByteArray = message.getBytes(charsetName);

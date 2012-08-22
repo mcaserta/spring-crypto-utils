@@ -4,14 +4,14 @@
        xmlns:crypt="http://code.google.com/p/spring-crypto-utils/schema/crypt"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://code.google.com/p/spring-crypto-utils/schema/crypt http://code.google.com/p/spring-crypto-utils/schema/crypt.xsd">
 
-    <crypt:b64SymmetricKeyGenerator id="generator" algorithm="DESede" provider="SunJCE"/>
+    <crypt:b64SymmetricKeyGenerator id="generator" algorithm="DESede" provider="BC"/>
 
     <crypt:b64SymmetricCipherer id="encrypter"
                                 keyAlgorithm="DESede" cipherAlgorithm="DESede/CBC/PKCS5Padding"
-                                mode="ENCRYPT" provider="SunJCE"/>
+                                mode="ENCRYPT" provider="BC"/>
 
     <crypt:b64SymmetricCipherer id="decrypter"
                                 keyAlgorithm="DESede" cipherAlgorithm="DESede/CBC/PKCS5Padding"
-                                mode="DECRYPT" provider="SunJCE"/>
+                                mode="DECRYPT" provider="BC"/>
 
 </beans>

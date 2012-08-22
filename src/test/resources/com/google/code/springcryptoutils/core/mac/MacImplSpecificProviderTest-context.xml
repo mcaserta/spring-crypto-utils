@@ -8,6 +8,6 @@
 
     <crypt:secretKey id="secretKey" keystore-ref="keystore" alias="hmac" password="changeit"/>
 
-    <crypt:mac id="mac" secretKey-ref="secretKey" provider="SunJCE"/>
+    <crypt:mac id="mac" secretKey-ref="secretKey" provider="BC"/>
 
 </beans>

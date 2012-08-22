@@ -19,8 +19,8 @@
         </entry>
     </util:map>
 
-    <crypt:signerWithChooserByPrivateKeyId id="signer" privateKeyMap-ref="privateKeyMap" algorithm="SHA1withRSA" provider="SunRsaSign"/>
+    <crypt:signerWithChooserByPrivateKeyId id="signer" privateKeyMap-ref="privateKeyMap" algorithm="SHA1withRSA" provider="BC"/>
 
-    <crypt:verifierWithChooserByPublicKeyId id="verifier" publicKeyMap-ref="publicKeyMap" algorithm="SHA1withRSA" provider="SunRsaSign"/>
+    <crypt:verifierWithChooserByPublicKeyId id="verifier" publicKeyMap-ref="publicKeyMap" algorithm="SHA1withRSA" provider="BC"/>
 
 </beans>

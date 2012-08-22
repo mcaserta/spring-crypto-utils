@@ -10,8 +10,8 @@
 
     <crypt:privateKey id="privateKey" keystore-ref="keystore" alias="test" password="password"/>
 
-    <crypt:asymmetricCipherer id="encrypter" mode="ENCRYPT" key-ref="privateKey" provider="SunJCE"/>
+    <crypt:asymmetricCipherer id="encrypter" mode="ENCRYPT" key-ref="privateKey" provider="BC"/>
 
-    <crypt:asymmetricCipherer id="decrypter" mode="DECRYPT" key-ref="publicKey" provider="SunJCE"/>
+    <crypt:asymmetricCipherer id="decrypter" mode="DECRYPT" key-ref="publicKey" provider="BC"/>
 
 </beans>

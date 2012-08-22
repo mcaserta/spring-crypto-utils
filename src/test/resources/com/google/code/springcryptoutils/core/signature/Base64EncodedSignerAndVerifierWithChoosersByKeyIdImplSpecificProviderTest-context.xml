@@ -20,9 +20,9 @@
     </util:map>
 
     <crypt:b64SignerWithChooserByPrivateKeyId id="signer" privateKeyMap-ref="privateKeyMap"
-                                              algorithm="SHA1withRSA" provider="SunRsaSign"/>
+                                              algorithm="SHA1withRSA" provider="BC"/>
 
     <crypt:b64VerifierWithChooserByPublicKeyId id="verifier" publicKeyMap-ref="publicKeyMap"
-                                               algorithm="SHA1withRSA" provider="SunRsaSign"/>
+                                               algorithm="SHA1withRSA" provider="BC"/>
 
 </beans>

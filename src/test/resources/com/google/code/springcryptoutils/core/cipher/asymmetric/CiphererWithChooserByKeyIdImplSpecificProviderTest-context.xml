@@ -16,8 +16,8 @@
         </entry>
     </util:map>
 
-    <crypt:asymmetricCiphererWithChooserByKeyId id="encrypter" mode="ENCRYPT" keyMap-ref="keyMap" provider="SunJCE"/>
+    <crypt:asymmetricCiphererWithChooserByKeyId id="encrypter" mode="ENCRYPT" keyMap-ref="keyMap" provider="BC"/>
 
-    <crypt:asymmetricCiphererWithChooserByKeyId id="decrypter" mode="DECRYPT" keyMap-ref="keyMap" provider="SunJCE"/>
+    <crypt:asymmetricCiphererWithChooserByKeyId id="decrypter" mode="DECRYPT" keyMap-ref="keyMap" provider="BC"/>
 
 </beans>

@@ -4,6 +4,6 @@
        xmlns:crypt="http://code.google.com/p/spring-crypto-utils/schema/crypt"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://code.google.com/p/spring-crypto-utils/schema/crypt http://code.google.com/p/spring-crypto-utils/schema/crypt.xsd">
 
-    <crypt:symmetricKeyGenerator id="generator" algorithm="DESede" provider="SunJCE"/>
+    <crypt:symmetricKeyGenerator id="generator" algorithm="DESede" provider="BC"/>
 
 </beans>

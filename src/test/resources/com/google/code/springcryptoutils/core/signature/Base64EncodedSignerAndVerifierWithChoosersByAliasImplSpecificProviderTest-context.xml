@@ -19,9 +19,9 @@
     <crypt:publicKeyRegistryByAlias id="publicKeyRegistry" keystoreRegistry-ref="keystoreRegistry"/>
 
     <crypt:b64SignerWithChoosersByAlias id="signer" privateKeyRegistryByAlias-ref="privateKeyRegistry"
-                                        algorithm="SHA1withRSA" provider="SunRsaSign"/>
+                                        algorithm="SHA1withRSA" provider="BC"/>
 
     <crypt:b64VerifierWithChoosersByAlias id="verifier" publicKeyRegistryByAlias-ref="publicKeyRegistry"
-                                          algorithm="SHA1withRSA" provider="SunRsaSign"/>
+                                          algorithm="SHA1withRSA" provider="BC"/>
 
 </beans>

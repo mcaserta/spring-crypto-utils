@@ -1,11 +1,14 @@
 package com.google.code.springcryptoutils.core.cipher.symmetric;
 
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.security.Security;
 import java.util.Arrays;
 
 import static org.junit.Assert.*;
@@ -13,6 +16,10 @@ import static org.junit.Assert.*;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration
 public class KeyGeneratorImplSpecificProviderTest {
+
+    static {
+        Security.addProvider(new BouncyCastleProvider());
+    }
 
     @Autowired
     private KeyGenerator generator;
