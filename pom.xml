@@ -14,22 +14,22 @@
     <packaging>jar</packaging>
     <name>Spring Cryptographic Utilities</name>
     <description>A framework for easier configuration of cryptographic utilities using Spring.</description>
-    <url>https://code.google.com/p/spring-crypto-utils/</url>
+    <url>http://springcryptoutils.com/</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <spring.version>3.1.1.RELEASE</spring.version>
+        <spring.version>3.1.2.RELEASE</spring.version>
     </properties>
 
     <scm>
         <connection>scm:git:git@github.com:mcaserta/spring-crypto-utils.git</connection>
         <developerConnection>scm:git:git@github.com:mcaserta/spring-crypto-utils.git</developerConnection>
-        <url>https://github.com/mcaserta/spring-crypto-utils</url>
+        <url>http://github.com/mcaserta/spring-crypto-utils</url>
     </scm>
 
     <issueManagement>
-        <system>Google Code Issues</system>
-        <url>http://code.google.com/p/spring-crypto-utils/issues/list</url>
+        <system>GitHub Issues</system>
+        <url>https://github.com/mcaserta/spring-crypto-utils/issues</url>
     </issueManagement>
 
     <distributionManagement>
@@ -121,7 +121,6 @@
                 <version>2.2.1</version>
                 <configuration>
                     <mavenExecutorId>forked-path</mavenExecutorId>
-                    <tagBase>https://spring-crypto-utils.googlecode.com/svn/tags</tagBase>
                 </configuration>
             </plugin>
         </plugins>

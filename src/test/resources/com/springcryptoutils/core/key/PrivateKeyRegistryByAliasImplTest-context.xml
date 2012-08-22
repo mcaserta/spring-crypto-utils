@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:crypt="http://springcryptoutils.com/schema/crypt"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd http://springcryptoutils.com/schema/crypt http://springcryptoutils.com/schema/crypt.xsd">
+
+    <crypt:keystore id="keystore1" location="classpath:keystore.jks" password="password"/>
+    <crypt:keystore id="keystore2" location="classpath:keystore.jks" password="password"/>
+
+    <crypt:keystoreRegistry id="keystoreRegistry" entries-ref="entries"/>
+
+    <util:map id="entries">
+        <entry key="keystoreOne" value-ref="keystore1"/>
+        <entry key="keystoreTwo" value-ref="keystore2"/>
+    </util:map>
+
+    <crypt:privateKeyRegistryByAlias id="privateKeyRegistry" keystoreRegistry-ref="keystoreRegistry"/>
+
+</beans>

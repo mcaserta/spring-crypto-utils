@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:crypt="http://springcryptoutils.com/schema/crypt"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://springcryptoutils.com/schema/crypt http://springcryptoutils.com/schema/crypt.xsd">
+
+    <crypt:symmetricKeyGenerator id="generator" algorithm="DESede"/>
+
+    <crypt:symmetricCipherer id="encrypter" keyAlgorithm="DESede" cipherAlgorithm="DESede/CBC/PKCS5Padding"
+                             mode="ENCRYPT"/>
+
+    <crypt:symmetricCipherer id="decrypter" keyAlgorithm="DESede" cipherAlgorithm="DESede/CBC/PKCS5Padding"
+                             mode="DECRYPT"/>
+
+</beans>
