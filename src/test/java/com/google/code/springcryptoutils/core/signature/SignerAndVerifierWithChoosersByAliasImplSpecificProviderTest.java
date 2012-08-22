@@ -5,6 +5,7 @@ import com.google.code.springcryptoutils.core.key.PrivateKeyException;
 import com.google.code.springcryptoutils.core.key.PublicKeyChooserByAlias;
 import com.google.code.springcryptoutils.core.key.PublicKeyException;
 import com.google.code.springcryptoutils.core.keystore.KeyStoreChooser;
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,6 +14,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.io.UnsupportedEncodingException;
+import java.security.Security;
 import java.util.UUID;
 
 import static org.junit.Assert.*;
@@ -20,6 +22,10 @@ import static org.junit.Assert.*;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration
 public class SignerAndVerifierWithChoosersByAliasImplSpecificProviderTest {
+
+    static {
+        Security.addProvider(new BouncyCastleProvider());
+    }
 
     @Autowired
     private SignerWithChoosersByAlias signer;

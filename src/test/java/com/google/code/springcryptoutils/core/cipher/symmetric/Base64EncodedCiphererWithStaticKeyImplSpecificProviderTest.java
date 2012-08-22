@@ -1,5 +1,6 @@
 package com.google.code.springcryptoutils.core.cipher.symmetric;
 
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -8,6 +9,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.io.UnsupportedEncodingException;
+import java.security.Security;
 import java.util.UUID;
 
 import static org.junit.Assert.assertEquals;
@@ -16,6 +18,10 @@ import static org.junit.Assert.assertNotNull;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration
 public class Base64EncodedCiphererWithStaticKeyImplSpecificProviderTest {
+
+    static {
+        Security.addProvider(new BouncyCastleProvider());
+    }
 
     @Autowired
     private Base64EncodedCiphererWithStaticKey encrypter;

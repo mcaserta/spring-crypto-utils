@@ -1,17 +1,24 @@
 package com.google.code.springcryptoutils.core.mac;
 
 import org.apache.commons.codec.binary.Base64;
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.security.Security;
+
 import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration
 public class Base64EncodedMacImplSpecificProviderTest {
+
+    static {
+        Security.addProvider(new BouncyCastleProvider());
+    }
 
     @Autowired
     private Base64EncodedMac mac;
