@@ -26,6 +26,9 @@ navbar:
 
         <div class="tab-content">
             <div class="tab-pane active" id="key-private">
+                <p>To get a reference to a <code>java.security.PrivateKey</code>, use the 
+                    <code>&lt;crypt:privateKey&gt;</code> element.</p>
+
 <pre class="prettyprint"><strong>&lt;crypt:privateKey id="privateKey" keystore-ref="keystore" alias="test"
     password="password"/&gt;</strong>
 
@@ -34,12 +37,18 @@ navbar:
             </div>
 
             <div class="tab-pane" id="key-public">
+                <p>To get a reference to a <code>java.security.PublicKey</code>, use the 
+                    <code>&lt;crypt:publicKey&gt;</code> element.</p>
+
 <pre class="prettyprint"><strong>&lt;crypt:publicKey id="publicKey" keystore-ref="keystore" alias="test"/&gt;</strong>
 
 &lt;crypt:keystore id="keystore" location="classpath:keystore.jks" password="password"/&gt;</pre>
             </div>
 
             <div class="tab-pane" id="key-secret">
+                <p>To get a reference to a <code>java.security.Key</code>, use the 
+                    <code>&lt;crypt:secretKey&gt;</code> element.</p>
+
 <pre class="prettyprint"><strong>&lt;crypt:secretKey id="secretKey" keystore-ref="keystore" alias="hmac"
     password="changeit"/&gt;</strong>
 

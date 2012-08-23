@@ -10,7 +10,7 @@ navbar:
 
 ## What is a public key?
 
-If you are asking yourself questions such as this, go get yourself a copy of <a target="_blank"
+If you are asking yourself questions such as this, do yourself a favour: go get a copy of <a target="_blank"
 href="http://www.schneier.com/book-applied.html">Bruce Schneier's Applied Cryptography</a>.
 Seriously, he told you so:
 
