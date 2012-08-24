@@ -1,0 +1,105 @@
+---
+layout: docs-full
+title: Message Authentication Codes
+navbar:
+  active_item: docs
+---
+<div class="page-header">
+    <h1>Message Authentication Codes</h1>
+</div>
+
+<div class="row">
+    <div class="span3 columns">
+        <h3>Message Authentication Codes</h3>
+    </div>
+
+    <div class="span9 columns">
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#mac" data-toggle="tab">mac</a></li>
+            <li><a href="#b64Mac" data-toggle="tab">b64Mac</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div class="tab-pane active" id="mac">
+<pre class="prettyprint"><strong>&lt;crypt:mac id="mac" secretKey-ref="secretKey" algorithm="HmacSHA1" provider="BC"/&gt;</strong>
+
+&lt;crypt:secretKey id="secretKey" keystore-ref="keystore" alias="hmac" password="changeit"/&gt;
+&lt;crypt:keystore id="keystore" location="classpath:keystore.jceks" password="changeit" type="JCEKS"/&gt;
+</pre>
+
+                <p>For your reference, the JCEKS keystore above was created like this:</p>
+
+<pre class="prettyprint">$ keytool -keystore keystore.jceks -genseckey -keyalg HmacSHA1 -keysize 2048 -alias hmac -storetype jceks -storepass changeit -keypass changeit</pre>
+
+                <div class="alert alert-info">
+                    <h4 class="alert-heading">algorithm</h4>
+                    <code>HmacSHA1</code> is the default algorithm and can be omitted.
+                </div>
+
+                <div class="alert alert-info">
+                    <h4 class="alert-heading">provider <span class="label">since 1.3.0</span></h4>
+                    The <code>provider</code> attribute is optional.
+                </div>
+
+                <p>Here is an example implementation.</p>
+
+<pre class="prettyprint"><strong>import com.springcryptoutils.core.mac.Mac;</strong>
+
+public class MyMacDigester {
+
+    <strong>@Autowired
+    // NB: this is a com.springcryptoutils.core.mac.Mac
+    //     not a javax.security.Mac
+    private Mac mac;</strong>
+
+    public void myBusinessMethod() {
+        byte[] message = "eat me!".getBytes();
+        <strong>byte[] digest = mac.digest(message);</strong>
+    }
+}
+</pre>
+            </div>
+            <div class="tab-pane" id="b64Mac">
+                <p>You shouldn't allow your raw bytes to wander the internets
+                    unarmed. This is why we also provide a base64 encoded
+                    version for message authentication codes.</p>
+
+<pre class="prettyprint"><strong>&lt;crypt:b64Mac id="mac" secretKey-ref="secretKey" algorithm="HmacSHA1" provider="BC"/&gt;</strong>
+
+&lt;crypt:secretKey id="secretKey" keystore-ref="keystore" alias="hmac" password="changeit"/&gt;
+&lt;crypt:keystore id="keystore" location="classpath:keystore.jceks" password="changeit" type="JCEKS"/&gt;
+</pre>
+
+                <p>For your reference, the JCEKS keystore above was created like this:</p>
+
+                <pre class="prettyprint">$ keytool -keystore keystore.jceks -genseckey -keyalg HmacSHA1 -keysize 2048 -alias hmac -storetype jceks -storepass changeit -keypass changeit</pre>
+
+                <div class="alert alert-info">
+                    <h4 class="alert-heading">algorithm</h4>
+                    <code>HmacSHA1</code> is the default algorithm and can be omitted.
+                </div>
+
+                <div class="alert alert-info">
+                    <h4 class="alert-heading">provider <span class="label">since 1.3.0</span></h4>
+                    The <code>provider</code> attribute is optional.
+                </div>
+
+                <p>Here is an example implementation.</p>
+
+<pre class="prettyprint"><strong>import com.springcryptoutils.core.mac.Base64EncodedMac;</strong>
+
+public class MyMacDigester {
+
+    <strong>@Autowired
+    private Base64EncodedMac mac;</strong>
+
+    public void myBusinessMethod() {
+        String b64message = Base64.encode("eat me!");
+        <strong>String b64digest = mac.digest(message);</strong>
+    }
+}
+</pre>
+            </div>
+        </div>
+    </div>
+</div>
