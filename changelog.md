@@ -21,6 +21,8 @@ navbar:
     becomes <code>http://springcryptoutils.com/schema/crypt</code>
   * in the java files: <code>import com.google.code.springcryptoutils</code> becomes
     <code>import com.springcryptoutils</code>
+  * <strong>NB:</strong> the maven coordinates are unchanged (they still have
+    <code>com.google</code> in the groupId)
 
 
 ### release 1.2.0 - (2012-05-10)
