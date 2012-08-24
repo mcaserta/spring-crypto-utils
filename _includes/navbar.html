@@ -10,9 +10,7 @@
 
             <div class="nav-collapse">
                 <ul class="nav">
-                    <li
-                    {% if page.navbar.active_item == 'home' %} class="active"{% endif %}><a
-                        href="index.html">Home</a></li>
+                    {% if page.navbar.active_item != 'home' %}<li class="active"><a href="index.html">Home</a></li>{% endif %}
                     <li class="{% if page.navbar.active_item == 'docs' %}active {% endif %}dropdown" id="docsmenu"><a class="dropdown-toggle"
                                                                                             data-toggle="dropdown"
                                                                                             href="#docsmenu">Documentation
