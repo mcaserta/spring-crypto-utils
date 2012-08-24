@@ -1,0 +1,386 @@
+---
+layout: docs-full
+title: Symmetric Encryption
+navbar:
+  active_item: docs
+---
+<div class="page-header">
+    <h1>Symmetric Encryption</h1>
+</div>
+
+<div class="row">
+    <div class="span3 columns">
+        <h3>Symmetric Encryption</h3>
+
+        <p>Symmetric Encryption employs a shared secret in order to exchange messages securely.</p>
+    </div>
+
+    <div class="span9 columns">
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#symmetricKeyGenerator" data-toggle="tab">symmetricKeyGenerator</a></li>
+            <li><a href="#b64SymmetricKeyGenerator" data-toggle="tab">b64SymmetricKeyGenerator</a></li>
+            <li><a href="#symmetricCipherer" data-toggle="tab">symmetricCipherer</a></li>
+            <li><a href="#b64SymmetricCipherer" data-toggle="tab">b64SymmetricCipherer</a></li>
+            <li><a href="#symmetricCiphererWithStaticKey" data-toggle="tab">symmetricCiphererWithStaticKey</a></li>
+            <li><a href="#b64SymmetricCiphererWithStaticKey" data-toggle="tab">b64SymmetricCiphererWithStaticKey</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div class="tab-pane active" id="symmetricKeyGenerator">
+<pre class="prettyprint"><strong>&lt;crypt:symmetricKeyGenerator id="generator" algorithm="DESede" provider="BC"/&gt;</strong></pre>
+
+                <div class="alert alert-info">
+                    <h4 class="alert-heading">algorithm</h4>
+                    <code>DESede</code> is the default algorithm and can be omitted.
+                </div>
+
+                <div class="alert alert-info">
+                    <h4 class="alert-heading">provider <span class="label">since 1.3.0</span></h4>
+                    The <code>provider</code> attribute is optional.
+                </div>
+
+                <p>A symmetric key can then be generated like this:</p>
+
+<pre class="prettyprint">
+<strong>import com.springcryptoutils.core.cipher.symmetric.KeyGenerator;</strong>
+
+public class MyKeyGenerator {
+
+    <strong>@Autowired
+    private KeyGenerator generator;</strong>
+
+    public void generateANewKey() {
+        <strong>byte[] key = generator.generate();</strong>
+    }
+}</pre>
+            </div>
+            <div class="tab-pane" id="b64SymmetricKeyGenerator">
+                <p>Because you don't usually work directly with byte arrays,
+                    but rather with a base64 encoded version of such data,
+                    there also is a base64 version of the key generator:</p>
+
+                <pre class="prettyprint"><strong>&lt;crypt:b64SymmetricKeyGenerator id="generator" algorithm="DESede" provider="BC"/&gt;</strong></pre>
+
+                <div class="alert alert-info">
+                    <h4 class="alert-heading">algorithm</h4>
+                    <code>DESede</code> is the default algorithm and can be omitted.
+                </div>
+
+                <div class="alert alert-info">
+                    <h4 class="alert-heading">provider <span class="label">since 1.3.0</span></h4>
+                    The <code>provider</code> attribute is optional.
+                </div>
+
+                <p>A symmetric key can then be generated like this:</p>
+
+<pre class="prettyprint">
+<strong>import com.springcryptoutils.core.cipher.symmetric.Base64EncodedKeyGenerator;</strong>
+
+public class MyBase64KeyGenerator {
+
+    <strong>@Autowired
+    private Base64EncodedKeyGenerator generator;</strong>
+
+    public void generateANewKey() {
+        <strong>String b64key = generator.generate();</strong>
+    }
+}</pre>
+            </div>
+            <div class="tab-pane" id="symmetricCipherer">
+<pre class="prettyprint"><strong>&lt;crypt:symmetricCipherer id="encrypter" keyAlgorithm="DESede"
+                         cipherAlgorithm="DESede/CBC/PKCS5Padding" provider="BC"
+                         mode="ENCRYPT"/&gt;
+&lt;crypt:symmetricCipherer id="decrypter" keyAlgorithm="DESede"
+                         cipherAlgorithm="DESede/CBC/PKCS5Padding" provider="BC"
+                         mode="DECRYPT"/&gt;
+</strong></pre>
+
+                <div class="alert alert-info">
+                    <h4 class="alert-heading">keyAlgorithm</h4>
+                    <code>DESede</code> is the default key algorithm and can be
+                    omitted.
+                </div>
+
+                <div class="alert alert-info">
+                    <h4 class="alert-heading">cipherAlgorithm</h4>
+                    <code>DESede/CBC/PKCS5Padding</code> (triple DES with cipher
+                    block chaining and PKCS#5 padding) is the default cipher
+                    algorithm and can be omitted.
+                </div>
+
+                <div class="alert alert-info">
+                    <h4 class="alert-heading">provider <span class="label">since
+                        1.3.0</span></h4>
+                    The <code>provider</code> attribute is optional.
+                </div>
+
+                <div class="alert alert-info">
+                    <h4 class="alert-heading">mode</h4>
+                    This can be either <code>ENCRYPT</code> or
+                    <code>DECRYPT</code>, depending on whether you're encrypting
+                    or decrypting.
+                </div>
+
+                <p>Decrypting a message is done using the same interface as for
+                    encrypting. The only difference is that the underlying mode
+                    of operation is set in configuration to
+                    <code>DECRYPT</code>.</p>
+
+<pre class="prettyprint"><strong>import com.springcryptoutils.core.cipher.symmetric.Cipherer;</strong>
+
+public class AnEncryptionExample {
+
+    <strong>@Autowired
+    @Qualifier("encrypter")
+    private Cipherer encrypter;</strong>
+
+    <strong>@Autowired
+    @Qualifier("decrypter")
+    private Cipherer decrypter;</strong>
+
+    // initialization vector
+    private static final byte[] iv = new byte[] {1, 2, 3, 4, 5, 6, 7, 8};
+    // encryption key
+    private static final byte[] key = new byte[] {...};
+
+    public void encryptAndDecrypt(byte[] clearTextMessage) {
+        <strong>byte[] encryptedMessage = encrypter.encrypt(key, iv, clearTextMessage);
+        byte[] theOriginalClearTextMessage = decrypter.encrypt(key, iv, encryptedMessage);</strong>
+    }
+}
+</pre>
+            </div>
+            <div class="tab-pane" id="b64SymmetricCipherer">
+                <p>Because you don't usually work directly with byte arrays,
+                    but rather with a base64 encoded version of such data,
+                    there also is a base64 version of the cipherer.</p>
+
+<pre class="prettyprint"><strong>&lt;crypt:b64SymmetricCipherer id="encrypter" keyAlgorithm="DESede"
+                            cipherAlgorithm="DESede/CBC/PKCS5Padding" provider="BC"
+                            mode="ENCRYPT"/&gt;
+&lt;crypt:b64SymmetricCipherer id="decrypter" keyAlgorithm="DESede"
+                            cipherAlgorithm="DESede/CBC/PKCS5Padding" provider="BC"
+                            mode="DECRYPT"/&gt;</strong></pre>
+
+                <div class="alert alert-info">
+                    <h4 class="alert-heading">keyAlgorithm</h4>
+                    <code>DESede</code> is the default key algorithm and can be
+                    omitted.
+                </div>
+
+                <div class="alert alert-info">
+                    <h4 class="alert-heading">cipherAlgorithm</h4>
+                    <code>DESede/CBC/PKCS5Padding</code> (triple DES with cipher
+                    block chaining and PKCS#5 padding) is the default cipher
+                    algorithm and can be omitted.
+                </div>
+
+                <div class="alert alert-info">
+                    <h4 class="alert-heading">provider <span class="label">since
+                        1.3.0</span></h4>
+                    The <code>provider</code> attribute is optional.
+                </div>
+
+                <div class="alert alert-info">
+                    <h4 class="alert-heading">mode</h4>
+                    This can be either <code>ENCRYPT</code> or
+                    <code>DECRYPT</code>, depending on whether you're encrypting
+                    or decrypting.
+                </div>
+
+                <p>Decrypting a message is done using the same interface as for
+                    encrypting. The only difference is that the underlying mode
+                    of operation is set in configuration to
+                    <code>DECRYPT</code>.</p>
+
+<pre class="prettyprint"><strong>import com.springcryptoutils.core.cipher.symmetric.Base64EncodedCipherer;</strong>
+
+public class ABase64EncryptionExample {
+
+    <strong>@Autowired
+    @Qualifier("encrypter")
+    private Base64EncodedCipherer encrypter;</strong>
+
+    <strong>@Autowired
+    @Qualifier("decrypter")
+    private Base64EncodedCipherer decrypter;</strong>
+
+    // base64 encoded initialization vector
+    private static final String iv = "AQIDBAUGAQI=";
+
+    // base64 encoded encryption key
+    private static final String key = "Rs3xEA16I52XJpsWwkw4GrB8l6FiVGK/";
+
+    public void encryptAndDecrypt() {
+        <strong>String b64encryptedMessage = encrypter.encrypt(key, iv, "a secret message");
+        String decryptedMessage = decrypter.encrypt(key, iv, b64encryptedMessage);</strong>
+    }
+}
+</pre>
+            </div>
+            <div class="tab-pane" id="symmetricCiphererWithStaticKey">
+                <p>If the encryption key is static, you can configure it in the
+                    xml.</p>
+
+<pre class="prettyprint"><strong>&lt;crypt:symmetricCiphererWithStaticKey
+    id="encrypter"
+    keyAlgorithm="DESede" cipherAlgorithm="DESede/CBC/PKCS5Padding"
+    key="Rs3xEA16I52XJpsWwkw4GrB8l6FiVGK/"
+    initializationVector="AQIDBAUGAQI="
+    provider="BC"
+    mode="ENCRYPT"/&gt;
+&lt;crypt:symmetricCiphererWithStaticKey
+    id="decrypter"
+    keyAlgorithm="DESede" cipherAlgorithm="DESede/CBC/PKCS5Padding"
+    key="Rs3xEA16I52XJpsWwkw4GrB8l6FiVGK/"
+    initializationVector="AQIDBAUGAQI="
+    provider="BC"
+    mode="DECRYPT"&gt;</strong></pre>
+
+                <div class="alert alert-info">
+                    <h4 class="alert-heading">keyAlgorithm</h4>
+                    <code>DESede</code> is the default key algorithm and can be
+                    omitted.
+                </div>
+
+                <div class="alert alert-info">
+                    <h4 class="alert-heading">cipherAlgorithm</h4>
+                    <code>DESede/CBC/PKCS5Padding</code> (triple DES with cipher
+                    block chaining and PKCS#5 padding) is the default cipher
+                    algorithm and can be omitted.
+                </div>
+
+                <div class="alert alert-info">
+                    <h4 class="alert-heading">key</h4>
+                    The encryption key, base64 encoded.
+                </div>
+
+                <div class="alert alert-info">
+                    <h4 class="alert-heading">initializationVector</h4>
+                    The initialization vector, base64 encoded.
+                </div>
+
+                <div class="alert alert-info">
+                    <h4 class="alert-heading">provider <span class="label">since
+                        1.3.0</span></h4>
+                    The <code>provider</code> attribute is optional.
+                </div>
+
+                <div class="alert alert-info">
+                    <h4 class="alert-heading">mode</h4>
+                    This can be either <code>ENCRYPT</code> or
+                    <code>DECRYPT</code>, depending on whether you're encrypting
+                    or decrypting.
+                </div>
+
+                <p>Decrypting a message is done using the same interface as for
+                    encrypting. The only difference is that the underlying mode
+                    of operation is set in configuration to
+                    <code>DECRYPT</code>.</p>
+
+                <p>Here's an example implementation:</p>
+
+<pre class="prettyprint"><strong>import com.springcryptoutils.core.cipher.symmetric.CiphererWithStaticKey;</strong>
+
+public class MyEncryptionWithAStaticKey {
+
+    <strong>@Autowired
+    @Qualifier("encrypter")
+    private CiphererWithStaticKey encrypter;
+
+    @Autowired
+    @Qualifier("decrypter")
+    private CiphererWithStaticKey decrypter;</strong>
+
+    public void encryptAndDecrypt() {
+        final byte[] message = new byte[] {4, 8, 15, 16, 23, 42};
+        <strong>byte[] encryptedMessage = encrypter.encrypt(message);
+        byte[] decryptedMessage = decrypter.encrypt(encryptedMessage);</strong>
+    }
+}</pre>
+            </div>
+            <div class="tab-pane" id="b64SymmetricCiphererWithStaticKey">
+                <p>If the encryption key is static and you want to work with
+                    base64 encoded data, you can configure the xml like
+                    this.</p>
+
+<pre class="prettyprint"><strong>&lt;crypt:b64SymmetricCiphererWithStaticKey
+    id="encrypter"
+    keyAlgorithm="DESede" cipherAlgorithm="DESede/CBC/PKCS5Padding"
+    key="Rs3xEA16I52XJpsWwkw4GrB8l6FiVGK/"
+    initializationVector="AQIDBAUGAQI="
+    provider="BC"
+    mode="ENCRYPT"/&gt;
+    &lt;crypt:b64SymmetricCiphererWithStaticKey
+    id="decrypter"
+    keyAlgorithm="DESede" cipherAlgorithm="DESede/CBC/PKCS5Padding"
+    key="Rs3xEA16I52XJpsWwkw4GrB8l6FiVGK/"
+    initializationVector="AQIDBAUGAQI="
+    provider="BC"
+    mode="DECRYPT"&gt;</strong></pre>
+
+                <div class="alert alert-info">
+                    <h4 class="alert-heading">keyAlgorithm</h4>
+                    <code>DESede</code> is the default key algorithm and can be
+                    omitted.
+                </div>
+
+                <div class="alert alert-info">
+                    <h4 class="alert-heading">cipherAlgorithm</h4>
+                    <code>DESede/CBC/PKCS5Padding</code> (triple DES with cipher
+                    block chaining and PKCS#5 padding) is the default cipher
+                    algorithm and can be omitted.
+                </div>
+
+                <div class="alert alert-info">
+                    <h4 class="alert-heading">key</h4>
+                    The encryption key, base64 encoded.
+                </div>
+
+                <div class="alert alert-info">
+                    <h4 class="alert-heading">initializationVector</h4>
+                    The initialization vector, base64 encoded.
+                </div>
+
+                <div class="alert alert-info">
+                    <h4 class="alert-heading">provider <span class="label">since
+                        1.3.0</span></h4>
+                    The <code>provider</code> attribute is optional.
+                </div>
+
+                <div class="alert alert-info">
+                    <h4 class="alert-heading">mode</h4>
+                    This can be either <code>ENCRYPT</code> or
+                    <code>DECRYPT</code>, depending on whether you're encrypting
+                    or decrypting.
+                </div>
+
+                <p>Decrypting a message is done using the same interface as for
+                    encrypting. The only difference is that the underlying mode
+                    of operation is set in configuration to
+                    <code>DECRYPT</code>.</p>
+
+                <p>Here's an example implementation:</p>
+
+<pre class="prettyprint"><strong>import com.springcryptoutils.core.cipher.symmetric.Base64EncodedCiphererWithStaticKey;</strong>
+
+public class MyBase64EncryptionWithAStaticKey {
+
+    <strong>@Autowired
+    @Qualifier("encrypter")
+    private Base64EncodedCiphererWithStaticKey encrypter;
+
+    @Autowired
+    @Qualifier("decrypter")
+    private Base64EncodedCiphererWithStaticKey decrypter;</strong>
+
+    public void encryptAndDecrypt() {
+        final String message = "this is a top-secret message";
+        <strong>String b64encryptedMessage = encrypter.encrypt(message);
+        String decryptedMessage = decrypter.encrypt(b64encryptedMessage);</strong>
+    }
+}</pre>
+            </div>
+        </div>
+    </div>
+</div>
