@@ -1,0 +1,277 @@
+---
+layout: docs-full
+title: Asymmetric Encryption
+navbar:
+  active_item: docs
+---
+<div class="page-header">
+    <h1>Asymmetric Encryption</h1>
+</div>
+
+<div class="row">
+    <div class="span3 columns">
+        <h3>Asymmetric Encryption</h3>
+
+        <p>Asymmetric Encryption employs key pairs in order to exchange messages
+            securely.</p>
+    </div>
+
+    <div class="span9 columns">
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#asymmetricCipherer" data-toggle="tab">asymmetricCipherer</a></li>
+            <li><a href="#b64AsymmetricCipherer" data-toggle="tab">b64AsymmetricCipherer</a></li>
+            <li><a href="#asymmetricCiphererWithChooserByKeyId" data-toggle="tab">asymmetricCiphererWithChooserByKeyId</a></li>
+            <li><a href="#b64AsymmetricCiphererWithChooserByKeyId" data-toggle="tab">b64AsymmetricCiphererWithChooserByKeyId</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div class="tab-pane active" id="asymmetricCipherer">
+<pre class="prettyprint"><strong>&lt;crypt:asymmetricCipherer id="encrypter" key-ref="privateKey" algorithm="RSA"
+    provider="BC" mode="ENCRYPT" /&gt;
+
+&lt;crypt:asymmetricCipherer id="decrypter" key-ref="publicKey" algorithm="RSA"
+    provider="BC" mode="DECRYPT"/&gt;</strong>
+
+&lt;crypt:publicKey id="publicKey" keystore-ref="keystore" alias="test"/&gt;
+&lt;crypt:privateKey id="privateKey" keystore-ref="keystore" alias="test" password="password"/&gt;
+&lt;crypt:keystore id="keystore" location="classpath:keystore.jks" password="password"/&gt;
+</pre>
+
+                <div class="alert alert-info">
+                    <h4 class="alert-heading">algorithm</h4>
+                    <code>RSA</code> is the default algorithm and can be omitted.
+                </div>
+
+                <div class="alert alert-info">
+                    <h4 class="alert-heading">provider <span class="label">since
+                        1.3.0</span></h4>
+                    The <code>provider</code> attribute is optional.
+                </div>
+
+                <div class="alert alert-info">
+                    <h4 class="alert-heading">mode</h4>
+                    This can be either <code>ENCRYPT</code> or
+                    <code>DECRYPT</code>, depending on whether you're encrypting
+                    or decrypting.
+                </div>
+
+                <p>Decrypting a message is done using the same interface as for
+                    encrypting. The only difference is that the underlying mode
+                    of operation is set in configuration to
+                    <code>DECRYPT</code>.</p>
+
+                <p>Here's an example implementation:</p>
+
+<pre class="prettyprint"><strong>import com.springcryptoutils.core.cipher.asymmetric.Cipherer;</strong>
+
+public class MyEncrypter {
+
+    <strong>@Autowired
+    @Qualifier("encrypter")
+    private Cipherer encrypter;
+
+    @Autowired
+    @Qualifier("decrypter")
+    private Cipherer decrypter;</strong>
+
+    public void encryptAndDecrypt(byte[] clearTextMessage) {
+        <strong>byte[] encryptedMessage = encrypter.encrypt(clearTextMessage);
+        byte[] theOriginalClearTextMessage = decrypter.encrypt(encryptedMessage);</strong>
+    }
+}</pre>
+            </div>
+            <div class="tab-pane" id="b64AsymmetricCipherer">
+                <p>Because you don't usually work directly with byte arrays,
+                    but rather with a base64 encoded version of such data,
+                    there also is a base64 version of the cipherer.</p>
+
+<pre class="prettyprint"><strong>&lt;crypt:b64AsymmetricCipherer id="encrypter" key-ref="privateKey" algorithm="RSA"
+    provider="BC" mode="ENCRYPT" /&gt;
+
+&lt;crypt:b64AsymmetricCipherer id="decrypter" key-ref="publicKey" algorithm="RSA"
+    provider="BC" mode="DECRYPT"/&gt;</strong>
+
+&lt;crypt:publicKey id="publicKey" keystore-ref="keystore" alias="test"/&gt;
+&lt;crypt:privateKey id="privateKey" keystore-ref="keystore" alias="test" password="password"/&gt;
+&lt;crypt:keystore id="keystore" location="classpath:keystore.jks" password="password"/&gt;
+</pre>
+
+                <div class="alert alert-info">
+                    <h4 class="alert-heading">algorithm</h4>
+                    <code>RSA</code> is the default algorithm and can be omitted.
+                </div>
+
+                <div class="alert alert-info">
+                    <h4 class="alert-heading">provider <span class="label">since
+                        1.3.0</span></h4>
+                    The <code>provider</code> attribute is optional.
+                </div>
+
+                <div class="alert alert-info">
+                    <h4 class="alert-heading">mode</h4>
+                    This can be either <code>ENCRYPT</code> or
+                    <code>DECRYPT</code>, depending on whether you're encrypting
+                    or decrypting.
+                </div>
+
+                <p>Decrypting a message is done using the same interface as for
+                    encrypting. The only difference is that the underlying mode
+                    of operation is set in configuration to
+                    <code>DECRYPT</code>.</p>
+
+                <p>Here's an example implementation:</p>
+
+<pre class="prettyprint"><strong>import com.springcryptoutils.core.cipher.asymmetric.Base64EncodedCipherer;</strong>
+
+public class MyBase64Encrypter {
+
+    <strong>@Autowired
+    @Qualifier("encrypter")
+    private Base64EncodedCipherer encrypter;
+
+    @Autowired
+    @Qualifier("decrypter")
+    private Base64EncodedCipherer decrypter;</strong>
+
+    public void encryptAndDecrypt() {
+        <strong>String b64encryptedMessage = encrypter.encrypt("a secret message");
+        String decryptedMessage = decrypter.encrypt(b64encryptedMessage);</strong>
+    }
+}</pre>
+            </div>
+            <div class="tab-pane" id="asymmetricCiphererWithChooserByKeyId">
+                <p>If your encryption key is not static, you can configure a
+                    mapping by logical name in the xml configuration.</p>
+
+<pre class="prettyprint"><strong>&lt;crypt:asymmetricCiphererWithChooserByKeyId id="encrypter" keyMap-ref="keyMap"
+    algorithm="RSA" provider="BC" mode="ENCRYPT"/&gt;
+
+&lt;crypt:asymmetricCiphererWithChooserByKeyId id="decrypter" keyMap-ref="keyMap"
+    algorithm="RSA" provider="BC" mode="DECRYPT"/&gt;</strong>
+
+&lt;util:map id="keyMap"&gt;
+    &lt;entry key="publicKeyId"&gt;
+        &lt;crypt:publicKey keystore-ref="keystore" alias="test"/&gt;
+    &lt;/entry&gt;
+    &lt;entry key="privateKeyId"&gt;
+        &lt;crypt:privateKey keystore-ref="keystore" alias="test" password="password"/&gt;
+    &lt;/entry&gt;
+&lt;/util:map&gt;
+
+&lt;crypt:keystore id="keystore" location="classpath:keystore.jks" password="password"/&gt;
+</pre>
+
+                <div class="alert alert-info">
+                    <h4 class="alert-heading">algorithm</h4>
+                    <code>RSA</code> is the default algorithm and can be omitted.
+                </div>
+
+                <div class="alert alert-info">
+                    <h4 class="alert-heading">provider <span class="label">since
+                        1.3.0</span></h4>
+                    The <code>provider</code> attribute is optional.
+                </div>
+
+                <div class="alert alert-info">
+                    <h4 class="alert-heading">mode</h4>
+                    This can be either <code>ENCRYPT</code> or
+                    <code>DECRYPT</code>, depending on whether you're encrypting
+                    or decrypting.
+                </div>
+
+                <p>Decrypting a message is done using the same interface as for
+                    encrypting. The only difference is that the underlying mode
+                    of operation is set in configuration to
+                    <code>DECRYPT</code>.</p>
+
+                <p>Here's an example implementation:</p>
+
+<pre class="prettyprint"><strong>import com.springcryptoutils.core.cipher.asymmetric.CiphererWithChooserByKeyId;</strong>
+
+public class MyCiphererWithChooserByKeyId {
+
+    <strong>@Autowired
+    @Qualifier("encrypter")
+    private CiphererWithChooserByKeyId encrypter;
+
+    @Autowired
+    @Qualifier("decrypter")
+    private CiphererWithChooserByKeyId decrypter;</strong>
+
+    public void encryptAndDecrypt() {
+        final byte[] message = new byte[] {4, 8, 15, 16, 23, 42};
+        <strong>byte[] encryptedMessage = encrypter.encrypt("publicKeyId", message);
+        byte[] decryptedMessage = decrypter.encrypt("privateKeyId", encryptedMessage);</strong>
+    }
+}</pre>
+            </div>
+            <div class="tab-pane" id="b64AsymmetricCiphererWithChooserByKeyId">
+                <p>If your encryption key is not static and you need to work
+                    with base64 encoded data, you can configure a mapping by
+                    logical name in the xml configuration.</p>
+
+<pre class="prettyprint"><strong>&lt;crypt:b64AsymmetricCiphererWithChooserByKeyId id="encrypter" keyMap-ref="keyMap"
+    algorithm="RSA" provider="BC" mode="ENCRYPT"/&gt;
+
+&lt;crypt:b64AsymmetricCiphererWithChooserByKeyId id="decrypter" keyMap-ref="keyMap"
+    algorithm="RSA" provider="BC" mode="DECRYPT"/&gt;</strong>
+
+&lt;util:map id="keyMap"&gt;
+    &lt;entry key="publicKeyId"&gt;
+        &lt;crypt:publicKey keystore-ref="keystore" alias="test"/&gt;
+    &lt;/entry&gt;
+    &lt;entry key="privateKeyId"&gt;
+        &lt;crypt:privateKey keystore-ref="keystore" alias="test" password="password"/&gt;
+    &lt;/entry&gt;
+&lt;/util:map&gt;
+
+&lt;crypt:keystore id="keystore" location="classpath:keystore.jks" password="password"/&gt;
+</pre>
+
+                <div class="alert alert-info">
+                    <h4 class="alert-heading">algorithm</h4>
+                    <code>RSA</code> is the default algorithm and can be omitted.
+                </div>
+
+                <div class="alert alert-info">
+                    <h4 class="alert-heading">provider <span class="label">since
+                        1.3.0</span></h4>
+                    The <code>provider</code> attribute is optional.
+                </div>
+
+                <div class="alert alert-info">
+                    <h4 class="alert-heading">mode</h4>
+                    This can be either <code>ENCRYPT</code> or
+                    <code>DECRYPT</code>, depending on whether you're encrypting
+                    or decrypting.
+                </div>
+
+                <p>Decrypting a message is done using the same interface as for
+                    encrypting. The only difference is that the underlying mode
+                    of operation is set in configuration to
+                    <code>DECRYPT</code>.</p>
+
+                <p>Here's an example implementation:</p>
+
+<pre class="prettyprint"><strong>import com.springcryptoutils.core.cipher.asymmetric.Base64EncodedCiphererWithChooserByKeyId;</strong>
+
+public class MyBase64EncodedCiphererWithChooserByKeyId {
+
+    <strong>@Autowired
+    @Qualifier("encrypter")
+    private Base64EncodedCiphererWithChooserByKeyId encrypter;
+
+    @Autowired
+    @Qualifier("decrypter")
+    private Base64EncodedCiphererWithChooserByKeyId decrypter;</strong>
+
+    public void encryptAndDecrypt() {
+        final String message = "this is a top-secret message";
+        <strong>String b64encryptedMessage = encrypter.encrypt("publicKeyId", message);
+        String decryptedMessage = decrypter.encrypt("privateKeyId", b64encryptedMessage);</strong>
+    }
+}</pre>
+            </div>
+        </div>
+    </div>
+</div>
