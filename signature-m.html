@@ -1,0 +1,240 @@
+---
+layout: docs-full
+title: Signature (with Multiple Keys)
+navbar:
+  active_item: docs
+---
+<div class="page-header">
+    <h1>Signature
+        <small>with Multiple Keys</small>
+    </h1>
+</div>
+
+<div class="row">
+    <div class="span3 columns">
+        <h3>Digital Signatures with Multiple Keys</h3>
+
+        <p>If you need to switch keys when signing or verifying, use one of these.</p>
+    </div>
+
+    <div class="span9 columns">
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#signerWithChooserByPrivateKeyId" data-toggle="tab">signerWithChooserByPrivateKeyId</a></li>
+            <li><a href="#b64SignerWithChooserByPrivateKeyId" data-toggle="tab">b64SignerWithChooserByPrivateKeyId</a></li>
+            <li><a href="#verifierWithChooserByPublicKeyId" data-toggle="tab">verifierWithChooserByPublicKeyId</a></li>
+            <li><a href="#b64VerifierWithChooserByPublicKeyId" data-toggle="tab">b64VerifierWithChooserByPublicKeyId</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div class="tab-pane active" id="signerWithChooserByPrivateKeyId">
+
+                <p>Sometimes you need to be able to select signing keys at runtime. This is how you do it.</p>
+
+<pre class="prettyprint"><strong>&lt;crypt:signerWithChooserByPrivateKeyId id="signer" privateKeyMap-ref="privateKeyMap"
+    algorithm="SHA1withRSA" provider="BC"/&gt;</strong>
+
+&lt;util:map id="privateKeyMap"&gt;
+    &lt;entry key="mcDonalds"&gt;
+        &lt;crypt:privateKey keystore-ref="mcDonaldsKeystore" alias="ronald"
+            password="ketchup"/&gt;
+    &lt;/entry&gt;
+    &lt;entry key="burgerKing"&gt;
+        &lt;crypt:privateKey keystore-ref="burgerKingKeystore" alias="cowboy"
+            password="meatIsMurder"/&gt;
+    &lt;/entry&gt;
+&lt;/util:map&gt;
+
+&lt;crypt:keystore id="mcDonaldsKeystore" location="classpath:keystore-mcdonalds.jks"
+    password="royaleWithCheese"/&gt;
+
+&lt;crypt:keystore id="burgerKingKeystore" location="classpath:keystore-burger-king.jks"
+    password="r0naldSucksStinkyMeat"/&gt;
+</pre>
+
+                <div class="alert alert-info">
+                    <h4 class="alert-heading">algorithm</h4>
+                    <code>SHA1withRSA</code> is the default algorithm and can be omitted.
+                </div>
+
+                <div class="alert alert-info">
+                    <h4 class="alert-heading">provider <span class="label">since 1.3.0</span></h4>
+                    The <code>provider</code> attribute is optional.
+                </div>
+
+                <p>The signer can then be used like this:</p>
+
+<pre class="prettyprint">
+<strong>import com.springcryptoutils.core.signature.SignerWithChooserByPrivateKeyId;</strong>
+
+public class MyBusinessSigner {
+
+    <strong>@Autowired
+    private SignerWithChooserByPrivateKeyId signer;</strong>
+
+    public void myBusinessMethod(byte[] messageToBeTrusted) {
+        byte[] mcsignature = signer.sign("mcDonalds", messageToBeTrusted);
+        byte[] bksignature = signer.sign("burgerKing", messageToBeTrusted);
+    }
+}</pre>
+            </div>
+
+            <div class="tab-pane" id="b64SignerWithChooserByPrivateKeyId">
+
+                <p>Because you don't usually work directly with byte arrays, but rather with a base64 encoded
+                    version of such data, there also is a base64 version of the signer.</p>
+
+<pre class="prettyprint"><strong>&lt;crypt:b64SignerWithChooserByPrivateKeyId id="signer" privateKeyMap-ref="privateKeyMap"
+    algorithm="SHA1withRSA" provider="BC"/&gt;</strong>
+
+&lt;util:map id="privateKeyMap"&gt;
+    &lt;entry key="mcDonalds"&gt;
+        &lt;crypt:privateKey keystore-ref="mcDonaldsKeystore" alias="ronald"
+            password="ketchup"/&gt;
+    &lt;/entry&gt;
+    &lt;entry key="burgerKing"&gt;
+        &lt;crypt:privateKey keystore-ref="burgerKingKeystore" alias="cowboy"
+            password="meatIsMurder"/&gt;
+    &lt;/entry&gt;
+&lt;/util:map&gt;
+
+&lt;crypt:keystore id="mcDonaldsKeystore" location="classpath:keystore-mcdonalds.jks"
+    password="royaleWithCheese"/&gt;
+
+&lt;crypt:keystore id="burgerKingKeystore" location="classpath:keystore-burger-king.jks"
+    password="r0naldSucksStinkyMeat"/&gt;
+</pre>
+
+                <div class="alert alert-info">
+                    <h4 class="alert-heading">algorithm</h4>
+                    <code>SHA1withRSA</code> is the default algorithm and can be omitted.
+                </div>
+
+                <div class="alert alert-info">
+                    <h4 class="alert-heading">provider <span class="label">since 1.3.0</span></h4>
+                    The <code>provider</code> attribute is optional.
+                </div>
+
+                <p>The signer can then be used like this:</p>
+
+<pre class="prettyprint">
+<strong>import com.springcryptoutils.core.signature.Base64EncodedSignerWithChooserByPrivateKeyId;</strong>
+
+public class MyBusinessSigner {
+
+    <strong>@Autowired
+    private Base64EncodedSignerWithChooserByPrivateKeyId signer;</strong>
+
+    public void myBusinessMethod(String messageToBeTrusted) {
+        String b64MCsignature = signer.sign("mcDonalds", messageToBeTrusted);
+        String b64BKsignature = signer.sign("burgerKing", messageToBeTrusted);
+    }
+}</pre>
+            </div>
+
+            <div class="tab-pane" id="verifierWithChooserByPublicKeyId">
+
+                <p>Sometimes you need to be able to select verifying keys at runtime. This is how you do it.</p>
+
+<pre class="prettyprint"><strong>&lt;crypt:verifierWithChooserByPublicKeyId id="verifier" publicKeyMap-ref="publicKeyMap"
+    algorithm="SHA1withRSA" provider="BC"/&gt;</strong>
+
+&lt;util:map id="publicKeyMap"&gt;
+    &lt;entry key="mcDonalds"&gt;
+        &lt;crypt:publicKey keystore-ref="mcDonaldsKeystore" alias="ronald"/&gt;
+    &lt;/entry&gt;
+    &lt;entry key="burgerKing"&gt;
+        &lt;crypt:publicKey keystore-ref="burgerKingKeystore" alias="cowboy"/&gt;
+    &lt;/entry&gt;
+&lt;/util:map&gt;
+
+&lt;crypt:keystore id="mcDonaldsKeystore" location="classpath:keystore-mcdonalds.jks"
+    password="royaleWithCheese"/&gt;
+
+&lt;crypt:keystore id="burgerKingKeystore" location="classpath:keystore-burger-king.jks"
+    password="r0naldSucksStinkyMeat"/&gt;
+</pre>
+
+                <div class="alert alert-info">
+                    <h4 class="alert-heading">algorithm</h4>
+                    <code>SHA1withRSA</code> is the default algorithm and can be omitted.
+                </div>
+
+                <div class="alert alert-info">
+                    <h4 class="alert-heading">provider <span class="label">since 1.3.0</span></h4>
+                    The <code>provider</code> attribute is optional.
+                </div>
+
+                <p>Here is an example usage of the verifier:</p>
+
+<pre class="prettyprint">
+<strong>import com.springcryptoutils.core.signature.VerifierWithChooserByPublicKeyId;</strong>
+
+public class MyBusinessVerifier {
+
+    @Autowired
+    <strong>private VerifierWithChooserByPublicKeyId verifier;</strong>
+
+    public void myBusinessMethod(byte[] messageToBeTrusted, byte[] signature) {
+        <strong>boolean verified = verifier.verify("mcDonalds", messageToBeTrusted, signature);</strong>
+    }
+}
+</pre>
+            </div>
+
+            <div class="tab-pane" id="b64VerifierWithChooserByPublicKeyId">
+
+                <p>Because you don't usually work directly with byte arrays, but rather with a base64 encoded
+                    version of such data, there also is a base64 version of the verifier.</p>
+
+<pre class="prettyprint"><strong>&lt;crypt:b64VerifierWithChooserByPublicKeyId id="verifier" publicKeyMap-ref="publicKeyMap"
+    algorithm="SHA1withRSA" provider="BC"/&gt;</strong>
+
+&lt;util:map id="publicKeyMap"&gt;
+    &lt;entry key="mcDonalds"&gt;
+        &lt;crypt:publicKey keystore-ref="mcDonaldsKeystore" alias="ronald"/&gt;
+    &lt;/entry&gt;
+    &lt;entry key="burgerKing"&gt;
+        &lt;crypt:publicKey keystore-ref="burgerKingKeystore" alias="cowboy"/&gt;
+    &lt;/entry&gt;
+&lt;/util:map&gt;
+
+&lt;crypt:keystore id="mcDonaldsKeystore" location="classpath:keystore-mcdonalds.jks"
+    password="royaleWithCheese"/&gt;
+
+&lt;crypt:keystore id="burgerKingKeystore" location="classpath:keystore-burger-king.jks"
+    password="r0naldSucksStinkyMeat"/&gt;
+</pre>
+
+                <div class="alert alert-info">
+                    <h4 class="alert-heading">algorithm</h4>
+                    <code>SHA1withRSA</code> is the default algorithm and can be omitted.
+                </div>
+
+                <div class="alert alert-info">
+                    <h4 class="alert-heading">provider <span class="label">since 1.3.0</span></h4>
+                    The <code>provider</code> attribute is optional.
+                </div>
+
+                <p>Here is an example usage of the verifier:</p>
+
+<pre class="prettyprint">
+<strong>import com.springcryptoutils.core.signature.Base64EncodedVerifierWithChooserByPublicKeyId;</strong>
+
+public class MyBusinessVerifier {
+
+    @Autowired
+    <strong>private Base64EncodedVerifierWithChooserByPublicKeyId verifier;</strong>
+
+    public void myBusinessMethod(String message, String b64signature) {
+        if (<strong>verifier.verify("mcDonalds", message, b64signature)</strong>) {
+            proceedWithOrder(message);
+        } else {
+            // ignore order
+        }
+    }
+}
+</pre>
+            </div>
+        </div>
+    </div>
+</div>
