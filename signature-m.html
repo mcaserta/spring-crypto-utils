@@ -72,8 +72,8 @@ public class MyBusinessSigner {
     private SignerWithChooserByPrivateKeyId signer;</strong>
 
     public void myBusinessMethod(byte[] messageToBeTrusted) {
-        byte[] mcsignature = signer.sign("mcDonalds", messageToBeTrusted);
-        byte[] bksignature = signer.sign("burgerKing", messageToBeTrusted);
+        <strong>byte[] mcsignature = signer.sign("mcDonalds", messageToBeTrusted);
+        byte[] bksignature = signer.sign("burgerKing", messageToBeTrusted);</strong>
     }
 }</pre>
             </div>
@@ -125,8 +125,8 @@ public class MyBusinessSigner {
     private Base64EncodedSignerWithChooserByPrivateKeyId signer;</strong>
 
     public void myBusinessMethod(String messageToBeTrusted) {
-        String b64MCsignature = signer.sign("mcDonalds", messageToBeTrusted);
-        String b64BKsignature = signer.sign("burgerKing", messageToBeTrusted);
+        <strong>String b64MCsignature = signer.sign("mcDonalds", messageToBeTrusted);
+        String b64BKsignature = signer.sign("burgerKing", messageToBeTrusted);</strong>
     }
 }</pre>
             </div>
