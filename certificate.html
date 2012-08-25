@@ -1,0 +1,31 @@
+---
+layout: docs-full
+title: Certificates
+navbar:
+  active_item: docs
+---
+<div class="page-header">
+    <h1>Certificates</h1>
+</div>
+
+<div class="row">
+    <div class="span3 columns">
+        <h3>Certificates</h3>
+
+        <blockquote>
+            <p>In God we trust. All others must submit an X.509 certificate.</p>
+            <small>attributed to <cite title="Charles Forsythe">Charles Forsythe</cite></small>
+        </blockquote>
+    </div>
+
+    <div class="span9 columns">
+        <p>To get a reference to a <code>java.security.cert.Certificate</code>,
+            use the certificate tag like this:</p>
+
+
+<pre class="prettyprint"><strong>&lt;crypt:certificate id="certificate" keystore-ref="keystore" alias="test"/&gt;</strong>
+
+&lt;crypt:keystore id="keystore" location="classpath:keystore.jks" password="password"/&gt;
+</pre>
+    </div>
+</div>
