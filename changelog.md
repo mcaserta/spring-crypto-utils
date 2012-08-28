@@ -10,13 +10,13 @@ navbar:
 
 ### the trunk - release version and date to be defined
 
-* (#3) new: better appliance of the Apache License v2
+* mcaserta/spring-crypto-utils#3 new: better appliance of the Apache License v2
   (<a href="https://github.com/simonetripodi">Simone Tripodi</a>)
 
 
 ### release 1.3.0 - (2012-08-22)
 
-* (#2) new: added provider attribute to almost all elements so that
+* mcaserta/spring-crypto-utils#2 new: added provider attribute to almost all elements so that
   a custom provider can be configured 
   (think <a href="http://www.bouncycastle.org/java.html">BouncyCastle</a>)
   (<a href="https://github.com/bosakm">Martin Bosak</a>)
@@ -34,7 +34,8 @@ navbar:
 
 ### release 1.2.0 - (2012-05-10)
 
-* (#1) new: added certificate element (<a href="https://github.com/iamthechad">Chad Johnston</a>)
+* mcaserta/spring-crypto-utils#1 new: added certificate element
+  (<a href="https://github.com/iamthechad">Chad Johnston</a>)
 
 
 ### release 1.1.1 - (2012-02-02)
