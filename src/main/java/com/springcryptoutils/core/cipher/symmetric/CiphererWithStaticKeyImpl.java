@@ -1,3 +1,18 @@
+/*
+ * Copyright 2012 Mirko Caserta
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this software except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.springcryptoutils.core.cipher.symmetric;
 
 import java.io.UnsupportedEncodingException;
@@ -14,7 +29,7 @@ import com.springcryptoutils.core.cipher.Mode;
 /**
  * The default implementation for performing symmetric encryption/decryption
  * using a static key.
- * 
+ *
  * @author Mirko Caserta (mirko.caserta@gmail.com)
  */
 public class CiphererWithStaticKeyImpl implements CiphererWithStaticKey, InitializingBean {
@@ -29,7 +44,7 @@ public class CiphererWithStaticKeyImpl implements CiphererWithStaticKey, Initial
 
 	/**
 	 * The symmetric key algorithm. The default is DESede (triple DES).
-	 * 
+	 *
 	 * @param keyAlgorithm the symmetric key algorithm
 	 */
 	public void setKeyAlgorithm(String keyAlgorithm) {
@@ -39,7 +54,7 @@ public class CiphererWithStaticKeyImpl implements CiphererWithStaticKey, Initial
 	/**
 	 * The cipher algorithm. The default is DESede/CBC/PKCS5Padding (triple DES
 	 * with Cipher Block Chaining and PKCS 5 padding).
-	 * 
+	 *
 	 * @param cipherAlgorithm the cipher algorithm
 	 */
 	public void setCipherAlgorithm(String cipherAlgorithm) {
@@ -49,7 +64,7 @@ public class CiphererWithStaticKeyImpl implements CiphererWithStaticKey, Initial
 	/**
 	 * Sets the provider name of the specific implementation requested (e.g.,
 	 * "BC" for BouncyCastle, "SunJCE" for the default Sun JCE provider).
-	 * 
+	 *
 	 * @param provider the provider to set
 	 */
 	public void setProvider(String provider) {
@@ -58,7 +73,7 @@ public class CiphererWithStaticKeyImpl implements CiphererWithStaticKey, Initial
 
 	/**
 	 * Sets the encryption/decryption mode.
-	 * 
+	 *
 	 * @param mode the encryption/decryption mode
 	 */
 	public void setMode(Mode mode) {
@@ -68,7 +83,7 @@ public class CiphererWithStaticKeyImpl implements CiphererWithStaticKey, Initial
 	/**
 	 * A base64 encoded representation of the raw byte array containing the
 	 * initialization vector.
-	 * 
+	 *
 	 * @param initializationVector the initialization vector
 	 * @throws SymmetricEncryptionException on runtime errors
 	 */
@@ -83,7 +98,7 @@ public class CiphererWithStaticKeyImpl implements CiphererWithStaticKey, Initial
 	/**
 	 * A base64 encoded representation of the raw byte array containing the
 	 * cryptographic key.
-	 * 
+	 *
 	 * @param key the cryptographic key
 	 */
 	public void setKey(String key) {
@@ -92,7 +107,7 @@ public class CiphererWithStaticKeyImpl implements CiphererWithStaticKey, Initial
 
 	/**
 	 * Encrypts/decrypts a message based on the underlying mode of operation.
-	 * 
+	 *
 	 * @param message if in encryption mode, the clear-text message, otherwise
 	 *        the message to decrypt
 	 * @return if in encryption mode, the encrypted message, otherwise the
