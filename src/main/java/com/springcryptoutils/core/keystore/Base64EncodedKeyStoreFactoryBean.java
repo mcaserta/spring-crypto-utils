@@ -1,3 +1,18 @@
+/*
+ * Copyright 2012 Mirko Caserta
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this software except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.springcryptoutils.core.keystore;
 
 import java.io.ByteArrayInputStream;
@@ -15,7 +30,7 @@ import org.springframework.beans.factory.InitializingBean;
 /**
  * A spring bean factory for instancing KeyStore objects from a base64 encoded
  * keystore file.
- * 
+ *
  * @author Mirko Caserta (mirko.caserta@gmail.com)
  */
 public class Base64EncodedKeyStoreFactoryBean implements FactoryBean,
@@ -30,7 +45,7 @@ public class Base64EncodedKeyStoreFactoryBean implements FactoryBean,
 
     /**
      * Sets the BASE64 encoded version of the keystore file.
-     * 
+     *
      * @param base64EncodedKeyStoreFile
      *            the BASE64 encoded version of the keystore file
      */
@@ -40,7 +55,7 @@ public class Base64EncodedKeyStoreFactoryBean implements FactoryBean,
 
     /**
      * Sets the keystore password.
-     * 
+     *
      * @param password
      *            the keystore password
      */
@@ -50,7 +65,7 @@ public class Base64EncodedKeyStoreFactoryBean implements FactoryBean,
 
     /**
      * Sets the keystore type (defaults to JKS).
-     * 
+     *
      * @param type
      *            the keystore type (defaults to JKS)
      */
@@ -61,7 +76,7 @@ public class Base64EncodedKeyStoreFactoryBean implements FactoryBean,
     /**
      * Sets the provider name of the specific implementation requested (e.g.,
      * "BC" for BouncyCastle, "SunJCE" for the default Sun JCE provider).
-     * 
+     *
      * @param provider
      *            the provider to set
      */
