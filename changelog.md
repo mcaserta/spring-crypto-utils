@@ -8,11 +8,18 @@ navbar:
   active_item: docs
 ---
 
+### the trunk - release version and date to be defined
+
+* (#3) new: better appliance of the Apache License v2
+  (<a href="https://github.com/simonetripodi">Simone Tripodi</a>)
+
+
 ### release 1.3.0 - (2012-08-22)
 
-* new: added provider attribute to almost all elements so that
+* (#2) new: added provider attribute to almost all elements so that
   a custom provider can be configured 
-  (think <a href="http://www.bouncycastle.org/java.html">BouncyCastle</a>) (Martin Bosak)
+  (think <a href="http://www.bouncycastle.org/java.html">BouncyCastle</a>)
+  (<a href="https://github.com/bosakm">Martin Bosak</a>)
 * new: the namespace for the whole project has been moved to springcryptoutils.com.
   
   <strong>Migration guide:</strong> a very simple search and 
@@ -27,7 +34,7 @@ navbar:
 
 ### release 1.2.0 - (2012-05-10)
 
-* new: added certificate element (Chad Johnston)
+* (#1) new: added certificate element (<a href="https://github.com/iamthechad">Chad Johnston</a>)
 
 
 ### release 1.1.1 - (2012-02-02)
