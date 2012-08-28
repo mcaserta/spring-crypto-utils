@@ -1,3 +1,18 @@
+/*
+ * Copyright 2012 Mirko Caserta
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this software except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.springcryptoutils.core.cipher.symmetric;
 
 import javax.crypto.Cipher;
@@ -12,7 +27,7 @@ import com.springcryptoutils.core.cipher.Mode;
 /**
  * The default implementation for performing symmetric encryption/decryption
  * using base64 encoded versions of raw byte arrays and a static key.
- * 
+ *
  * @author Mirko Caserta (mirko.caserta@gmail.com)
  */
 public class Base64EncodedCiphererWithStaticKeyImpl implements Base64EncodedCiphererWithStaticKey, InitializingBean {
@@ -29,7 +44,7 @@ public class Base64EncodedCiphererWithStaticKeyImpl implements Base64EncodedCiph
 
 	/**
 	 * The symmetric key algorithm. The default is DESede (triple DES).
-	 * 
+	 *
 	 * @param keyAlgorithm the symmetric key algorithm
 	 */
 	public void setKeyAlgorithm(String keyAlgorithm) {
@@ -39,7 +54,7 @@ public class Base64EncodedCiphererWithStaticKeyImpl implements Base64EncodedCiph
 	/**
 	 * The cipher algorithm. The default is DESede/CBC/PKCS5Padding (triple DES
 	 * with Cipher Block Chaining and PKCS 5 padding).
-	 * 
+	 *
 	 * @param cipherAlgorithm the cipher algorithm
 	 */
 	public void setCipherAlgorithm(String cipherAlgorithm) {
@@ -49,7 +64,7 @@ public class Base64EncodedCiphererWithStaticKeyImpl implements Base64EncodedCiph
 	/**
 	 * The charset to use when converting a string into a raw byte array
 	 * representation. The default is UTF-8.
-	 * 
+	 *
 	 * @param charsetName the charset name (default: UTF-8)
 	 */
 	public void setCharsetName(String charsetName) {
@@ -59,7 +74,7 @@ public class Base64EncodedCiphererWithStaticKeyImpl implements Base64EncodedCiph
 	/**
 	 * Sets the provider name of the specific implementation requested (e.g.,
 	 * "BC" for BouncyCastle, "SunJCE" for the default Sun JCE provider).
-	 * 
+	 *
 	 * @param provider the provider to set
 	 */
 	public void setProvider(String provider) {
@@ -68,7 +83,7 @@ public class Base64EncodedCiphererWithStaticKeyImpl implements Base64EncodedCiph
 
 	/**
 	 * Sets the encryption/decryption mode.
-	 * 
+	 *
 	 * @param mode the encryption/decryption mode
 	 */
 	public void setMode(Mode mode) {
@@ -80,7 +95,7 @@ public class Base64EncodedCiphererWithStaticKeyImpl implements Base64EncodedCiph
 	 * formatted so it's easier to read? This may not work well with some base64
 	 * decoders which don't accept whitespace in the input so the default is
 	 * false.
-	 * 
+	 *
 	 * @param chunkOutput should the output be formatted?
 	 */
 	public void setChunkOutput(boolean chunkOutput) {
@@ -90,7 +105,7 @@ public class Base64EncodedCiphererWithStaticKeyImpl implements Base64EncodedCiph
 	/**
 	 * A base64 encoded representation of the raw byte array containing the
 	 * initialization vector.
-	 * 
+	 *
 	 * @param initializationVector the initialization vector
 	 */
 	public void setInitializationVector(String initializationVector) {
@@ -100,7 +115,7 @@ public class Base64EncodedCiphererWithStaticKeyImpl implements Base64EncodedCiph
 	/**
 	 * A base64 encoded representation of the raw byte array containing the
 	 * cryptographic key.
-	 * 
+	 *
 	 * @param key the cryptographic key
 	 */
 	public void setKey(String key) {
@@ -109,7 +124,7 @@ public class Base64EncodedCiphererWithStaticKeyImpl implements Base64EncodedCiph
 
 	/**
 	 * Encrypts/decrypts a message using the underlying symmetric key and mode.
-	 * 
+	 *
 	 * @param message if in encryption mode, the clear-text message to encrypt,
 	 *        otherwise a base64 encoded version of the raw byte array
 	 *        containing the message to decrypt

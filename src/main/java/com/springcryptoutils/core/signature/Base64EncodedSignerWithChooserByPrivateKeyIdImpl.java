@@ -1,3 +1,18 @@
+/*
+ * Copyright 2012 Mirko Caserta
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this software except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.springcryptoutils.core.signature;
 
 import java.security.PrivateKey;
@@ -8,7 +23,7 @@ import java.util.Map;
  * The default implementation for providing base64 encoded versions of digital
  * signatures where the private key is configured in the underlying mapping
  * using a logical name.
- * 
+ *
  * @author Mirko Caserta (mirko.caserta@gmail.com)
  */
 public class Base64EncodedSignerWithChooserByPrivateKeyIdImpl implements Base64EncodedSignerWithChooserByPrivateKeyId {
@@ -25,7 +40,7 @@ public class Base64EncodedSignerWithChooserByPrivateKeyIdImpl implements Base64E
 
 	/**
 	 * The signature algorithm. The default is SHA1withRSA.
-	 * 
+	 *
 	 * @param algorithm the signature algorithm
 	 */
 	public void setAlgorithm(String algorithm) {
@@ -35,7 +50,7 @@ public class Base64EncodedSignerWithChooserByPrivateKeyIdImpl implements Base64E
 	/**
 	 * The charset to use when converting a string into a raw byte array
 	 * representation. The default is UTF-8.
-	 * 
+	 *
 	 * @param charsetName the charset name (default: UTF-8)
 	 */
 	public void setCharsetName(String charsetName) {
@@ -45,7 +60,7 @@ public class Base64EncodedSignerWithChooserByPrivateKeyIdImpl implements Base64E
 	/**
 	 * Sets the provider name of the specific implementation requested (e.g.,
 	 * "BC" for BouncyCastle, "SunJCE" for the default Sun JCE provider).
-	 * 
+	 *
 	 * @param provider the provider to set
 	 */
 	public void setProvider(String provider) {
@@ -55,7 +70,7 @@ public class Base64EncodedSignerWithChooserByPrivateKeyIdImpl implements Base64E
 	/**
 	 * The map of private keys where the map keys are logical names which must
 	 * match the privateKeyId parameter as specified in the sign method.
-	 * 
+	 *
 	 * @param privateKeyMap the private key map
 	 * @see #sign(String, String)
 	 */
@@ -65,7 +80,7 @@ public class Base64EncodedSignerWithChooserByPrivateKeyIdImpl implements Base64E
 
 	/**
 	 * Signs a message.
-	 * 
+	 *
 	 * @param privateKeyId the logical name of the private key as configured in
 	 *        the underlying mapping
 	 * @param message the message to sign
