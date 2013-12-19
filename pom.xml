@@ -23,7 +23,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.google.code.spring-crypto-utils</groupId>
     <artifactId>spring-crypto-utils</artifactId>
-    <version>1.3.5-SNAPSHOT</version>
+    <version>1.3.6-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>Spring Cryptographic Utilities</name>
     <description>A framework for easier configuration of cryptographic utilities using Spring.</description>
@@ -162,6 +162,18 @@
                     <configuration>
                         <mavenExecutorId>forked-path</mavenExecutorId>
                     </configuration>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.apache.maven.scm</groupId>
+                            <artifactId>maven-scm-api</artifactId>
+                            <version>1.8.1</version>
+                        </dependency>
+                        <dependency>
+                            <groupId>org.apache.maven.scm</groupId>
+                            <artifactId>maven-scm-provider-gitexe</artifactId>
+                            <version>1.8.1</version>
+                        </dependency>
+                    </dependencies>
                 </plugin>
                 <plugin>
                     <artifactId>maven-site-plugin</artifactId>
