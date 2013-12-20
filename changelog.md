@@ -8,8 +8,10 @@ navbar:
   active_item: docs
 ---
 
-### the trunk - release version and date to be defined
+### release 1.3.6 - (2013-12-19)
 
+* Spring Framework 4.0.0 ready
+* JDK 1.6 is now the minimum required version
 * <a href="https://github.com/mcaserta/spring-crypto-utils/pull/3">#3</a>
   new: better appliance of the Apache License v2
   (<a href="https://github.com/simonetripodi">Simone Tripodi</a>)
