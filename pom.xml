@@ -23,7 +23,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.google.code.spring-crypto-utils</groupId>
     <artifactId>spring-crypto-utils</artifactId>
-    <version>1.4.0</version>
+    <version>1.4.1-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>Spring Cryptographic Utilities</name>
     <description>A framework for easier configuration of cryptographic utilities using Spring.</description>
@@ -38,7 +38,7 @@
         <connection>scm:git:git@github.com:mcaserta/spring-crypto-utils.git</connection>
         <developerConnection>scm:git:git@github.com:mcaserta/spring-crypto-utils.git</developerConnection>
         <url>http://github.com/mcaserta/spring-crypto-utils</url>
-        <tag>spring-crypto-utils-1.4.0</tag>
+        <tag>HEAD</tag>
     </scm>
     <issueManagement>
         <system>GitHub Issues</system>
