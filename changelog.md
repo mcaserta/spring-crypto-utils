@@ -8,6 +8,12 @@ navbar:
   active_item: docs
 ---
 
+### release 1.4.0 - (2015-02-16)
+
+* Spring Platform 1.1.1
+* JDK 1.7 is now the minimum required version
+
+
 ### release 1.3.6 - (2013-12-19)
 
 * Spring Framework 4.0.0 ready
