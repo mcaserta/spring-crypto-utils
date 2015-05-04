@@ -34,7 +34,7 @@ public class DigesterImpl implements Digester, InitializingBean {
 	/**
 	 * Enum for the output mode: base64 or hexadecimal.
 	 */
-	public static enum OutputMode {
+	public enum OutputMode {
 		BASE64, HEX
 	}
 
