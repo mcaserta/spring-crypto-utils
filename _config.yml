@@ -1,5 +1,5 @@
 markdown: GFM
-pygments: true
 safe: true
+highlighter: rouge
 
 title: Spring Crypto Utils
