@@ -1,4 +1,4 @@
-markdown: rdiscount
+markdown: GFM
 pygments: true
 safe: true
 
