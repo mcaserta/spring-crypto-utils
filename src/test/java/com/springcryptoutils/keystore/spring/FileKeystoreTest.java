@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringJUnitConfig
-public class FileKeystore {
+class FileKeystoreTest {
 
     @Autowired
     private KeyStore keystore;

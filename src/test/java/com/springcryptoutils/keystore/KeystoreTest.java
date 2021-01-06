@@ -4,6 +4,8 @@ import com.springcryptoutils.CryptException;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.security.KeyStore;
 
@@ -12,10 +14,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class KeystoreTest {
 
-    @Test
-    @DisplayName("loads a keystore from the classpath")
-    void classpathKeystore() {
-        KeyStore keystore = keystore("classpath:keystore.jks", "password", "JKS", "SUN");
+    @DisplayName("loads a keystore from the classpath and the filesystem")
+    @ParameterizedTest
+    @ValueSource(strings = {"classpath:keystore.jks", "file:src/test/resources/keystore.jks", "src/test/resources/keystore.jks"})
+    void classpathKeystore(String location) {
+        KeyStore keystore = keystore(location, "password", "JKS", "SUN");
         assertNotNull(keystore);
         assertEquals("JKS", keystore.getType(), "type");
     }
@@ -32,22 +35,6 @@ class KeystoreTest {
     @DisplayName("loads a keystore from the classpath with the default provider and type")
     void classpathKeystoreWithDefaultProviderAndType() {
         KeyStore keystore = keystore("classpath:keystore.jks", "password");
-        assertNotNull(keystore);
-        assertEquals("JKS", keystore.getType(), "type");
-    }
-
-    @Test
-    @DisplayName("loads a keystore from the local filesystem with the file: prefix")
-    void fileKeystore1() {
-        KeyStore keystore = keystore("file:src/test/resources/keystore.jks", "password", "JKS", "SUN");
-        assertNotNull(keystore);
-        assertEquals("JKS", keystore.getType(), "type");
-    }
-
-    @Test
-    @DisplayName("loads a keystore from the local filesystem without the file: prefix")
-    void fileKeystore2() {
-        KeyStore keystore = keystore("src/test/resources/keystore.jks", "password", "JKS", "SUN");
         assertNotNull(keystore);
         assertEquals("JKS", keystore.getType(), "type");
     }
