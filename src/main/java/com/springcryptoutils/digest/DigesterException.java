@@ -8,4 +8,8 @@ public class DigesterException extends RuntimeException {
         super(message, e);
     }
 
+    public DigesterException(String message) {
+        super(message);
+    }
+
 }
