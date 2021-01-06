@@ -1,6 +1,5 @@
 package com.springcryptoutils.digest.spring;
 
-import com.springcryptoutils.Crypt;
 import com.springcryptoutils.digest.Digester;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -11,6 +10,7 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import java.nio.charset.StandardCharsets;
 
+import static com.springcryptoutils.Crypt.digester;
 import static com.springcryptoutils.digest.DigesterConsts.*;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
@@ -42,12 +42,12 @@ class DigesterTest {
     public static class Cfg {
         @Bean
         public Digester md5() {
-            return Crypt.digester("MD5");
+            return digester("MD5");
         }
 
         @Bean
         public Digester sha1() {
-            return Crypt.digester("SHA1");
+            return digester("SHA1");
         }
     }
 

@@ -1,6 +1,6 @@
 package com.springcryptoutils.digest;
 
-import com.springcryptoutils.Crypt;
+import com.springcryptoutils.CryptException;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import java.nio.charset.StandardCharsets;
 import java.security.Security;
 
+import static com.springcryptoutils.Crypt.digester;
 import static com.springcryptoutils.digest.DigesterConsts.*;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -22,7 +23,7 @@ class DigesterWithCustomProviderTest {
     @Test
     @DisplayName("Digester for the SHA1 algorithm")
     void sha1() {
-        Digester digester = Crypt.digester("SHA1", "BC"); // use Bouncy Castle provider
+        Digester digester = digester("SHA1", "BC"); // use Bouncy Castle provider
         assertArrayEquals(MESSAGE_SHA1, digester.digest("message".getBytes(StandardCharsets.UTF_8)));
         assertArrayEquals(EMPTY_SHA1, digester.digest("".getBytes(StandardCharsets.UTF_8)));
     }
@@ -30,7 +31,7 @@ class DigesterWithCustomProviderTest {
     @Test
     @DisplayName("Digester for the MD5 algorithm")
     void md5() {
-        Digester digester = Crypt.digester("MD5", "BC"); // use Bouncy Castle provider
+        Digester digester = digester("MD5", "BC"); // use Bouncy Castle provider
         assertArrayEquals(MESSAGE_MD5, digester.digest("message".getBytes(StandardCharsets.UTF_8)));
         assertArrayEquals(EMPTY_MD5, digester.digest("".getBytes(StandardCharsets.UTF_8)));
     }
@@ -39,8 +40,8 @@ class DigesterWithCustomProviderTest {
     @DisplayName("Digester for an invalid algorithm should throw a DigesterException")
     void invalidAlgorithm1() {
         assertThrows(
-                DigesterException.class,
-                () -> Crypt.digester("foo", "BC"), // use Bouncy Castle provider
+                CryptException.class,
+                () -> digester("foo", "BC"), // use Bouncy Castle provider
                 "No such algorithm: foo"
         );
     }

@@ -1,6 +1,5 @@
 package com.springcryptoutils.digest.spring;
 
-import com.springcryptoutils.Crypt;
 import com.springcryptoutils.digest.EncodingDigester;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.junit.jupiter.api.DisplayName;
@@ -13,6 +12,7 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import java.security.Security;
 
 import static com.springcryptoutils.Crypt.Encoding.*;
+import static com.springcryptoutils.Crypt.digester;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringJUnitConfig
@@ -107,42 +107,42 @@ class EncodingDigesterWithCustomProviderTest {
     public static class Cfg {
         @Bean
         public EncodingDigester sha1hex() {
-            return Crypt.digester("SHA1", "BC", HEX);
+            return digester("SHA1", "BC", HEX);
         }
 
         @Bean
         public EncodingDigester sha1base64() {
-            return Crypt.digester("SHA1", "BC", BASE64);
+            return digester("SHA1", "BC", BASE64);
         }
 
         @Bean
         public EncodingDigester sha1url() {
-            return Crypt.digester("SHA1", "BC", URL);
+            return digester("SHA1", "BC", URL);
         }
 
         @Bean
         public EncodingDigester sha1mime() {
-            return Crypt.digester("SHA1", "BC", MIME);
+            return digester("SHA1", "BC", MIME);
         }
 
         @Bean
         public EncodingDigester md5hex() {
-            return Crypt.digester("MD5", "BC", HEX);
+            return digester("MD5", "BC", HEX);
         }
 
         @Bean
         public EncodingDigester md5base64() {
-            return Crypt.digester("MD5", "BC", BASE64);
+            return digester("MD5", "BC", BASE64);
         }
 
         @Bean
         public EncodingDigester md5url() {
-            return Crypt.digester("MD5", "BC", URL);
+            return digester("MD5", "BC", URL);
         }
 
         @Bean
         public EncodingDigester md5mime() {
-            return Crypt.digester("MD5", "BC", MIME);
+            return digester("MD5", "BC", MIME);
         }
     }
 

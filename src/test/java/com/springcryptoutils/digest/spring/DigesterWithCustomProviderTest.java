@@ -1,6 +1,5 @@
 package com.springcryptoutils.digest.spring;
 
-import com.springcryptoutils.Crypt;
 import com.springcryptoutils.digest.Digester;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.junit.jupiter.api.DisplayName;
@@ -13,6 +12,7 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import java.nio.charset.StandardCharsets;
 import java.security.Security;
 
+import static com.springcryptoutils.Crypt.digester;
 import static com.springcryptoutils.digest.DigesterConsts.*;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
@@ -48,12 +48,12 @@ class DigesterWithCustomProviderTest {
     public static class Cfg {
         @Bean
         public Digester md5() {
-            return Crypt.digester("MD5", "BC");
+            return digester("MD5", "BC");
         }
 
         @Bean
         public Digester sha1() {
-            return Crypt.digester("SHA1", "BC");
+            return digester("SHA1", "BC");
         }
     }
 
