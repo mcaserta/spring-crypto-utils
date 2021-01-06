@@ -13,6 +13,9 @@
         <java.version>11</java.version>
         <junit.version>5.7.0</junit.version>
         <spring.boot.version>2.4.1</spring.boot.version>
+        <sonar.projectKey>mcaserta_spring-crypto-utils</sonar.projectKey>
+        <sonar.organization>mcaserta</sonar.organization>
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     </properties>
     <scm>
         <connection>scm:git:git@github.com:mcaserta/spring-crypto-utils.git</connection>
