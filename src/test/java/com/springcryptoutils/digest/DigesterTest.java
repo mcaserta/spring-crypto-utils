@@ -60,4 +60,24 @@ class DigesterTest {
         );
     }
 
+    @Test
+    @DisplayName("Digester for an empty provider should throw a DigesterException")
+    void emptyProvider() {
+        assertThrows(
+                CryptException.class,
+                () -> digester("SHA1", "   "),
+                "No such provider: '   '"
+        );
+    }
+
+    @Test
+    @DisplayName("Digester for an invalid encoder should throw a DigesterException")
+    void invalidEncoder() {
+        assertThrows(
+                CryptException.class,
+                () -> digester("SHA1", "SUN", null),
+                "No such encoding: null"
+        );
+    }
+
 }

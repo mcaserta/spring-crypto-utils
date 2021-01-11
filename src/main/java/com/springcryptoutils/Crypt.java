@@ -28,6 +28,8 @@ public class Crypt {
     private static final Base64.Encoder url = Base64.getUrlEncoder();
     private static final Base64.Encoder mime = Base64.getMimeEncoder();
 
+    private Crypt() {} // utility class, user can't make new instances
+
     /**
      * Returns a key store.
      *
@@ -44,7 +46,7 @@ public class Crypt {
      * @throws CryptException on keystore loading errors
      */
     public static KeyStore keystore(String location, String password) {
-        return keystore(location, password, null, null);
+        return keystore(location, password, null, "SUN");
     }
 
     /**
@@ -64,7 +66,7 @@ public class Crypt {
      * @throws CryptException on keystore loading errors
      */
     public static KeyStore keystore(String location, String password, String type) {
-        return keystore(location, password, type, null);
+        return keystore(location, password, type, "SUN");
     }
 
     /**
@@ -87,10 +89,10 @@ public class Crypt {
     public static KeyStore keystore(String location, String password, String type, String provider) {
         try {
             final KeyStore keyStore;
-            if (provider != null && !provider.trim().isEmpty()) {
-                keyStore = KeyStore.getInstance(type == null ? "JKS" : type, provider);
+            if (provider == null || provider.trim().isEmpty()) {
+                throw new CryptException(String.format("invalid provider: %s", provider));
             } else {
-                keyStore = KeyStore.getInstance(type == null ? "JKS" : type);
+                keyStore = KeyStore.getInstance(type == null ? "JKS" : type, provider);
             }
             final InputStream inputStream;
             if (location.startsWith("classpath:")) {
@@ -103,9 +105,9 @@ public class Crypt {
             keyStore.load(inputStream, password.toCharArray());
             return keyStore;
         } catch (KeyStoreException | CertificateException | IOException | NoSuchAlgorithmException e) {
-            throw new CryptException("error loading keystore: location=" + location, e);
+            throw new CryptException(String.format("error loading keystore: location=%s", location), e);
         } catch (NoSuchProviderException e) {
-            throw new CryptException("error loading keystore, no such provider: provider=" + provider, e);
+            throw new CryptException(String.format("error loading keystore, no such provider: provider=%s", provider), e);
         }
     }
 
@@ -151,6 +153,10 @@ public class Crypt {
      * @throws CryptException on no such algorithm or provider exceptions
      */
     public static EncodingDigester digester(String algorithm, String provider, Encoding encoding, Charset charset) {
+        if (encoding == null) {
+            throw new CryptException("Invalid encoding: null");
+        }
+
         final Digester rawDigester = Optional.ofNullable(provider)
                 .map(p -> digester(algorithm, p))
                 .orElseGet(() -> digester(algorithm));
@@ -164,8 +170,8 @@ public class Crypt {
                 return message -> url.encodeToString(rawDigester.digest(message.getBytes(charset)));
             case MIME:
                 return message -> mime.encodeToString(rawDigester.digest(message.getBytes(charset)));
-            default:
-                throw new CryptException("Unexpected encoding: " + encoding);
+            default: // unreachable
+                throw new CryptException(String.format("Unexpected encoding: %s", encoding));
         }
     }
 

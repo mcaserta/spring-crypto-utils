@@ -41,7 +41,6 @@ class KeystoreTest {
 
     @Test
     @DisplayName("loads a keystore from an https url")
-    @Disabled("this should only run on machines with a working internet connection")
     void httpsKeystore() {
         KeyStore keystore = keystore("https://github.com/mcaserta/spring-crypto-utils/blob/1.4/src/test/resources/keystore.jks?raw=true", "password", "JKS", "SUN");
         assertNotNull(keystore);
@@ -64,6 +63,18 @@ class KeystoreTest {
     @DisplayName("loading a keystore with the wrong provider should throw an exception")
     void noSuchProvider() {
         assertThrows(CryptException.class, () -> keystore("classpath:keystore.jks", "password", "JKS", "foo"));
+    }
+
+    @Test
+    @DisplayName("loading a keystore with an empty provider should throw an exception")
+    void emptyProvider() {
+        assertThrows(CryptException.class, () -> keystore("classpath:keystore.jks", "password", "JKS", "   "));
+    }
+
+    @Test
+    @DisplayName("loading a keystore with a null provider should throw an exception")
+    void nullProvider() {
+        assertThrows(CryptException.class, () -> keystore("classpath:keystore.jks", "password", "JKS", null));
     }
 
 }
