@@ -32,7 +32,7 @@ class DefaultKeystoreTest {
         KeyStore keystore = Crypt.keystore("PKCS12");
         assertNotNull(keystore);
         assertEquals("PKCS12", keystore.getType(), "type");
-        assertEquals(1, keystore.size(), "size");
+        assertEquals(2, keystore.size(), "size");
     }
 
     @Test

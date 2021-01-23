@@ -203,6 +203,34 @@ public class Crypt {
         }
     }
 
+    public static PrivateKey privateKey(KeyStore keystore, String alias, String password) {
+        try {
+            final KeyStore.PrivateKeyEntry privateKeyEntry = (KeyStore.PrivateKeyEntry) keystore.getEntry(alias, new KeyStore.PasswordProtection(password.toCharArray()));
+
+            if (privateKeyEntry == null) {
+                throw new CryptException(String.format("no such private key with alias: %s", alias));
+            }
+
+            return privateKeyEntry.getPrivateKey();
+        } catch (NoSuchAlgorithmException | UnrecoverableEntryException | KeyStoreException e) {
+            throw new CryptException(String.format("error loading private key with alias: %s", alias), e);
+        }
+    }
+
+    public static Key secretKey(KeyStore keystore, String alias, String password) {
+        try {
+            final Key key = keystore.getKey(alias, password.toCharArray());
+
+            if (key == null) {
+                throw new CryptException(String.format("no such secret key with alias: %s", alias));
+            }
+
+            return key;
+        } catch (KeyStoreException | UnrecoverableKeyException | NoSuchAlgorithmException e) {
+            throw new CryptException(String.format("error loading secret key with alias: %s", alias), e);
+        }
+    }
+
     /**
      * Returns an encoding message digester for the given algorithm.
      * <p>
