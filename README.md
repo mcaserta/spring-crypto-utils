@@ -1,3 +1,7 @@
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=mcaserta_spring-crypto-utils&metric=alert_status)](https://sonarcloud.io/dashboard?id=mcaserta_spring-crypto-utils)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=mcaserta_spring-crypto-utils&metric=security_rating)](https://sonarcloud.io/dashboard?id=mcaserta_spring-crypto-utils)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=mcaserta_spring-crypto-utils&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=mcaserta_spring-crypto-utils)
+
 Welcome fellow hacker. This is the main development branch,
 where things are a work in progress towards the shiny next 
 new version: 1.5.0.
