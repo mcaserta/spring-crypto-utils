@@ -12,23 +12,30 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.security.*;
+import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
 import java.util.Base64;
 import java.util.Optional;
 
-
+/**
+ * <p>This class is the main entrypoint for all cryptographic operations.</p>
+ *
+ * <p>Just type <code>Crypt.</code> in your code and let your IDE's
+ * autocompletion do the rest.</p>
+ *
+ * @author Mirko Caserta (mirko.caserta@gmail.com)
+ * @since 1.5.0
+ */
 public class Crypt {
-
-    public enum Encoding {
-        HEX, BASE64, URL, MIME
-    }
 
     private static final HexEncoder hex = HexEncoder.getEncoder();
     private static final Base64.Encoder base64 = Base64.getEncoder();
     private static final Base64.Encoder url = Base64.getUrlEncoder();
     private static final Base64.Encoder mime = Base64.getMimeEncoder();
 
-    private Crypt() {} // utility class, user can't make new instances
+    private Crypt() {
+        // utility class, user can't make new instances
+    }
 
     /**
      * Returns the default keystore using configuration from the following
@@ -38,7 +45,7 @@ public class Crypt {
      *   <li><code>javax.net.ssl.keyStore</code></li>
      *   <li><code>javax.net.ssl.keyStorePassword</code></li>
      * </ul>
-     *
+     * <p>
      * The keystore location supports the following protocols:
      *
      * <ul>
@@ -47,20 +54,21 @@ public class Crypt {
      *   <li><code>https:</code></li>
      *   <li><code>file:</code></li>
      * </ul>
-     *
+     * <p>
      * If no protocol is specified, <code>file</code> is assumed.
      *
      * @return the default keystore
+     * @throws CryptException on loading errors
      */
     public static KeyStore keystore() {
+        // TODO: discriminate by keystore type
         final String location = System.getProperty("javax.net.ssl.keyStore");
 
         if (location == null || location.trim().length() == 0) {
             throw new CryptException("no value was specified for the system property: javax.net.ssl.keyStore");
         }
 
-        final String password = System.getProperty("javax.net.ssl.keyStorePassword");
-        return keystore(location, password);
+        return keystore(location, System.getProperty("javax.net.ssl.keyStorePassword"));
     }
 
     /**
@@ -76,10 +84,10 @@ public class Crypt {
      *                 If no protocol is specified, <code>file</code> is assumed.
      * @param password the password
      * @return a key store
-     * @throws CryptException on keystore loading errors
+     * @throws CryptException on loading errors
      */
     public static KeyStore keystore(String location, String password) {
-        return keystore(location, password, null, "SUN");
+        return keystore(location, password, "JKS", "SUN");
     }
 
     /**
@@ -94,9 +102,9 @@ public class Crypt {
      *                 </ul>
      *                 If no protocol is specified, <code>file</code> is assumed.
      * @param password the password
-     * @param type     the keystore type (ex: <code>JKS</code>)
+     * @param type     the keystore type (ex: <code>JKS</code>, <code>PKCS12</code>)
      * @return a key store
-     * @throws CryptException on keystore loading errors
+     * @throws CryptException on loading errors
      */
     public static KeyStore keystore(String location, String password, String type) {
         return keystore(location, password, type, "SUN");
@@ -114,10 +122,10 @@ public class Crypt {
      *                 </ul>
      *                 If no protocol is specified, <code>file</code> is assumed.
      * @param password the password
-     * @param type     the keystore type (ex: <code>JKS</code>)
+     * @param type     the keystore type (ex: <code>JKS</code>, <code>PKCS12</code>)
      * @param provider the provider (hint: Bouncy Castle is <code>BC</code>)
      * @return a key store
-     * @throws CryptException on keystore loading errors
+     * @throws CryptException on loading errors
      */
     public static KeyStore keystore(String location, String password, String type, String provider) {
         try {
@@ -125,7 +133,7 @@ public class Crypt {
             if (provider == null || provider.trim().isEmpty()) {
                 throw new CryptException(String.format("invalid provider: %s", provider));
             } else {
-                keyStore = KeyStore.getInstance(type == null ? "JKS" : type, provider);
+                keyStore = KeyStore.getInstance(type, provider);
             }
             final InputStream inputStream;
             if (location.startsWith("classpath:")) {
@@ -141,6 +149,28 @@ public class Crypt {
             throw new CryptException(String.format("error loading keystore: location=%s", location), e);
         } catch (NoSuchProviderException e) {
             throw new CryptException(String.format("error loading keystore, no such provider: provider=%s", provider), e);
+        }
+    }
+
+    /**
+     * Loads a public key from the given keystore.
+     *
+     * @param keystore the keystore to read from
+     * @param alias the certificate alias
+     * @return the public key
+     * @throws CryptException on loading errors
+     */
+    public static PublicKey publicKey(KeyStore keystore, String alias) {
+        try {
+            final Certificate certificate = keystore.getCertificate(alias);
+
+            if (certificate == null) {
+                throw new CryptException(String.format("certificate not found for alias: %s", alias));
+            }
+
+            return certificate.getPublicKey();
+        } catch (KeyStoreException e) {
+            throw new CryptException(String.format("error loading public key with alias: %s", alias), e);
         }
     }
 
@@ -249,6 +279,10 @@ public class Crypt {
      */
     public static Digester digester(String algorithm) {
         return digester(algorithm, (String) null);
+    }
+
+    public enum Encoding {
+        HEX, BASE64, URL, MIME
     }
 
 }

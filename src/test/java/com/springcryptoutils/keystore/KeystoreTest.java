@@ -1,13 +1,13 @@
 package com.springcryptoutils.keystore;
 
 import com.springcryptoutils.CryptException;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.security.KeyStore;
+import java.security.KeyStoreException;
 
 import static com.springcryptoutils.Crypt.keystore;
 import static org.junit.jupiter.api.Assertions.*;
@@ -16,35 +16,39 @@ class KeystoreTest {
 
     @DisplayName("loads a keystore from the classpath and the filesystem")
     @ParameterizedTest
-    @ValueSource(strings = {"classpath:keystore.jks", "file:src/test/resources/keystore.jks", "src/test/resources/keystore.jks"})
-    void classpathKeystore(String location) {
-        KeyStore keystore = keystore(location, "password", "JKS", "SUN");
+    @ValueSource(strings = {"classpath:/keystore.jks", "file:src/test/resources/keystore.jks", "src/test/resources/keystore.jks"})
+    void classpathKeystore(String location) throws KeyStoreException {
+        KeyStore keystore = keystore(location, "password");
         assertNotNull(keystore);
         assertEquals("JKS", keystore.getType(), "type");
+        assertEquals(1, keystore.size(), "size");
     }
 
     @Test
     @DisplayName("loads a keystore from the classpath with the default provider")
-    void classpathKeystoreWithDefaultProvider() {
-        KeyStore keystore = keystore("classpath:keystore.jks", "password", "JKS");
+    void classpathKeystoreWithDefaultProvider() throws KeyStoreException {
+        KeyStore keystore = keystore("classpath:/keystore.jks", "password", "JKS");
         assertNotNull(keystore);
         assertEquals("JKS", keystore.getType(), "type");
+        assertEquals(1, keystore.size(), "size");
     }
 
     @Test
     @DisplayName("loads a keystore from the classpath with the default provider and type")
-    void classpathKeystoreWithDefaultProviderAndType() {
-        KeyStore keystore = keystore("classpath:keystore.jks", "password");
+    void classpathKeystoreWithDefaultProviderAndType() throws KeyStoreException {
+        KeyStore keystore = keystore("classpath:/keystore.jks", "password");
         assertNotNull(keystore);
         assertEquals("JKS", keystore.getType(), "type");
+        assertEquals(1, keystore.size(), "size");
     }
 
     @Test
     @DisplayName("loads a keystore from an https url")
-    void httpsKeystore() {
+    void httpsKeystore() throws KeyStoreException {
         KeyStore keystore = keystore("https://github.com/mcaserta/spring-crypto-utils/blob/1.4/src/test/resources/keystore.jks?raw=true", "password", "JKS", "SUN");
         assertNotNull(keystore);
         assertEquals("JKS", keystore.getType(), "type");
+        assertEquals(1, keystore.size(), "size");
     }
 
     @Test
