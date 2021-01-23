@@ -45,7 +45,7 @@ class KeystoreTest {
     @Test
     @DisplayName("loads a keystore from an https url")
     void httpsKeystore() throws KeyStoreException {
-        KeyStore keystore = keystore("https://github.com/mcaserta/spring-crypto-utils/blob/1.4/src/test/resources/keystore.jks?raw=true", "password", "JKS", "SUN");
+        KeyStore keystore = keystore("https://github.com/mcaserta/spring-crypto-utils/raw/1.4/src/test/resources/keystore.jks", "password", "JKS", "SUN");
         assertNotNull(keystore);
         assertEquals("JKS", keystore.getType(), "type");
         assertEquals(1, keystore.size(), "size");

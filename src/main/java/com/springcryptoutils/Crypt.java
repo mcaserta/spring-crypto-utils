@@ -20,8 +20,8 @@ import java.util.Optional;
 /**
  * <p>This class is the main entrypoint for all cryptographic operations.</p>
  *
- * <p>Just type <code>Crypt.</code> in your code and let your IDE's
- * autocompletion do the rest.</p>
+ * <p>Just type <code>Crypt.</code> in your IDE and let autocompletion do
+ * the rest.</p>
  *
  * @author Mirko Caserta (mirko.caserta@gmail.com)
  * @since 1.5.0
@@ -56,19 +56,48 @@ public class Crypt {
      * </ul>
      * <p>
      * If no protocol is specified, <code>file</code> is assumed.
+     * <p>
+     * The default keystore type is <code>JKS</code>.
      *
      * @return the default keystore
      * @throws CryptException on loading errors
      */
     public static KeyStore keystore() {
-        // TODO: discriminate by keystore type
+        return keystore("JKS");
+    }
+
+    /**
+     * Returns the default keystore using configuration from the following
+     * system properties:
+     *
+     * <ul>
+     *   <li><code>javax.net.ssl.keyStore</code></li>
+     *   <li><code>javax.net.ssl.keyStorePassword</code></li>
+     * </ul>
+     * <p>
+     * The keystore location supports the following protocols:
+     *
+     * <ul>
+     *   <li><code>classpath:</code></li>
+     *   <li><code>http:</code></li>
+     *   <li><code>https:</code></li>
+     *   <li><code>file:</code></li>
+     * </ul>
+     * <p>
+     * If no protocol is specified, <code>file</code> is assumed.
+     *
+     * @param type the keystore type (ex: <code>JKS</code>, <code>PKCS12</code>)
+     * @return the default keystore
+     * @throws CryptException on loading errors
+     */
+    public static KeyStore keystore(String type) {
         final String location = System.getProperty("javax.net.ssl.keyStore");
 
         if (location == null || location.trim().length() == 0) {
             throw new CryptException("no value was specified for the system property: javax.net.ssl.keyStore");
         }
 
-        return keystore(location, System.getProperty("javax.net.ssl.keyStorePassword"));
+        return keystore(location, System.getProperty("javax.net.ssl.keyStorePassword"), type);
     }
 
     /**
@@ -156,7 +185,7 @@ public class Crypt {
      * Loads a public key from the given keystore.
      *
      * @param keystore the keystore to read from
-     * @param alias the certificate alias
+     * @param alias    the certificate alias
      * @return the public key
      * @throws CryptException on loading errors
      */
