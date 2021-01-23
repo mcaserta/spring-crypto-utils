@@ -31,6 +31,39 @@ public class Crypt {
     private Crypt() {} // utility class, user can't make new instances
 
     /**
+     * Returns the default keystore using configuration from the following
+     * system properties:
+     *
+     * <ul>
+     *   <li><code>javax.net.ssl.keyStore</code></li>
+     *   <li><code>javax.net.ssl.keyStorePassword</code></li>
+     * </ul>
+     *
+     * The keystore location supports the following protocols:
+     *
+     * <ul>
+     *   <li><code>classpath:</code></li>
+     *   <li><code>http:</code></li>
+     *   <li><code>https:</code></li>
+     *   <li><code>file:</code></li>
+     * </ul>
+     *
+     * If no protocol is specified, <code>file</code> is assumed.
+     *
+     * @return the default keystore
+     */
+    public static KeyStore keystore() {
+        final String location = System.getProperty("javax.net.ssl.keyStore");
+
+        if (location == null || location.trim().length() == 0) {
+            throw new CryptException("no value was specified for the system property: javax.net.ssl.keyStore");
+        }
+
+        final String password = System.getProperty("javax.net.ssl.keyStorePassword");
+        return keystore(location, password);
+    }
+
+    /**
      * Returns a key store.
      *
      * @param location the keystore location. The following protocols are supported:
