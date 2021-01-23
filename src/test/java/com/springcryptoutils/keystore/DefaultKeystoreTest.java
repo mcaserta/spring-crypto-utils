@@ -2,6 +2,7 @@ package com.springcryptoutils.keystore;
 
 import com.springcryptoutils.Crypt;
 import com.springcryptoutils.CryptException;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -32,10 +33,6 @@ class DefaultKeystoreTest {
         assertNotNull(keystore);
         assertEquals("PKCS12", keystore.getType(), "type");
         assertEquals(1, keystore.size(), "size");
-        // we need to clean up these properties as otherwise tests that rely
-        // on https aren't going to work
-        System.setProperty("javax.net.ssl.keyStore", "");
-        System.setProperty("javax.net.ssl.keyStorePassword", "");
     }
 
     @Test
@@ -44,6 +41,18 @@ class DefaultKeystoreTest {
         System.setProperty("javax.net.ssl.keyStore", "sgiao belo");
         System.setProperty("javax.net.ssl.keyStorePassword", "wrong");
         assertThrows(CryptException.class, Crypt::keystore);
+    }
+
+    @Test
+    @DisplayName("loading an empty location should throw an error")
+    void emptyLocation() {
+        System.setProperty("javax.net.ssl.keyStore", "   ");
+        System.setProperty("javax.net.ssl.keyStorePassword", "wrong");
+        assertThrows(CryptException.class, Crypt::keystore);
+    }
+
+    @AfterEach
+    void cleanup() {
         // we need to clean up these properties as otherwise tests that rely
         // on https aren't going to work
         System.setProperty("javax.net.ssl.keyStore", "");
