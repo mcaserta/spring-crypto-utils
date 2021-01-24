@@ -1,11 +1,11 @@
 package com.springcryptoutils.util;
 
+import com.springcryptoutils.CryptException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static com.springcryptoutils.digest.DigesterConsts.*;
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class HexTest {
 
@@ -28,6 +28,12 @@ class HexTest {
         assertArrayEquals(EMPTY_SHA1, DECODER.decode("da39a3ee5e6b4b0d3255bfef95601890afd80709"), "2nd sha1");
         assertArrayEquals(MESSAGE_MD5, DECODER.decode("78e731027d8fd50ed642340b7c9a63b3"), "1st md5");
         assertArrayEquals(EMPTY_MD5, DECODER.decode("d41d8cd98f00b204e9800998ecf8427e"), "2nd md5");
+    }
+
+    @Test
+    @DisplayName("Decoding a non hex string should throw an error")
+    void decodeNonHexString() {
+        assertThrows(CryptException.class, () -> DECODER.decode("sgiao belo"));
     }
 
 }
