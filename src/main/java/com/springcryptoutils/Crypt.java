@@ -2,13 +2,16 @@ package com.springcryptoutils;
 
 import com.springcryptoutils.digest.Digester;
 import com.springcryptoutils.digest.EncodingDigester;
-import com.springcryptoutils.util.HexEncoder;
+import com.springcryptoutils.signature.EncodingSigner;
+import com.springcryptoutils.signature.EncodingVerifier;
+import com.springcryptoutils.signature.Signer;
+import com.springcryptoutils.signature.Verifier;
+import com.springcryptoutils.util.Hex;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.security.*;
@@ -16,6 +19,8 @@ import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
 import java.util.Base64;
 import java.util.Optional;
+
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 /**
  * <p>This class is the main entrypoint for all cryptographic operations.</p>
@@ -28,13 +33,17 @@ import java.util.Optional;
  */
 public class Crypt {
 
-    private static final HexEncoder hex = HexEncoder.getEncoder();
-    private static final Base64.Encoder base64 = Base64.getEncoder();
-    private static final Base64.Encoder url = Base64.getUrlEncoder();
-    private static final Base64.Encoder mime = Base64.getMimeEncoder();
+    private static final Hex.Encoder HEX_ENCODER = Hex.getEncoder();
+    private static final Base64.Encoder BASE_64_ENCODER = Base64.getEncoder();
+    private static final Base64.Encoder URL_ENCODER = Base64.getUrlEncoder();
+    private static final Base64.Encoder MIME_ENCODER = Base64.getMimeEncoder();
+    private static final Hex.Decoder HEX_DECODER = Hex.getDecoder();
+    private static final Base64.Decoder BASE_64_DECODER = Base64.getDecoder();
+    private static final Base64.Decoder URL_DECODER = Base64.getUrlDecoder();
+    private static final Base64.Decoder MIME_DECODER = Base64.getMimeDecoder();
 
     private Crypt() {
-        // utility class, user can't make new instances
+        // utility class, users can't make new instances
     }
 
     /**
@@ -182,6 +191,28 @@ public class Crypt {
     }
 
     /**
+     * Loads a certificate from the given keystore.
+     *
+     * @param keystore the keystore to read from
+     * @param alias    the certificate alias
+     * @return the certificate
+     * @throws CryptException on loading errors
+     */
+    public static Certificate certificate(KeyStore keystore, String alias) {
+        try {
+            final Certificate certificate = keystore.getCertificate(alias);
+
+            if (certificate == null) {
+                throw new CryptException(String.format("certificate not found for alias: %s", alias));
+            }
+
+            return certificate;
+        } catch (KeyStoreException e) {
+            throw new CryptException(String.format("error loading certificate with alias: %s", alias), e);
+        }
+    }
+
+    /**
      * Loads a public key from the given keystore.
      *
      * @param keystore the keystore to read from
@@ -243,7 +274,7 @@ public class Crypt {
      * @throws CryptException on no such algorithm or provider exceptions
      */
     public static EncodingDigester digester(String algorithm, Encoding encoding) {
-        return digester(algorithm, null, encoding, StandardCharsets.UTF_8);
+        return digester(algorithm, null, encoding, UTF_8);
     }
 
     /**
@@ -259,7 +290,7 @@ public class Crypt {
      * @throws CryptException on no such algorithm or provider exceptions
      */
     public static EncodingDigester digester(String algorithm, String provider, Encoding encoding) {
-        return digester(algorithm, provider, encoding, StandardCharsets.UTF_8);
+        return digester(algorithm, provider, encoding, UTF_8);
     }
 
     /**
@@ -283,13 +314,13 @@ public class Crypt {
 
         switch (encoding) {
             case HEX:
-                return message -> hex.encodeToString(rawDigester.digest(message.getBytes(charset)));
+                return message -> HEX_ENCODER.encodeToString(rawDigester.digest(message.getBytes(charset)));
             case BASE64:
-                return message -> base64.encodeToString(rawDigester.digest(message.getBytes(charset)));
+                return message -> BASE_64_ENCODER.encodeToString(rawDigester.digest(message.getBytes(charset)));
             case URL:
-                return message -> url.encodeToString(rawDigester.digest(message.getBytes(charset)));
+                return message -> URL_ENCODER.encodeToString(rawDigester.digest(message.getBytes(charset)));
             case MIME:
-                return message -> mime.encodeToString(rawDigester.digest(message.getBytes(charset)));
+                return message -> MIME_ENCODER.encodeToString(rawDigester.digest(message.getBytes(charset)));
             default: // unreachable
                 throw new CryptException(String.format("Unexpected encoding: %s", encoding));
         }
@@ -336,6 +367,146 @@ public class Crypt {
      */
     public static Digester digester(String algorithm) {
         return digester(algorithm, (String) null);
+    }
+
+    public static Signer signer(PrivateKey privateKey) {
+        return signer(privateKey, "SHA512withRSA");
+    }
+
+    public static Signer signer(PrivateKey privateKey, String algorithm) {
+        return signer(privateKey, algorithm, null);
+    }
+
+    public static Signer signer(PrivateKey privateKey, String algorithm, String provider) {
+        return message -> {
+            try {
+                // this way signature should be thread safe
+                final Signature signature =
+                        ((provider == null) || (provider.trim().isEmpty())) ? Signature
+                                .getInstance(algorithm) : Signature.getInstance(algorithm, provider);
+                signature.initSign(privateKey);
+                signature.update(message);
+                return signature.sign();
+            } catch (NoSuchAlgorithmException | NoSuchProviderException | SignatureException | InvalidKeyException e) {
+                throw new CryptException(String.format("error generating the signature: algorithm=%s, provider=%s", algorithm, provider), e);
+            }
+        };
+    }
+
+    public static EncodingSigner encodingSigner(PrivateKey privateKey, Encoding encoding) {
+        return encodingSigner(privateKey, UTF_8, encoding);
+    }
+
+    public static EncodingSigner encodingSigner(PrivateKey privateKey, Charset charset, Encoding encoding) {
+        return encodingSigner(privateKey, "SHA512withRSA", charset, encoding);
+    }
+
+    public static EncodingSigner encodingSigner(PrivateKey privateKey, String algorithm, Charset charset, Encoding encoding) {
+        return encodingSigner(privateKey, algorithm, null, charset, encoding);
+    }
+
+    public static EncodingSigner encodingSigner(PrivateKey privateKey, String algorithm, String provider, Charset charset, Encoding encoding) {
+        if (encoding == null) {
+            throw new CryptException("Invalid encoding: null");
+        }
+
+        if (charset == null) {
+            throw new CryptException("Invalid charset: null");
+        }
+
+        final Signer signer = signer(privateKey, algorithm, provider);
+
+        return message -> {
+            switch (encoding) {
+                case HEX:
+                    return HEX_ENCODER.encodeToString(signer.sign(message.getBytes(charset)));
+                case BASE64:
+                    return BASE_64_ENCODER.encodeToString(signer.sign(message.getBytes(charset)));
+                case URL:
+                    return URL_ENCODER.encodeToString(signer.sign(message.getBytes(charset)));
+                case MIME:
+                    return MIME_ENCODER.encodeToString(signer.sign(message.getBytes(charset)));
+                default: // unreachable
+                    throw new CryptException(String.format("Unexpected encoding: %s", encoding));
+            }
+        };
+    }
+
+    public static Verifier verifier(PublicKey publicKey) {
+        return verifier(publicKey, "SHA512withRSA");
+    }
+
+    public static Verifier verifier(PublicKey publicKey, String algorithm) {
+        return verifier(publicKey, algorithm, null);
+    }
+
+    public static Verifier verifier(PublicKey publicKey, String algorithm, String provider) {
+        return (message, signature) -> {
+            try {
+                // this way signatureInstance should be thread safe
+                final Signature signatureInstance =
+                        ((provider == null) || (provider.trim().isEmpty())) ? Signature
+                                .getInstance(algorithm) : Signature.getInstance(algorithm, provider);
+                signatureInstance.initVerify(publicKey);
+                signatureInstance.update(message);
+                return signatureInstance.verify(signature);
+            } catch (NoSuchAlgorithmException | NoSuchProviderException | InvalidKeyException e) {
+                throw new CryptException(String.format("error verifying the signature: algorithm=%s, provider=%s", algorithm, provider), e);
+            } catch (SignatureException e) {
+                return false;
+            }
+        };
+    }
+
+    public static EncodingVerifier encodingVerifier(PublicKey publicKey, Encoding encoding) {
+        return encodingVerifier(publicKey, "SHA512withRSA", encoding);
+    }
+
+    public static EncodingVerifier encodingVerifier(PublicKey publicKey, String algorithm, Encoding encoding) {
+        return encodingVerifier(publicKey, algorithm, null, encoding);
+    }
+
+    public static EncodingVerifier encodingVerifier(PublicKey publicKey, String algorithm, String provider, Encoding encoding) {
+        return encodingVerifier(publicKey, algorithm, provider, UTF_8, encoding);
+    }
+
+    public static EncodingVerifier encodingVerifier(PublicKey publicKey, String algorithm, String provider, Charset charset, Encoding encoding) {
+        if (encoding == null) {
+            throw new CryptException("Invalid encoding: null");
+        }
+
+        if (charset == null) {
+            throw new CryptException("Invalid charset: null");
+        }
+
+        final Verifier verifier = verifier(publicKey, algorithm, provider);
+
+        return (message, signature) -> {
+            final byte[] sig;
+
+            try {
+                switch (encoding) {
+                    case BASE64:
+                        sig = BASE_64_DECODER.decode(signature);
+                        break;
+                    case URL:
+                        sig = URL_DECODER.decode(signature);
+                        break;
+                    case MIME:
+                        sig = MIME_DECODER.decode(signature);
+                        break;
+                    case HEX:
+                        sig = HEX_DECODER.decode(signature);
+                        break;
+                    default: // unreachable
+                        throw new CryptException(String.format("Unexpected encoding: %s", encoding));
+                }
+            } catch (IllegalArgumentException e) {
+                throw new CryptException(String.format("cannot decode signature: %s", signature), e);
+            }
+
+            return verifier.verify(message.getBytes(charset), sig);
+        };
     }
 
     public enum Encoding {
