@@ -22,7 +22,7 @@ class SecretKeyTest {
         assertEquals(2, keystore.size(), "size");
         Key key = Crypt.secretKey(keystore, "hmac", "password");
         assertNotNull(key);
-        assertEquals("HmacSHA256", key.getAlgorithm(), "algorithm");
+        assertTrue("HmacSHA256".equals(key.getAlgorithm()) || "1.2.840.113549.2.9".equals(key.getAlgorithm()), "algorithm");
         assertEquals("RAW", key.getFormat(), "format");
     }
 
