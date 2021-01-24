@@ -2,10 +2,8 @@ package com.springcryptoutils;
 
 import com.springcryptoutils.digest.Digester;
 import com.springcryptoutils.digest.EncodingDigester;
-import com.springcryptoutils.signature.EncodingSigner;
-import com.springcryptoutils.signature.EncodingVerifier;
+import com.springcryptoutils.signature.*;
 import com.springcryptoutils.signature.Signer;
-import com.springcryptoutils.signature.Verifier;
 import com.springcryptoutils.util.Hex;
 
 import java.io.IOException;
@@ -18,6 +16,7 @@ import java.security.*;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
 import java.util.Base64;
+import java.util.Map;
 import java.util.Optional;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
@@ -32,6 +31,8 @@ import static java.nio.charset.StandardCharsets.UTF_8;
  * @since 1.5.0
  */
 public class Crypt {
+
+    public static final String DEFAULT_SIGNING_ALGORITHM = "SHA512withRSA";
 
     private static final Hex.Encoder HEX_ENCODER = Hex.getEncoder();
     private static final Base64.Encoder BASE_64_ENCODER = Base64.getEncoder();
@@ -370,7 +371,7 @@ public class Crypt {
     }
 
     public static Signer signer(PrivateKey privateKey) {
-        return signer(privateKey, "SHA512withRSA");
+        return signer(privateKey, DEFAULT_SIGNING_ALGORITHM);
     }
 
     public static Signer signer(PrivateKey privateKey, String algorithm) {
@@ -393,12 +394,32 @@ public class Crypt {
         };
     }
 
+    public static SignerByKey signer(Map<String, PrivateKey> privateKeyMap) {
+        return signer(privateKeyMap, DEFAULT_SIGNING_ALGORITHM);
+    }
+
+    public static SignerByKey signer(Map<String, PrivateKey> privateKeyMap, String algorithm) {
+        return signer(privateKeyMap, algorithm, null);
+    }
+
+    public static SignerByKey signer(Map<String, PrivateKey> privateKeyMap, String algorithm, String provider) {
+        return (privateKeyId, message) -> {
+            PrivateKey privateKey = privateKeyMap.get(privateKeyId);
+
+            if (privateKey == null) {
+                throw new CryptException(String.format("private key not found for id: %s", privateKeyId));
+            }
+
+            return signer(privateKey, algorithm, provider).sign(message);
+        };
+    }
+
     public static EncodingSigner encodingSigner(PrivateKey privateKey, Encoding encoding) {
         return encodingSigner(privateKey, UTF_8, encoding);
     }
 
     public static EncodingSigner encodingSigner(PrivateKey privateKey, Charset charset, Encoding encoding) {
-        return encodingSigner(privateKey, "SHA512withRSA", charset, encoding);
+        return encodingSigner(privateKey, DEFAULT_SIGNING_ALGORITHM, charset, encoding);
     }
 
     public static EncodingSigner encodingSigner(PrivateKey privateKey, String algorithm, Charset charset, Encoding encoding) {
@@ -433,7 +454,7 @@ public class Crypt {
     }
 
     public static Verifier verifier(PublicKey publicKey) {
-        return verifier(publicKey, "SHA512withRSA");
+        return verifier(publicKey, DEFAULT_SIGNING_ALGORITHM);
     }
 
     public static Verifier verifier(PublicKey publicKey, String algorithm) {
@@ -458,8 +479,28 @@ public class Crypt {
         };
     }
 
+    public static VerifierByKey verifier(Map<String, PublicKey> publicKeyMap) {
+        return verifier(publicKeyMap, DEFAULT_SIGNING_ALGORITHM);
+    }
+
+    public static VerifierByKey verifier(Map<String, PublicKey> publicKeyMap, String algorithm) {
+        return verifier(publicKeyMap, algorithm, null);
+    }
+
+    public static VerifierByKey verifier(Map<String, PublicKey> publicKeyMap, String algorithm, String provider) {
+        return (publicKeyId, message, signature) -> {
+            PublicKey publicKey = publicKeyMap.get(publicKeyId);
+
+            if (publicKey == null) {
+                throw new CryptException(String.format("public key not found for id: %s", publicKeyId));
+            }
+
+            return verifier(publicKey, algorithm, provider).verify(message, signature);
+        };
+    }
+
     public static EncodingVerifier encodingVerifier(PublicKey publicKey, Encoding encoding) {
-        return encodingVerifier(publicKey, "SHA512withRSA", encoding);
+        return encodingVerifier(publicKey, DEFAULT_SIGNING_ALGORITHM, encoding);
     }
 
     public static EncodingVerifier encodingVerifier(PublicKey publicKey, String algorithm, Encoding encoding) {
