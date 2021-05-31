@@ -1,5 +1,10 @@
-markdown: GFM
 safe: true
 highlighter: rouge
-
 title: Spring Crypto Utils
+plugins:
+  - jekyll-github-metadata
+  - jekyll-mentions
+  - jekyll-redirect-from
+  - jekyll-sitemap
+  - jemoji
+  - rdiscount
