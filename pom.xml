@@ -12,7 +12,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>11</java.version>
-        <junit.version>5.7.0</junit.version>
+        <junit.version>5.8.2</junit.version>
         <spring.boot.version>2.5.12</spring.boot.version>
         <sonar.projectKey>mcaserta_spring-crypto-utils</sonar.projectKey>
         <sonar.organization>mcaserta</sonar.organization>
